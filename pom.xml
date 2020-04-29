@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>marchliu.github.io</groupId>
+    <groupId>io.github.marchliu</groupId>
     <artifactId>jaskell-java8</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>liu.mars:jaskell-java8</name>
+    <name>io.github.marchliu:jaskell-java8</name>
     <licenses>
         <license>
             <name>MIT License</name>
@@ -19,11 +19,14 @@
         <developer>
             <name>Liu Xin</name>
             <email>mars.liu@outlook.com</email>
+            <organization>Mars Liu</organization>
+            <organizationUrl>https://marchliu.github.io</organizationUrl>
         </developer>
     </developers>
     <description>This is a utils library for java 8 project.
         It include parsec combinators and sql generators library.
     </description>
+    <url>https://github.com/MarchLiu/jasekll-java8</url>
 
     <scm>
         <connection>scm:git:git://github.com:MarchLiu/jasekll-java8.git</connection>
