@@ -21,6 +21,9 @@
             <email>mars.liu@outlook.com</email>
         </developer>
     </developers>
+    <description>This is a utils library for java 8 project.
+        It include parsec combinators and sql generators library.
+    </description>
 
     <scm>
         <connection>scm:git:git://github.com:MarchLiu/jasekll-java8.git</connection>
