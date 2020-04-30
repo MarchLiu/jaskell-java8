@@ -9,7 +9,7 @@ import java.io.EOFException;
 public interface State<E, Status, Tran> {
     /**
      * @return 总是返回 state 的当前元素，并迭代到下一个位置。如果到达结尾，会抛出 eof。
-     * @throws java.io.EOFException
+     * @throws java.io.EOFException 到达终结状态时，再调用 next 会抛出 EOF 异常。
      */
     E next() throws EOFException;
 
