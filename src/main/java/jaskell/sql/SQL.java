@@ -198,6 +198,18 @@ public class SQL {
         return new Count(name);
     }
 
+    public static Sum sum(){
+        return new Sum();
+    }
+
+    public static Sum sum(String name){
+        return new Sum(name);
+    }
+
+    public static Sum sum(Name name){
+        return new Sum(name);
+    }
+
     public static Case _case() {
         return new Case();
     }

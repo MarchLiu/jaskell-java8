@@ -5,7 +5,7 @@ import jaskell.script.Parameter;
 
 import java.util.List;
 
-public class Count implements Directive {
+public class Count extends Literal {
     private Name _field = null;
     Count(){
 
