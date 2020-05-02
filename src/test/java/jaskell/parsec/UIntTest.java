@@ -21,7 +21,7 @@ public class UIntTest extends Base {
     public void simple() throws Exception {
         State<Character, Integer, Integer> state = newState("23413214");
 
-        UInt uint = new UInt();
+        UInt<Integer, Integer> uint = new UInt<>();
 
         String s = uint.parse(state);
 
@@ -32,7 +32,7 @@ public class UIntTest extends Base {
     public void stop() throws Exception {
         State<Character, Integer, Integer> state = newState("23413a214");
 
-        UInt uint = new UInt();
+        UInt<Integer, Integer> uint = new UInt<>();
 
         String s = uint.parse(state);
 
@@ -43,7 +43,7 @@ public class UIntTest extends Base {
     public void fail() throws Exception {
         State<Character, Integer, Integer> state = newState("x2344");
 
-        UInt uint = new UInt();
+        UInt<Integer, Integer> uint = new UInt<>();
 
         try {
             String s = uint.parse(state);

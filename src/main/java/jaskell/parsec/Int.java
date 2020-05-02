@@ -8,20 +8,19 @@ import java.util.List;
  * Created by Mars Liu on 2016-01-07.
  * Int 算子尝试将后续的信息项组成一个整数,如果获得的信息不足以组成一个整数,抛出异常.
  */
-public class Int implements Parsec<String, Character> {
-    private Parsec<List<Character>, Character> parser = new Ch('-').then(
-            new Parsec<List<Character>, Character>() {
-                @Override
-                public <Status, Tran, S extends State<Character, Status, Tran>> List<Character> parse(S s)
-                        throws EOFException, ParsecException {
-                    List<Character> re = new ArrayList<>('-');
-                    re.addAll(new Many1<>(new Digit()).parse(s));
-                    return re;
-                }
-            });
+public class Int<Status, Tran>
+    implements Parsec<String, Character, Status, Tran> {
+    private final Parsec<List<Character>, Character, Status, Tran> parser =
+         s -> {
+          List<Character> re = new ArrayList<>();
+          Option<Character, Character, Status, Tran> sign = new Option<>(new Ch<>('-'));
+          sign.parse(s).ifPresent(re::add);
+          re.addAll(new Many1<Character, Character, Status, Tran>(new Digit<>()).parse(s));
+          return re;
+        };
 
     @Override
-    public <Status, Tran, S extends State<Character, Status, Tran>> String parse(S s)
+    public String parse(State<Character, Status, Tran> s)
             throws EOFException, ParsecException {
         List<Character> buffer = parser.parse(s);
         StringBuilder sb = new StringBuilder();

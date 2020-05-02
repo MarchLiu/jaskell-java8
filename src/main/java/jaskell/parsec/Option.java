@@ -9,15 +9,16 @@ import java.util.Optional;
  * return new one parsec&lt;Optional&lt;T&gt;, E, Status, Tran&gt;.
  * If the parser fail, Option parsec just return option.empty without Exception thrown.
  */
-public class Option<T, E> implements Parsec<Optional<T>, E> {
-    private Parsec<T, E> parser;
+public class Option<T, E, Status, Tran>
+    implements Parsec<Optional<T>, E, Status, Tran> {
+    private final Parsec<T, E, Status, Tran> parser;
 
-    public Option(Parsec<T, E> parser) {
+    public Option(Parsec<T, E, Status, Tran> parser) {
         this.parser = parser;
     }
 
     @Override
-    public <Status, Tran, S extends State<E, Status, Tran>>  Optional<T> parse(S s)
+    public  Optional<T> parse(State<E, Status, Tran> s)
             throws EOFException, ParsecException {
         try{
             return Optional.of(parser.parse(s));

@@ -7,75 +7,75 @@ import java.util.List;
  * Text Parsec Utils
  */
 public class Txt {
-    public static Parsec<Character, Character> ch(char value) {
-        return new Ch(value);
+    public static <Status, Tran> Ch<Status, Tran> ch(char value) {
+        return new Ch<>(value);
     }
 
-    public static Parsec<Character, Character> chIn(String data) {
-        return new ChIn(data);
+    public static <Status, Tran> ChIn<Status, Tran> chIn(String data) {
+        return new ChIn<>(data);
     }
 
-    public static Parsec<Character, Character> chNone(String data) {
-        return new ChNone(data);
+    public static <Status, Tran> ChNone<Status, Tran> chNone(String data) {
+        return new ChNone<>(data);
     }
 
-    public static Parsec<String, Character> crlf() {
-        return new Crlf();
+    public static <Status, Tran> Crlf<Status, Tran> crlf() {
+        return new Crlf<>();
     }
 
-    public static Parsec<String, Character> decimal() {
-        return new Decimal();
+    public static <Status, Tran> Decimal<Status, Tran> decimal() {
+        return new Decimal<>();
     }
 
-    public static Parsec<String, Character> udecimal() {
-        return new UDecimal();
+    public static <Status, Tran> UDecimal<Status, Tran> udecimal() {
+        return new UDecimal<>();
     }
 
-    public static Parsec<Character, Character> digit() {
-        return new Digit();
+    public static <Status, Tran> Digit<Status, Tran> digit() {
+        return new Digit<>();
     }
 
-    public static Parsec<String, Character> integer() {
-        return new Int();
+    public static <Status, Tran> Int<Status, Tran> integer() {
+        return new Int<>();
     }
 
-    public static Parsec<String, Character> uinteger() {
-        return new UInt();
+    public static <Status, Tran> UInt<Status, Tran> uinteger() {
+        return new UInt<>();
     }
 
-    public static Parsec<String, Character> eol() {
-        return new EndOfLine();
+    public static <Status, Tran> EndOfLine<Status, Tran> eol() {
+        return new EndOfLine<>();
     }
 
-    public static Parsec<Character, Character> newline() {
-        return new Newline();
+    public static <Status, Tran> Newline<Status, Tran> newline() {
+        return new Newline<>();
     }
 
-    public static Parsec<Character, Character> space() {
-        return new Space();
+    public static <Status, Tran> Space<Status, Tran> space() {
+        return new Space<>();
     }
 
-    public static Parsec<Character, Character> whitespace() {
-        return new Whitespace();
+    public static <Status, Tran> Whitespace<Status, Tran> whitespace() {
+        return new Whitespace<>();
     }
 
-    public static Parsec<Character, Character> skipSpaces() {
-        return new SkipSpaces();
+    public static <Status, Tran> SkipSpaces<Status, Tran> skipSpaces() {
+        return new SkipSpaces<>();
     }
 
-    public static Parsec<Character, Character> skipWhiteSpaces() {
-        return new Whitespace();
+    public static <Status, Tran> Whitespace<Status, Tran> skipWhiteSpaces() {
+        return new Whitespace<>();
     }
 
-    public static <Status, Tran> Parsec<String, Character> text(String value) {
-        return new Text(value);
+    public static <Status, Tran> Text<Status, Tran> text(String value) {
+        return new Text<>(value);
     }
     
-    public static <E> Binder<List<E>, String, E> joining() {
+    public static <Status, Tran> JoinText<Status, Tran> joining() {
         return new JoinText<>();
     }
 
-    public static <E> Binder<List<Character>, String, Character> joinChars() {
-        return new JoinCharacters();
+    public static <Status, Tran> JoinCharacters<Status, Tran> joinChars() {
+        return new JoinCharacters<>();
     }
 }

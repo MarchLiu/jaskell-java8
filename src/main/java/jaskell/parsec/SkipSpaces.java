@@ -7,10 +7,11 @@ import java.io.EOFException;
  * Created by march on 16/9/12.
  * SkipSpaces is a parser skip all spaces.
  */
-public class SkipSpaces implements Parsec<Character, Character> {
-    private final Parsec<Character, Character> parser = new Skip<>(new Whitespace());
+public class SkipSpaces<Status, Tran>
+    implements Parsec<Character, Character, Status, Tran> {
+    private final Parsec<Character, Character, Status, Tran> parser = new Skip<>(new Whitespace<>());
     @Override
-    public <Status, Tran, S extends State<Character, Status, Tran>> Character parse(S s)
+    public Character parse(State<Character, Status, Tran> s)
             throws EOFException, ParsecException {
         return parser.parse(s);
     }

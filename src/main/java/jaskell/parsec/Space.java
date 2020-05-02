@@ -6,9 +6,10 @@ import java.io.EOFException;
  * Created by Mars Liu on 2016-01-07.
  * Space 匹配空格
  */
-public class Space implements Parsec<Character, Character>{
+public class Space<Status, Tran>
+    implements Parsec<Character, Character, Status, Tran>{
     @Override
-    public <Status, Tran, S extends State<Character, Status, Tran>> Character parse(S s)
+    public Character parse(State<Character, Status, Tran> s)
             throws EOFException, ParsecException {
         Character re = s.next();
         if (Character.isSpaceChar(re)) {

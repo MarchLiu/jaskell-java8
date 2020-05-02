@@ -7,11 +7,12 @@ import java.io.EOFException;
  * Ahead look forward state and try to match parser.
  * Ahead return the parser data or fail and rollback state whatever
  */
-public class Ahead<T, E> implements Parsec<T, E> {
-    Parsec<T, E> parser;
+public class Ahead<T, E, Status, Tran>
+    implements Parsec<T, E, Status, Tran> {
+    Parsec<T, E, Status, Tran> parser;
 
     @Override
-    public <Status, Tran, S extends State<E, Status, Tran>> T parse(S s) throws EOFException, ParsecException {
+    public T parse(State<E, Status, Tran> s) throws EOFException, ParsecException {
         Tran tran = s.begin();
         try {
             return parser.parse(s);
@@ -20,7 +21,7 @@ public class Ahead<T, E> implements Parsec<T, E> {
         }
     }
 
-    public Ahead(Parsec<T, E> parser){
+    public Ahead(Parsec<T, E, Status, Tran> parser){
         this.parser = parser;
     }
 }

@@ -9,11 +9,12 @@ import static java.util.stream.Collectors.toSet;
  * Created by Mars Liu on 2016-01-10.
  * ChIn 即 char in ,是为 Character 特化的 one of
  */
-public class ChIn implements Parsec<Character, Character> {
-    private OneOf<Character> oneOf;
+public class ChIn<Status, Tran> implements
+    Parsec<Character, Character, Status, Tran> {
+    private final OneOf<Character, Status, Tran> oneOf;
 
     @Override
-    public <Status, Tran, S extends State<Character, Status, Tran>> Character parse(S s)
+    public Character parse(State<Character, Status, Tran> s)
             throws EOFException, ParsecException {
         return oneOf.parse(s);
     }

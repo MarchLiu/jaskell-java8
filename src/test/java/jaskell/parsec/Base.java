@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
  */
 public abstract class Base {
     State<Character, Integer, Integer> newState(String data) {
-        return new BasicState<>(IntStream.range(0, data.length())
+        return new SimpleState<>(IntStream.range(0, data.length())
                 .mapToObj(data::charAt)
                 .collect(Collectors.toList()));
     }

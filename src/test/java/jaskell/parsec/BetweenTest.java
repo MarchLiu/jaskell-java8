@@ -31,14 +31,14 @@ public class BetweenTest extends Base {
         State<Character, Integer, Integer> state = newState("hello");
 
 
-        Between<Character, Character, Character, Character> bmw = new Between<>(
+        Between<Character, Character, Character, Character, Integer, Integer> bmw = new Between<>(
                 new Eq<>('h'),
                 new Eq<>('l'),
                 new Eq<>('e')
         );
 
         Character c = bmw.parse(state);
-        Assert.assertTrue(c=='e');
+        Assert.assertEquals('e', (char) c);
     }
 
     @Test
@@ -47,14 +47,14 @@ public class BetweenTest extends Base {
         State<Character, Integer, Integer> state = newState("[hello]");
 
 
-        Parsec<String, Character> parser = new Between<>(
-                new Ch('['),
-                new Ch(']'),
+        Parsec<String, Character, Integer, Integer> parser = new Between<>(
+                new Ch<Integer, Integer>('['),
+                new Ch<>(']'),
                 new Many1<>(new Ne<>(']'))
         ).bind(new JoinText<>());
 
         String re = parser.parse(state);
-        Assert.assertTrue(re.equals("hello"));
+        Assert.assertEquals("hello", re);
     }
 
 

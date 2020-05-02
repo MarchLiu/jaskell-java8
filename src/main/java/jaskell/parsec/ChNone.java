@@ -8,11 +8,12 @@ import static java.util.stream.Collectors.toSet;
  * Created by Mars Liu on 2016-01-10.
  * ChNone 即 char none of,是为 Character 特化的 none of
  */
-public class ChNone implements Parsec<Character, Character> {
-    private NoneOf<Character> noneOf;
+public class ChNone<Status, Tran>
+    implements Parsec<Character, Character, Status, Tran> {
+    private final NoneOf<Character, Status, Tran> noneOf;
 
     @Override
-    public <Status, Tran, S extends State<Character, Status, Tran>> Character parse(S s)
+    public Character parse(State<Character, Status, Tran> s)
             throws EOFException, ParsecException {
         return noneOf.parse(s);
     }

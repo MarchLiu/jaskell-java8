@@ -2,6 +2,7 @@ package jaskell.parsec;
 
 import java.io.EOFException;
 import java.util.List;
+import java.util.stream.Collector;
 
 import static java.util.stream.Collectors.joining;
 
@@ -9,16 +10,21 @@ import static java.util.stream.Collectors.joining;
  * Created by Mars Liu on 16/9/13.
  * JoinText is a binder. It join Character List to String.
  */
-public class JoinText<E> implements Binder<List<E>, String, E> {
-    @Override
-    public Parsec<String, E> bind(List<E> value) {
-        return new Parsec<String, E>() {
-            @Override
-            public <Status, Tran, S extends State<E, Status, Tran>> String parse(S state)
-                    throws EOFException, ParsecException {
-                return value.stream().map(E::toString).collect(joining());
-            }
-        };
-    }
+public class JoinText<Status, Tran>
+    implements Binder<List<Character>, String, Character, Status, Tran> {
+  private final String sep;
+  @Override
+  public Parsec<String, Character, Status, Tran> bind(List<Character> value) {
+    Collector<CharSequence, ?, String> j = sep == null ? joining() : joining(sep);
+    return state -> value.stream().map(Object::toString).collect(j);
+  }
+
+  public JoinText() {
+    sep = null;
+  }
+
+  public JoinText(String sep) {
+    this.sep = sep;
+  }
 }
 

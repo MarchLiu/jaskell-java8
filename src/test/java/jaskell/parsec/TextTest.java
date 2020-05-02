@@ -26,7 +26,7 @@ public class TextTest extends Base {
     @Test
     public void simple() throws Exception {
         State<Character, Integer, Integer> state = newState("Hello World");
-        Text s = new Text("Hello World");
+        Text<Integer, Integer> s = new Text<>("Hello World");
         String a =  s.parse(state);
         assertEquals(a,"Hello World");
     }
@@ -34,7 +34,7 @@ public class TextTest extends Base {
     @Test
     public void less() throws Exception {
         State<Character, Integer, Integer> state = newState("Hello World");
-        Text s = new Text("Hello");
+        Text<Integer, Integer> s = new Text<>("Hello");
         String a =  s.parse(state);
         assertEquals(a,"Hello");
     }
@@ -42,7 +42,7 @@ public class TextTest extends Base {
     @Test
     public void more() throws Exception {
         State<Character, Integer, Integer> state = newState("Hello");
-        Text s = new Text("Hello world");
+        Text<Integer, Integer> s = new Text<>("Hello world");
         try {
             s.parse(state);
             fail("expect script failed because test data too large.");

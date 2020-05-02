@@ -19,7 +19,7 @@ public class FindTest extends Base {
     @Test
     public void simple() throws Exception {
         State<Character, Integer, Integer> state = newState(data);
-        Parsec<String,Character> parser = new Find<>(new Text("find"));
+        Parsec<String,Character, Integer, Integer> parser = new Find<>(new Text<>("find"));
         String re = parser.parse(state);
         Assert.assertEquals("find", re);
     }
@@ -27,11 +27,11 @@ public class FindTest extends Base {
     @Test
     public void failed() throws Exception {
         State<Character, Integer, Integer> state = newState(data);
-        Parsec<String, Character> parser = new Find<>(new Text("Fail"));
+        Parsec<String, Character, Integer, Integer> parser = new Find<>(new Text<>("Fail"));
         try {
             String re = parser.parse(state);
         } catch (Exception e){
-            Assert.assertTrue(ParsecException.class.isInstance(e));
+            Assert.assertTrue(e instanceof ParsecException);
         }
     }
 }

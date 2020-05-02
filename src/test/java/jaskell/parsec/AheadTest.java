@@ -1,7 +1,6 @@
 package jaskell.parsec;
 
 import static jaskell.parsec.Txt.space;
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -19,8 +18,8 @@ public class AheadTest extends Base {
     @Test
     public void simple() throws Exception{
         State<Character, Integer, Integer> state = newState("this is a string data.");
-        Parsec<String, Character> parser =
-                new Text("this").over(new Ahead<>(new Text(" is")));
+        Parsec<String, Character, Integer, Integer> parser =
+                new Text<Integer, Integer>("this").over(new Ahead<>(new Text<>(" is")));
 
         String re = parser.parse(state);
 
@@ -31,8 +30,8 @@ public class AheadTest extends Base {
     @Test
     public void result() throws Exception{
         State<Character, Integer, Integer> state = newState("this is a string data.");
-        Parsec<String, Character> parser =
-                new Text("this").then(space()).then(new Ahead<>(new Text("is")));
+        Parsec<String, Character, Integer, Integer> parser =
+                new Text<Integer, Integer>("this").then(space()).then(new Ahead<>(new Text<>("is")));
 
         String re = parser.parse(state);
 
@@ -43,8 +42,8 @@ public class AheadTest extends Base {
     @Test
     public void fail() throws Exception{
         State<Character, Integer, Integer> state = newState("this is a string.");
-        Parsec<String, Character> parser =
-                new Text("this").then(space()).then(new Ahead<>(new Text(" is")));
+        Parsec<String, Character, Integer, Integer> parser =
+                new Text<Integer, Integer>("this").then(space()).then(new Ahead<>(new Text<>(" is")));
 
         try {
             String re = parser.parse(state);

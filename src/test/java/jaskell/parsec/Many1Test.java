@@ -26,7 +26,7 @@ public class Many1Test extends Base {
     public void fail() throws Exception {
         State<Character, Integer, Integer> state = newState("ello");
 
-        Many1<Character, Character> m = new Many1<>(
+        Many1<Character, Character, Integer, Integer> m = new Many1<>(
                 new Eq<>('h')
         );
 
@@ -40,8 +40,8 @@ public class Many1Test extends Base {
 
     @Test
     public void one() throws Exception {
-        Parsec<String, Character> m =
-                new Many1<>(new Eq<>('h')).bind(joining());
+        Parsec<String, Character, Integer, Integer> m =
+                new Many1<Character, Character, Integer, Integer>(new Eq<>('h')).bind(joining());
         State<Character, Integer, Integer> state1 = newState("hello");
         String re = m.parse(state1);
         Assert.assertEquals(re, "h");
@@ -49,8 +49,8 @@ public class Many1Test extends Base {
 
     @Test
     public void all() throws Exception {
-        Parsec<String, Character> parser =
-                new Many1<>(new One<Character>()).bind(joining());
+        Parsec<String, Character, Integer, Integer> parser =
+                new Many1<Character, Character, Integer, Integer>(new One<>()).bind(joining());
         State<Character, Integer, Integer> state1 = newState("hello");
         String re = parser.parse(state1);
         Assert.assertEquals(re, "hello");

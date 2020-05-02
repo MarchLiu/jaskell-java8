@@ -1,6 +1,5 @@
 package jaskell.parsec;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
@@ -26,9 +25,9 @@ public class TryTest extends Base {
     public void simple() throws Exception {
         List<String> data = Arrays.asList("Hello", "World");
 
-        State<String, Integer, Integer> state = new BasicState<>(data);
+        State<String, Integer, Integer> state = new SimpleState<>(data);
         Integer idx = state.status();
-        Try<String, String> tryIt = new Try<>(new Eq<>("Hello"));
+        Try<String, String, Integer, Integer> tryIt = new Try<>(new Eq<>("Hello"));
 
         String re = tryIt.parse(state);
 
@@ -38,9 +37,9 @@ public class TryTest extends Base {
     @Test
     public void rollback() throws Exception {
         List<String> data = Arrays.asList("Hello", "World");
-        BasicState<String> state = new BasicState<>(data);
+        SimpleState<String> state = new SimpleState<>(data);
         Integer idx = state.status();
-        Try<String, String> tryIt = new Try<>(new Eq<>("hello"));
+        Try<String, String, Integer, Integer> tryIt = new Try<>(new Eq<>("hello"));
 
         try{
             String re = tryIt.parse(state);

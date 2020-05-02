@@ -7,35 +7,35 @@ import java.util.Set;
  * static util class for atom parsers.
  */
 public class Atom {
-    public static <E>  Parsec <E, E> one()  {
+    public static <E, Status, Tran> Parsec <E, E, Status, Tran> one()  {
         return new One<>();
     }
 
-    public static <E> Parsec<E, E> eof() {
+    public static <E, Status, Tran, S extends State<E, Status, Tran>> Parsec<E, E, Status, Tran> eof() {
         return new Eof<>();
     }
 
-    public static <T, E> Parsec<T, E> pack(T value) {
+    public static <T, E, Status, Tran> Return<T, E, Status, Tran> pack(T value) {
         return new Return<>(value);
     }
 
-    public static <E> Parsec<E, E> fail(String message, Object...objects) {
+    public static <E, Status, Tran> Fail<E, Status, Tran> fail(String message, Object...objects) {
         return new Fail<>(message, objects);
     }
 
-    public static <E> Parsec<E, E> eq(E item) {
+    public static <E, Status, Tran> Eq<E, Status, Tran> eq(E item) {
         return new Eq<>(item);
     }
 
-    public static <E> Parsec<E, E> ne(E item) {
+    public static <E, Status, Tran> Ne<E, Status, Tran> ne(E item) {
         return new Ne<>(item);
     }
 
-    public static <E> Parsec<E, E> oneOf(Set<E> data) {
+    public static <E, Status, Tran> OneOf<E, Status, Tran> oneOf(Set<E> data) {
         return new OneOf<>(data);
     }
 
-    public static <E> Parsec<E, E> noneOf(Set<E> data) {
+    public static <E, Status, Tran> NoneOf<E, Status, Tran> noneOf(Set<E> data) {
         return new NoneOf<>(data);
     }
 }

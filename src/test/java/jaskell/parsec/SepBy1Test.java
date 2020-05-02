@@ -1,5 +1,7 @@
 package jaskell.parsec;
 
+import static jaskell.parsec.Combinator.sepBy1;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,8 +26,8 @@ public class SepBy1Test extends Base {
     public void TestSepBy1() throws Exception {
         State<Character, Integer, Integer> state = newState("hlhlhlhlhlhll");
 
-        SepBy1<Character, Character, Character> m =
-                new SepBy1<>(new Ch('h'), new Ch('l'));
+        SepBy1<Character, Character, Character, Integer, Integer> m =
+                sepBy1(new Ch<>('h'), new Ch<>('l'));
 
         List<Character> a = m.parse(state);
         Assert.assertEquals(a.size(), 6);

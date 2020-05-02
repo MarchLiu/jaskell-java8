@@ -8,8 +8,8 @@ import java.util.List;
  * BasicState 类型提供一个基本的 state 实现,它将线性信息序列放到一个List&lt;E%gt;中作为缓存,不保证并发安全.
  * 如果我们要处理的数据量不至于对内存使用造成负担,也没有并发安全的需要,可以使用它.
  */
-public class BasicState<E> implements State<E, Integer, Integer> {
-    private List<E> buffer;
+public class SimpleState<E> implements State<E, Integer, Integer> {
+    private final List<E> buffer;
     private int current=0;
     private int tran = -1;
 
@@ -64,7 +64,7 @@ public class BasicState<E> implements State<E, Integer, Integer> {
         return new ParsecException(this.current, message);
     }
 
-    public BasicState(List<E> items){
+    public SimpleState(List<E> items){
         this.buffer = items;
     }
 

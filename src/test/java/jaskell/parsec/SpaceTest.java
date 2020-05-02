@@ -22,7 +22,7 @@ public class SpaceTest extends Base {
     @Test
     public void simpleSpace() throws Exception {
         State<Character, Integer, Integer> state = newState(" ");
-        Parsec<Character, Character> s = new Space();
+        Parsec<Character, Character, Integer, Integer> s = new Space<>();
         Character a =  s.parse(state);
         Assert.assertEquals(a.charValue(), ' ');
     }
@@ -30,7 +30,7 @@ public class SpaceTest extends Base {
     @Test
     public void fail() throws Exception {
         State<Character, Integer, Integer> state = newState("\t");
-        Parsec<Character, Character> s = new Space();
+        Parsec<Character, Character, Integer, Integer> s = new Space<>();
         try {
             s.parse(state);
             Assert.fail("Space script tab char should failed.");

@@ -6,12 +6,13 @@ import java.io.EOFException;
  * Created by Mars Liu on 2016-01-11.
  * Crlf 即 haskell parsec 的 crlf 算子,匹配 \r\n .
  */
-public class Crlf implements Parsec<String, Character> {
+public class Crlf<Status, Tran>
+    implements Parsec<String, Character, Status, Tran> {
     @Override
-    public <Status, Tran, S extends State<Character, Status, Tran>> String parse(S s)
+    public String parse(State<Character, Status, Tran> s)
             throws EOFException, ParsecException {
-        new Ch('\r').parse(s);
-        new Newline().parse(s);
+        new Ch<Status, Tran>('\r').parse(s);
+        new Newline<Status, Tran>().parse(s);
         return "\r\n";
     }
 }

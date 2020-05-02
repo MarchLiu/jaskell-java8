@@ -26,7 +26,7 @@ public class NoneOfTest extends Base {
     public void simpleOK() throws Exception {
         State<Character, Integer, Integer> state = newState("hello");
 
-        NoneOf<Character> noneOf = new NoneOf<>(Stream.of('k', 'o', 'f').collect(toSet()));
+        NoneOf<Character, Integer, Integer> noneOf = new NoneOf<>(Stream.of('k', 'o', 'f').collect(toSet()));
         Character c = noneOf.parse(state);
 
         Assert.assertEquals(c, new Character('h'));
@@ -34,7 +34,7 @@ public class NoneOfTest extends Base {
 
     @Test
     public void simpleFail() throws Exception {
-        NoneOf<Character> noneOf = new NoneOf<>(Stream.of('k', 'f', 's').collect(toSet()));
+        NoneOf<Character, Integer, Integer> noneOf = new NoneOf<>(Stream.of('k', 'f', 's').collect(toSet()));
         try {
             String content = "sound";
             State<Character, Integer, Integer> state2 = newState(content);

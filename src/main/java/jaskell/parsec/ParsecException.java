@@ -4,8 +4,8 @@ package jaskell.parsec;
  * Created by march on 16/9/11.
  */
 public class ParsecException extends RuntimeException {
-    private String message;
-    private Object status;
+    private final String message;
+    private final Object status;
 
     public ParsecException(Object status, String message) {
         super(message);

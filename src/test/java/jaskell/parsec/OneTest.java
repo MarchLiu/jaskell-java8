@@ -22,11 +22,11 @@ public class OneTest extends Base {
     public void testOne() throws Exception {
         State<Character, Integer, Integer> state = newState("hello");
 
-        One<Character> one = new One<>();
+        One<Character, Integer, Integer> one = new One<>();
 
         try {
             Character c = one.parse(state);
-            Assert.assertTrue(c.equals('h'));
+            Assert.assertEquals('h', (char) c);
         } catch (ParsecException e) {
             Assert.assertTrue(true);
         }

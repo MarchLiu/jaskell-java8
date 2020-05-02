@@ -20,7 +20,7 @@ public class NewlineTest extends Base {
     @Test
     public void simpleCrlf() throws Exception {
         State<Character, Integer, Integer> state = newState("\r\n");
-        Parsec<String, Character> crlf = new Crlf();
+        Parsec<String, Character, Integer, Integer> crlf = new Crlf<>();
 
         String re = crlf.parse(state);
         Assert.assertEquals(re, "\r\n");
@@ -33,9 +33,9 @@ public class NewlineTest extends Base {
     public void simpleNl() throws Exception {
         State<Character, Integer, Integer> state = newState("\r\n");
 
-        Parsec<Character, Character> enter = new Newline();
+        Parsec<Character, Character, Integer, Integer> enter = new Newline<>();
 
-        Character c = ch('\r').then(enter).parse(state);
+        Character c = new Ch<Integer, Integer>('\r').then(enter).parse(state);
 
         Assert.assertEquals(c.charValue(), '\n');
     }

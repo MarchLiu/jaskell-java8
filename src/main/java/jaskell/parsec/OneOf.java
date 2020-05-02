@@ -8,11 +8,11 @@ import static java.util.stream.Collectors.joining;
  * Created by Mars Liu on 2016-01-03.
  * OneOf 即 one of ,给定项中任何一个匹配成功即视为成功,否则抛出错误.
  */
-public class OneOf<E> implements Parsec<E, E> {
-    private Set<E> items;
+public class OneOf<E, Status, Tran> implements Parsec<E, E, Status, Tran> {
+    private final Set<E> items;
 
     @Override
-    public <Status, Tran, S extends State<E, Status, Tran>> E parse(S s)
+    public E parse(State<E, Status, Tran> s)
             throws EOFException, ParsecException {
         E data = s.next();
         if(items.contains(data)) {

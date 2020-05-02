@@ -14,7 +14,7 @@ import java.io.EOFException;
  * @since 2016-09-11
  * @version 1.0
  */
-public class BasicStateTest extends Base {
+public class SimpleStateTest extends Base {
 
 
     @Before
@@ -45,7 +45,7 @@ public class BasicStateTest extends Base {
             String message = String.format("The state next at preview line should failed but %c.", failed);
             Assert.fail(message);
         } catch (EOFException e) {
-            Assert.assertTrue("the error is Eof", EOFException.class==e.getClass());
+            Assert.assertSame("the error is Eof", EOFException.class, e.getClass());
         }
     }
 
