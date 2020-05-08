@@ -25,7 +25,19 @@ public class By extends Select.From {
         _fields.addAll(Arrays.asList(names));
     }
 
+    public By(List<?> names){
+        for(Object name: names){
+            if(name instanceof String){
+                _fields.add(new Name((String) name));
+            }
+            if(name instanceof Directive){
+                _fields.add((Directive) name);
+            }
+        }
+    }
+
     public By by(String names){
+        // TODO: 应更严谨的处理命名转义
         _fields.addAll(Arrays.stream(
                 names.split(",")).map(String::trim).map(Name::new).collect(Collectors.toList()));
         return this;
@@ -38,6 +50,18 @@ public class By extends Select.From {
 
     public By by(Directive ... names){
         _fields.addAll(Arrays.asList(names));
+        return this;
+    }
+
+    public By by(List<?> names){
+        for(Object name: names){
+            if(name instanceof String){
+                _fields.add(new Name((String) name));
+            }
+            if(name instanceof Directive){
+                _fields.add((Directive) name);
+            }
+        }
         return this;
     }
 

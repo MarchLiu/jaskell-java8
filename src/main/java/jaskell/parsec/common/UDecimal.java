@@ -13,8 +13,8 @@ import java.util.List;
 public class UDecimal
     implements Parsec<String, Character> {
     private final Parsec<List<Character>, Character> parser =
-            new Choice<List<Character>, Character>(new Try<>(new Many1<>(new Digit())),
-                new Return<>(new ArrayList<>('0'))).over(
+        new Choice<>(new Try<>(new Many1<>(new Digit())),
+            new Return<>(new ArrayList<>('0'))).over(
             new Ch('.')).bind(
                 (List<Character> value) -> s -> {
                 value.add('.');
