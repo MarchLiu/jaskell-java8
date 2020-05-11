@@ -16,7 +16,7 @@ public class Decimal<Status, Tran> implements Parsec<String, Character, Status, 
                     new Return<List<Character>, Character, Status, Tran>(new ArrayList<>()))
                     .bind((List<Character> value) -> (State<Character, Status, Tran> s) -> {
                         Parsec<List<Character>, Character, Status, Tran> numbers =
-                            new Many<Character, Character, Status, Tran>(new Digit<Status, Tran>());
+                            new Many<>(new Digit<>());
                         List<Character> left = numbers.parse(s);
                         if (left.isEmpty()) {
                             value.add('0');

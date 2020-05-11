@@ -9,6 +9,20 @@ import java.io.EOFException;
 public class Text<Status, Tran>
     implements Parsec<String, Character, Status, Tran>{
     private final String text;
+    private final Boolean caseSensitive;
+
+    public Text(String text) {
+        this(text, true);
+    }
+
+    public Text(String text, boolean caseSensitive) {
+        this.caseSensitive = caseSensitive;
+        if(caseSensitive){
+            this.text = text;
+        } else {
+            this.text = text.toLowerCase();
+        }
+    }
 
     @Override
     public String parse(State<Character, Status, Tran> s)
@@ -16,15 +30,20 @@ public class Text<Status, Tran>
         int idx = 0;
         for(Character c: this.text.toCharArray()) {
             Character data = s.next();
-            if(c != data){
-                String message = String.format("Expect %c at %d but %c", c, idx, data);
-                throw s.trap(message);
+            if (caseSensitive) {
+                if (c != data) {
+                    String message = String.format("Expect %c at %d but %c", c, idx, data);
+                    throw s.trap(message);
+                }
+            } else {
+                if (c != data.toString().toLowerCase().charAt(0)) {
+                    String message = String.format("Expect %c at %d but %c", c, idx, data);
+                    throw s.trap(message);
+                }
             }
             idx ++;
         }
         return text;
     }
-    public Text(String text){
-        this.text = text;
-    }
+
 }
