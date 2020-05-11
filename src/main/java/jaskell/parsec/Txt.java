@@ -11,12 +11,24 @@ public class Txt {
         return new Ch<>(value);
     }
 
+    public static <Status, Tran> Ch<Status, Tran> ch(char value, boolean caseSensitive) {
+        return new Ch<>(value, caseSensitive);
+    }
+
     public static <Status, Tran> ChIn<Status, Tran> chIn(String data) {
         return new ChIn<>(data);
     }
 
+    public static <Status, Tran> ChIn<Status, Tran> chIn(String data, boolean caseSensitive) {
+        return new ChIn<>(data, caseSensitive);
+    }
+
     public static <Status, Tran> ChNone<Status, Tran> chNone(String data) {
         return new ChNone<>(data);
+    }
+
+    public static <Status, Tran> ChNone<Status, Tran> chNone(String data, boolean caseSensitive) {
+        return new ChNone<>(data, caseSensitive);
     }
 
     public static <Status, Tran> Crlf<Status, Tran> crlf() {
@@ -59,6 +71,10 @@ public class Txt {
         return new Whitespace<>();
     }
 
+    public static <Status, Tran> NoWhitespace<Status, Tran> noWhitespace() {
+        return new NoWhitespace<>();
+    }
+
     public static <Status, Tran> SkipSpaces<Status, Tran> skipSpaces() {
         return new SkipSpaces<>();
     }
@@ -70,7 +86,11 @@ public class Txt {
     public static <Status, Tran> Text<Status, Tran> text(String value) {
         return new Text<>(value);
     }
-    
+
+    public static <Status, Tran> Text<Status, Tran> text(String value, boolean caseSensitive) {
+        return new Text<>(value, caseSensitive);
+    }
+
     public static <Status, Tran> JoinText<Status, Tran> joining() {
         return new JoinText<>();
     }

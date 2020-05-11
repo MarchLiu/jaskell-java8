@@ -11,17 +11,41 @@ import static java.util.stream.Collectors.toSet;
  */
 public class ChIn<Status, Tran> implements
     Parsec<Character, Character, Status, Tran> {
-    private final OneOf<Character, Status, Tran> oneOf;
+    private final Set<Character> chars;
+    private final Boolean caseSensitive;
 
     @Override
     public Character parse(State<Character, Status, Tran> s)
             throws EOFException, ParsecException {
-        return oneOf.parse(s);
+        Character c = s.next();
+        if(caseSensitive){
+            if(chars.contains(c)){
+                return c;
+            }
+        }else{
+            if(chars.contains(c.toString().toLowerCase().charAt(0))){
+                return c;
+            }
+        }
+
+        throw s.trap(String.format("expect any char in %s (case sensitive %b) but get %c", chars, caseSensitive, c));
     }
 
     public ChIn(String data){
-        Set<Character> buffer = IntStream.range(0, data.length())
-                .mapToObj(data::charAt).collect(toSet());
-        this.oneOf = new OneOf<>(buffer);
+        this(data, false);
     }
+
+    public ChIn(String data, boolean caseSensitive){
+        this.caseSensitive = caseSensitive;
+        if(caseSensitive) {
+            this.chars = IntStream.range(0, data.length())
+                .mapToObj(data::charAt).collect(toSet());
+        } else {
+            String content = data.toLowerCase();
+            this.chars = IntStream.range(0, content.length())
+                .mapToObj(content::charAt).collect(toSet());
+        }
+
+    }
+
 }

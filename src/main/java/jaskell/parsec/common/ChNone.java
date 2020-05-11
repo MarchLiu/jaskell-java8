@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toSet;
 import jaskell.parsec.ParsecException;
 
 import java.io.EOFException;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 /**
@@ -12,16 +13,42 @@ import java.util.stream.IntStream;
  * ChNone 即 char none of,是为 Character 特化的 none of
  */
 public class ChNone implements Parsec<Character, Character> {
-    private final NoneOf<Character> noneOf;
+    private final Set<Character> chars;
+    private final Boolean caseSensitive;
 
     @Override
     public Character parse(State<Character> s)
-            throws EOFException, ParsecException {
-        return noneOf.parse(s);
+        throws EOFException, ParsecException {
+        Character c = s.next();
+        if(caseSensitive){
+            if(!chars.contains(c)){
+                return c;
+            }
+        }else{
+            if(!chars.contains(c.toString().toLowerCase().charAt(0))){
+                return c;
+            }
+        }
+
+        throw s.trap(String.format("expect any char none of %s (case sensitive %b) but get %c",
+            chars, caseSensitive, c));
     }
 
     public ChNone(String data){
-        this.noneOf = new NoneOf<>(
-                IntStream.range(0, data.length()).mapToObj(data::charAt).collect(toSet()));
+        this(data, false);
     }
+
+    public ChNone(String data, boolean caseSensitive){
+        this.caseSensitive = caseSensitive;
+        if(caseSensitive) {
+            this.chars = IntStream.range(0, data.length())
+                .mapToObj(data::charAt).collect(toSet());
+        } else {
+            String content = data.toLowerCase();
+            this.chars = IntStream.range(0, content.length())
+                .mapToObj(content::charAt).collect(toSet());
+        }
+
+    }
+
 }

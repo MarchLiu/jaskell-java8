@@ -14,17 +14,41 @@ import java.util.stream.IntStream;
  */
 public class ChIn implements
     Parsec<Character, Character> {
-    private final OneOf<Character> oneOf;
+    private final Set<Character> chars;
+    private final Boolean caseSensitive;
 
     @Override
     public Character parse(State<Character> s)
-            throws EOFException, ParsecException {
-        return oneOf.parse(s);
+        throws EOFException, ParsecException {
+        Character c = s.next();
+        if(caseSensitive){
+            if(chars.contains(c)){
+                return c;
+            }
+        }else{
+            if(chars.contains(c.toString().toLowerCase().charAt(0))){
+                return c;
+            }
+        }
+
+        throw s.trap(String.format("expect any char in %s (case sensitive %b) but get %c", chars, caseSensitive, c));
     }
 
     public ChIn(String data){
-        Set<Character> buffer = IntStream.range(0, data.length())
-                .mapToObj(data::charAt).collect(toSet());
-        this.oneOf = new OneOf<>(buffer);
+        this(data, false);
     }
+
+    public ChIn(String data, boolean caseSensitive){
+        this.caseSensitive = caseSensitive;
+        if(caseSensitive) {
+            this.chars = IntStream.range(0, data.length())
+                .mapToObj(data::charAt).collect(toSet());
+        } else {
+            String content = data.toLowerCase();
+            this.chars = IntStream.range(0, content.length())
+                .mapToObj(content::charAt).collect(toSet());
+        }
+
+    }
+
 }

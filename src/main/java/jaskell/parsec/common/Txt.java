@@ -11,12 +11,24 @@ public class Txt {
         return new Ch(value);
     }
 
+    public static Ch ch(char value, boolean caseSensitive) {
+        return new Ch(value, caseSensitive);
+    }
+
     public static ChIn chIn(String data) {
         return new ChIn(data);
     }
 
+    public static ChIn chIn(String data, boolean caseSensitive) {
+        return new ChIn(data, caseSensitive);
+    }
+
     public static ChNone chNone(String data) {
         return new ChNone(data);
+    }
+
+    public static ChNone chNone(String data, boolean caseSensitive) {
+        return new ChNone(data, caseSensitive);
     }
 
     public static Crlf crlf() {
@@ -59,6 +71,10 @@ public class Txt {
         return new Whitespace();
     }
 
+    public static NoWhitespace noWhitespace() {
+        return new NoWhitespace();
+    }
+
     public static SkipSpaces skipSpaces() {
         return new SkipSpaces();
     }
@@ -70,7 +86,11 @@ public class Txt {
     public static Text text(String value) {
         return new Text(value);
     }
-    
+
+    public static Text text(String value, boolean caseSensitive) {
+        return new Text(value, caseSensitive);
+    }
+
     public static JoinText joining() {
         return new JoinText();
     }
