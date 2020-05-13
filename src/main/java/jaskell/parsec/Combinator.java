@@ -21,6 +21,10 @@ public class Combinator {
         return new Choice<>(parsers);
     }
 
+    public static <T, E, Status, Tran> Choice<T, E, Status, Tran> choice(List<Parsec<T, E, Status, Tran>> parsers) {
+        return new Choice<>(parsers);
+    }
+
     public static <T, E, Status, Tran> Many<T, E, Status, Tran> many(Parsec<T, E, Status, Tran> parser) {
         return new Many<>(parser);
     }

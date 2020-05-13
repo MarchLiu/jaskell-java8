@@ -8,29 +8,26 @@ import org.junit.Test;
 
 public class OneTest extends Base {
 
-    @Before
-    public void before() throws Exception {
-    }
+  @Before
+  public void before() throws Exception {
+  }
 
-    @After
-    public void after() throws Exception {
-    }
+  @After
+  public void after() throws Exception {
+  }
 
-    /**
-     * Method: script(State<T> s)
-     */
-    @Test
-    public void testOne() throws Exception {
-        State<Character> state = newState("hello");
+  /**
+   * Method: script(State<T> s)
+   */
+  @Test
+  public void testOne() throws Exception {
+    State<Character> state = newState("hello");
 
-        One<Character> one = new One<>();
+    One<Character> one = new One<>();
 
-        try {
-            Character c = one.parse(state);
-            Assert.assertEquals('h', (char) c);
-        } catch (ParsecException e) {
-            Assert.assertTrue(true);
-        }
-    }
+
+    Character c = one.parse(state);
+    Assert.assertEquals('h', (char) c);
+  }
 
 } 

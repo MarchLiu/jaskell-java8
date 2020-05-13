@@ -12,4 +12,5 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
  - add parsec common namespace for common jobs
  - make parsec combinators easier to use 
  - make group/order by accept name list
+ - add choice(list of parsecs) function
  
