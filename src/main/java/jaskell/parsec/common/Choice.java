@@ -30,9 +30,12 @@ public class Choice<T, E>
         }
       }
     }
-    if (err == null) {
+    if(err == null){
       throw s.trap("Choice Error : All parsec parser failed.");
     } else {
+      if(err instanceof EOFException) {
+        throw (EOFException) err;
+      }
       String message = String.format("Choice Error %s, stop at %s", err, s.status());
       throw s.trap(message);
     }
