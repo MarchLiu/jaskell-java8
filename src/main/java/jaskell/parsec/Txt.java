@@ -15,6 +15,15 @@ public class Txt {
         return new Ch<>(value, caseSensitive);
     }
 
+    public static <Status, Tran> NCh<Status, Tran> nCh(char value) {
+        return new NCh<>(value);
+    }
+
+    public static <Status, Tran> NCh<Status, Tran> nCh(char value, boolean caseSensitive) {
+        return new NCh<>(value, caseSensitive);
+    }
+
+
     public static <Status, Tran> ChIn<Status, Tran> chIn(String data) {
         return new ChIn<>(data);
     }
