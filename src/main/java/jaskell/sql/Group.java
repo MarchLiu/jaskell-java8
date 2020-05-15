@@ -42,7 +42,7 @@ public class Group implements Directive {
         return re;
     }
 
-    public static class By extends jaskell.sql.By {
+    public static class By extends jaskell.sql.By implements CouldOrder {
         public By(String names){
             super(names);
         }

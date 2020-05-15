@@ -89,7 +89,7 @@ public class Select extends Query {
         return re;
     }
 
-    public static class From extends Query {
+    public static class From extends Query implements CouldGroup, CouldOrder {
         Select _select;
         Directive _from;
 
