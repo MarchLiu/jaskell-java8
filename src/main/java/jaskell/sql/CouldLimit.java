@@ -9,7 +9,7 @@ import jaskell.script.Directive;
  * @version 1.0.0
  * @since 2020/05/15 17:04
  */
-public interface CouldLimit {
+public interface CouldLimit extends Directive {
   Limit limit(int l);
 
   Limit limit(Directive l);
