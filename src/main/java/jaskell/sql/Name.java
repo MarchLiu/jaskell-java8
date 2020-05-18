@@ -21,4 +21,16 @@ public class Name extends Literal {
         _literal = n;
     }
 
+    public String escaped() {
+        return _literal.replace("\"", "\\\"");
+    }
+
+    public String escaped(Character c) {
+        return _literal.replace(c.toString(), "\\"+c.toString());
+    }
+
+    public String quotedName() {
+        return String.format("\"%s\"", _literal.replace("\"", "\\\""));
+    }
+
 }
