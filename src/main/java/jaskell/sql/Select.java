@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Select extends Query {
-    private List<Directive> _fields = new ArrayList<>();
+    private final List<Directive> _fields = new ArrayList<>();
 
     Select(){
     }
@@ -80,8 +80,8 @@ public class Select extends Query {
     }
 
     @Override
-    public List<jaskell.script.Parameter> parameters() {
-        List<jaskell.script.Parameter> re = new ArrayList<>();
+    public List<jaskell.script.Parameter<?>> parameters() {
+        List<jaskell.script.Parameter<?>> re = new ArrayList<>();
         for (Directive field : _fields) {
             re.addAll(field.parameters());
         }
@@ -99,8 +99,8 @@ public class Select extends Query {
         }
 
         @Override
-        public List<jaskell.script.Parameter> parameters() {
-            ArrayList<jaskell.script.Parameter> re = new ArrayList<>();
+        public List<jaskell.script.Parameter<?>> parameters() {
+            ArrayList<jaskell.script.Parameter<?>> re = new ArrayList<>();
             re.addAll(_select.parameters());
             re.addAll(_from.parameters());
             for (int i = 0; i < re.size(); i++) {

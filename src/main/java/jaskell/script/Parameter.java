@@ -57,8 +57,8 @@ public class Parameter<T> implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re =  new ArrayList<>();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re =  new ArrayList<>();
         re.add(this);
         return re;
     }
