@@ -29,11 +29,11 @@ public abstract class Statement implements Directive {
 
     public <T> Statement setParameter(Object key, T value) throws IllegalArgumentException{
         boolean flag = false;
-        for (Parameter parameter:parameters()) {
+        for (Parameter<?> parameter:parameters()) {
             if (Objects.equals(parameter.key(), key)) {
                 if(parameter.valueClass().isInstance(value)) {
                     @SuppressWarnings("unchecked")
-                    Parameter<T> p = parameter;
+                    Parameter<T> p = (Parameter<T>) parameter;
                     p.value(value);
                 } else {
                     throw new IllegalArgumentException(String.format("parameter %s typed %s but received %s",
@@ -53,23 +53,23 @@ public abstract class Statement implements Directive {
     }
 
     public void syncParameters(PreparedStatement statement) throws SQLException {
-        List<Parameter> parameters = parameters();
-        for (Parameter parameter: parameters){
+        List<Parameter<?>> parameters = parameters();
+        for (Parameter<?> parameter: parameters){
             if(!parameter.confirmed()){
                 throw new IllegalStateException(String.format("parameter %s has not value", parameter.key()));
             }
         }
         clear(statement);
-        List<Parameter> params = parameters();
+        List<Parameter<?>> params = parameters();
         setOrder(params);
-        for (Parameter parameter: params) {
+        for (Parameter<?> parameter: params) {
             //TODO: overload by parameter.valueClass
             statement.setObject(parameter.order(), parameter.value());
         }
 
     }
 
-    void setOrder(List<Parameter> parameters){
+    void setOrder(List<Parameter<?>> parameters){
         for (int i = 0; i < parameters.size(); i++) {
             parameters.get(i).order(i+1);
         }
@@ -96,15 +96,15 @@ public abstract class Statement implements Directive {
     public Statement cache(){
         Statement self = this;
         return new Statement() {
-            private String _script = self.script();
-            private List<Parameter> _parameters = self.parameters();
+            private final String _script = self.script();
+            private final List<Parameter<?>> _parameters = self.parameters();
             @Override
             public String script() {
                 return _script;
             }
 
             @Override
-            public List<Parameter> parameters() {
+            public List<Parameter<?>> parameters() {
                 return _parameters;
             }
         };
