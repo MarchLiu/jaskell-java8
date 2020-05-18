@@ -32,7 +32,7 @@ public class Literal extends Predicate {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return new ArrayList<>();
     }
 
@@ -103,12 +103,12 @@ public class Literal extends Predicate {
 
         @Override
         public String script() {
-            return String.format("%s as %s", _prefix.script(), _name.name());
+            return String.format("%s as \"%s\"", _prefix.script(), _name.name().replace("\"", "\\\""));
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_name.parameters());
             return re;
         }

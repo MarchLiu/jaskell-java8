@@ -13,4 +13,6 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
  - make parsec combinators easier to use 
  - make group/order by accept name list
  - add choice(list of parsecs) function
+ - make name could escape
+ - make parameters of sql more clean
  

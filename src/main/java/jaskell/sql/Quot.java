@@ -18,6 +18,6 @@ public class Quot extends Name {
 
     @Override
     public String script() {
-        return String.format("%s%s%s", this._left, super.script(), this._right);
+        return String.format("%s%s%s", this._left, super.escaped(), this._right);
     }
 }
