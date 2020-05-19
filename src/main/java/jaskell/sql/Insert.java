@@ -13,7 +13,7 @@ public class Insert implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return new ArrayList<>();
     }
 

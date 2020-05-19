@@ -27,7 +27,7 @@ public class Not extends Predicate {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         if(_predicate.isPresent()){
             return _predicate.get().parameters();
         } else {

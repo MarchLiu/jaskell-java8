@@ -37,7 +37,7 @@ public class Using implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return null;
     }
 
@@ -54,7 +54,7 @@ public class Using implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return null;
         }
     }

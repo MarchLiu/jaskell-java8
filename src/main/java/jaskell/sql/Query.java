@@ -91,14 +91,14 @@ public abstract class Query extends Statement implements CouldLimit, CouldOffset
         Query self = this;
         return new Query() {
             private String _script = self.script();
-            private List<Parameter> _parameters = self.parameters();
+            private List<Parameter<?>> _parameters = self.parameters();
             @Override
             public String script() {
                 return _script;
             }
 
             @Override
-            public List<Parameter> parameters() {
+            public List<Parameter<?>> parameters() {
                 return _parameters;
             }
         };

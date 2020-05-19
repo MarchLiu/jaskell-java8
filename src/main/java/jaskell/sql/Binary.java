@@ -17,8 +17,8 @@ public abstract class Binary extends Predicate {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re = _left.parameters();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re = _left.parameters();
         re.addAll(_right.parameters());
         return re;
     }

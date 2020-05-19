@@ -35,7 +35,7 @@ public class Update implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return _table.parameters();
     }
 
@@ -69,8 +69,8 @@ public class Update implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             _sets.forEach(item -> re.addAll(item.parameters()));
             return re;
         }
@@ -120,8 +120,8 @@ public class Update implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _field.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _field.parameters();
             re.addAll(_value.parameters());
             return re;
         }

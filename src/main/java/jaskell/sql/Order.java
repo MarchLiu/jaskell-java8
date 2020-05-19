@@ -14,7 +14,7 @@ public class Order implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return _prefix.parameters();
     }
 

@@ -72,8 +72,8 @@ public class By extends Select.From {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re = _prefix.parameters();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re = _prefix.parameters();
         _fields.forEach(item->re.addAll(item.parameters()));
         return re;
     }

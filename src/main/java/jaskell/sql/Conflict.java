@@ -37,7 +37,7 @@ public class Conflict implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return _prefix.parameters();
     }
 
@@ -74,7 +74,7 @@ public class Conflict implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return _prefix.parameters();
         }
 
@@ -109,7 +109,7 @@ public class Conflict implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return _prefix.parameters();
         }
 
@@ -136,7 +136,7 @@ public class Conflict implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return _prefix.parameters();
         }
 

@@ -29,8 +29,8 @@ public class Union extends Query implements ThenSelect {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re = _prefix.parameters();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re = _prefix.parameters();
         re.addAll(_query.parameters());
         return re;
     }

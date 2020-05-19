@@ -32,7 +32,7 @@ public class Sum extends Literal {
   }
 
   @Override
-  public List<Parameter> parameters() {
+  public List<Parameter<?>> parameters() {
     return _field.parameters();
   }
 }

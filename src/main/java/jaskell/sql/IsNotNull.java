@@ -13,7 +13,7 @@ public class IsNotNull extends Predicate {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return _prefix.parameters();
     }
 }

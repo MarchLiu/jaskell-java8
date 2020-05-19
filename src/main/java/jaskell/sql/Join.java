@@ -24,8 +24,8 @@ class Join implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re = _prefix.parameters();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re = _prefix.parameters();
         re.addAll(_join.parameters());
         return re;
     }
@@ -53,8 +53,8 @@ class Join implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _join.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _join.parameters();
             _on.forEach(item->re.addAll(item.parameters()));
             return re;
         }

@@ -21,7 +21,7 @@ public class Alias implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return _query.parameters();
     }
 

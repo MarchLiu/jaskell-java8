@@ -27,7 +27,7 @@ public class Exists extends Predicate {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         if (_prefix.isPresent()){
             return Stream.concat(_prefix.get().parameters().stream(), directive.parameters().stream())
                     .collect(Collectors.toList());

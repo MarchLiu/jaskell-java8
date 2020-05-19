@@ -76,7 +76,7 @@ public class With extends Query implements ThenSelect {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return new ArrayList<>();
     }
 
@@ -123,8 +123,8 @@ public class With extends Query implements ThenSelect {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_query.parameters());
             return re;
         }
@@ -238,8 +238,8 @@ public class With extends Query implements ThenSelect {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }
@@ -254,8 +254,8 @@ public class With extends Query implements ThenSelect {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }
@@ -279,8 +279,8 @@ public class With extends Query implements ThenSelect {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }
@@ -341,7 +341,7 @@ public class With extends Query implements ThenSelect {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return _prefix.parameters();
         }
     }
@@ -356,8 +356,8 @@ public class With extends Query implements ThenSelect {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_query.parameters());
             return re;
         }

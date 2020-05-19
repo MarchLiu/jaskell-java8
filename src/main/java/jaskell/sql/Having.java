@@ -21,8 +21,8 @@ public class Having extends Statement {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re = new ArrayList<Parameter>();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re = new ArrayList<Parameter<?>>();
         re.addAll(_by.parameters());
         re.addAll(_predicate.parameters());
         return re;

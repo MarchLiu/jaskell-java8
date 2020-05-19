@@ -22,8 +22,8 @@ public class Offset extends Query {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re =  _prefix.parameters();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re =  _prefix.parameters();
         re.addAll(_offset.parameters());
         return re;
     }

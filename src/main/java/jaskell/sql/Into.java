@@ -66,8 +66,8 @@ public class Into implements Directive, ThenSelect {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re = new ArrayList<>(_prefix.parameters());
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re = new ArrayList<>(_prefix.parameters());
         _fields.forEach(item->re.addAll(item.parameters()));
         return re;
     }

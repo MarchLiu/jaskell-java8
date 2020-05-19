@@ -18,7 +18,7 @@ public class In implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return _statement.parameters();
     }
 }

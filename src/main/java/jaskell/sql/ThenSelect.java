@@ -55,8 +55,8 @@ public interface ThenSelect extends Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }

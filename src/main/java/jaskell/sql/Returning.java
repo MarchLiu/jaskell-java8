@@ -60,8 +60,8 @@ public class Returning extends Query {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re = _prefix.parameters();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re = _prefix.parameters();
         _names.forEach(field->re.addAll(field.parameters()));
         return re;
     }

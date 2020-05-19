@@ -13,7 +13,7 @@ public class Delete implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return new ArrayList<>();
     }
 
@@ -42,7 +42,7 @@ public class Delete implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return _from.parameters();
         }
 
@@ -83,8 +83,8 @@ public class Delete implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_predicate.parameters());
             return re;
         }

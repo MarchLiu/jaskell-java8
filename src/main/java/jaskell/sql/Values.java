@@ -35,8 +35,8 @@ public class Values extends Statement {
     }
 
     @Override
-    public List<Parameter> parameters() {
-        List<Parameter> re =  _insert.parameters();
+    public List<Parameter<?>> parameters() {
+        List<Parameter<?>> re =  _insert.parameters();
         _fields.forEach(field->re.addAll(field.parameters()));
         return re;
     }

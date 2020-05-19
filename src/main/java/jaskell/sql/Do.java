@@ -14,7 +14,7 @@ public class Do implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         return _prefix.parameters();
     }
 
@@ -39,7 +39,7 @@ public class Do implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return _prefix.parameters();
         }
 

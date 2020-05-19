@@ -27,7 +27,7 @@ public class Case implements Directive {
     }
 
     @Override
-    public List<Parameter> parameters() {
+    public List<Parameter<?>> parameters() {
         if(_argument != null){
             return _argument.parameters();
         }
@@ -48,8 +48,8 @@ public class Case implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_cond.parameters());
             return re;
         }
@@ -76,8 +76,8 @@ public class Case implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_expr.parameters());
             return re;
         }
@@ -115,8 +115,8 @@ public class Case implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_expr.parameters());
             return re;
         }
@@ -137,7 +137,7 @@ public class Case implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
+        public List<Parameter<?>> parameters() {
             return _prefix.parameters();
         }
 
@@ -172,8 +172,8 @@ public class Case implements Directive {
         }
 
         @Override
-        public List<Parameter> parameters() {
-            List<Parameter> re = _prefix.parameters();
+        public List<Parameter<?>> parameters() {
+            List<Parameter<?>> re = _prefix.parameters();
             re.addAll(_name.parameters());
             return re;
         }
