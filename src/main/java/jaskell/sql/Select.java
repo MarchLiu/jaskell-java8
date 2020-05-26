@@ -95,7 +95,7 @@ public class Select extends Query {
 
         @Override
         public String script() {
-            return String.format("%s from %s", _select.script(), _from.script());
+            return String.format("%s FROM %s", _select.script(), _from.script());
         }
 
         @Override

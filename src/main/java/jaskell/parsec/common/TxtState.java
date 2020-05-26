@@ -1,5 +1,12 @@
 package jaskell.parsec.common;
 
+import static jaskell.parsec.common.Atom.one;
+import static jaskell.parsec.common.Atom.pack;
+import static jaskell.parsec.common.Combinator.attempt;
+import static jaskell.parsec.common.Combinator.choice;
+import static jaskell.parsec.common.Txt.newline;
+import static jaskell.parsec.common.Txt.text;
+
 import jaskell.parsec.ParsecException;
 
 import java.io.EOFException;
@@ -74,21 +81,33 @@ public class TxtState implements State<Character> {
     return new ParsecException(this.current, message);
   }
 
-  public TxtState(String content, Character newLine) {
+  public TxtState(String content, String newLine) {
     List<Character> characters = new ArrayList<>();
-    lines.put(0, 0);
-    for (int i = 0; i < content.length(); i++) {
-      Character c = content.charAt(i);
+    for (char c : content.toCharArray()) {
       characters.add(c);
-      if (c.equals(newLine)) {
-        int idx = i;
-        lines.keySet().stream().max(Comparator.naturalOrder()).ifPresent(last -> {
-          lines.put(last, idx);
-          lines.put(idx + 1, idx + 1);
-        });
+    }
+    SimpleState<Character> state = new SimpleState<>(characters);
+    Parsec<Character, Character> chr = choice(attempt(text(newLine).then(pack('\n'))), one());
+    List<Character> buffer = new ArrayList<>();
+    int last = 0;
+    while (true) {
+      try {
+        Character re = chr.parse(state);
+        if (re == '\n') {
+          lines.put(last, state.status());
+          lines.put(last + 1, last + 1);
+          last = state.status();
+        }
+        buffer.add(re);
+      } catch (EOFException error) {
+        break;
       }
     }
-    this.buffer = characters;
+    this.buffer = buffer;
+  }
+
+  public TxtState(String content) {
+    this(content, "\n");
   }
 
   public int lineOfIndex(int index) {

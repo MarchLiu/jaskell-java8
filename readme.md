@@ -16,7 +16,10 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
  - make name could escape
  - make parameters of sql more clean
  
-### 1.2-SNAPSHOT
+### 1.2.2
 
 1.2 着重 SQL 组件重构
 
+ - add text state constructor
+ - add int tests
+ - bugs in int parser fixed

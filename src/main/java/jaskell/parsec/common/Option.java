@@ -22,10 +22,15 @@ public class Option<T, E>
     @Override
     public  Optional<T> parse(State<E> s)
             throws EOFException, ParsecException {
+        Integer status = s.status();
         try{
             return Optional.of(parser.parse(s));
         } catch (Exception e) {
-            return Optional.empty();
+            if(status.equals(s.status())) {
+                return Optional.empty();
+            } else {
+                throw e;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ public class Int implements Parsec<String, Character> {
     private final Parsec<List<Character>, Character> parser =
         s -> {
           List<Character> re = new ArrayList<>();
-          Option<Character, Character> sign = new Option<>(new Ch('-'));
+          Option<Character, Character> sign = new Option<>(new Try<>(new Ch('-')));
           sign.parse(s).ifPresent(re::add);
           re.addAll(new Many1<>(new Digit()).parse(s));
           return re;

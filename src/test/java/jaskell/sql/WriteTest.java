@@ -91,7 +91,7 @@ public class WriteTest {
         statement.execute(conn);
 
         Query query = select("content").from(table).where(l("id").eq(id.get()));
-        Optional re = query.scalar(conn, String.class);
+        Optional<String> re = query.scalar(conn, String.class);
         if (re.isPresent()) {
             Assert.assertEquals("rewritten", re.get());
         }else{

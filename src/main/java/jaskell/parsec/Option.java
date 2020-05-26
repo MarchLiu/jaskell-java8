@@ -20,10 +20,15 @@ public class Option<T, E, Status, Tran>
     @Override
     public  Optional<T> parse(State<E, Status, Tran> s)
             throws EOFException, ParsecException {
+        Status status = s.status();
         try{
             return Optional.of(parser.parse(s));
         } catch (Exception e) {
-            return Optional.empty();
+            if(status.equals(s.status())) {
+                return Optional.empty();
+            }else{
+                throw e;
+            }
         }
     }
 }
