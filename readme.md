@@ -23,3 +23,8 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
  - add text state constructor
  - add int tests
  - bugs in int parser fixed
+ - all SQL statements generate upper case words
+ 
+### 1.2.3
+
+
