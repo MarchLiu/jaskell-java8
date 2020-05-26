@@ -54,7 +54,7 @@ public class Returning extends Query {
 
     @Override
     public String script() {
-        return String.format("%s returning %s",
+        return String.format("%s RETURNING %s",
                 _prefix.script(),
                 _names.stream().map(Directive::script).collect(Collectors.joining(", ")));
     }

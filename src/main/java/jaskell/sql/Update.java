@@ -31,7 +31,7 @@ public class Update implements Directive {
 
     @Override
     public String script() {
-        return String.format("update %s", _table.script());
+        return String.format("UPDATE %s", _table.script());
     }
 
     @Override

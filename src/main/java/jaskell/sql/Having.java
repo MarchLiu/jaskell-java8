@@ -15,7 +15,7 @@ public class Having extends Statement {
 
     @Override
     public String script() {
-        return String.format("%s having %s",
+        return String.format("%s HAVING %s",
                 _by.script(),
                 _predicate.script());
     }

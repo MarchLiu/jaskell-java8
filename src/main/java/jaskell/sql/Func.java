@@ -41,14 +41,14 @@ public class Func extends Literal {
     }
 
     public static Func max(Directive argument){
-        return new Func("max", argument);
+        return new Func("MAX", argument);
     }
 
     public static Func min(Directive argument){
-        return new Func("max", argument);
+        return new Func("MIN", argument);
     }
 
     public static Func avg(Directive argument){
-        return new Func("avg", argument);
+        return new Func("AVGs", argument);
     }
 }

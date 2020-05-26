@@ -9,7 +9,7 @@ import java.util.List;
 public class Insert implements Directive {
     @Override
     public String script() {
-        return "insert";
+        return "INSERT";
     }
 
     @Override

@@ -10,7 +10,7 @@ public class Do implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s do", _prefix.script());
+        return String.format("%s DO", _prefix.script());
     }
 
     @Override
@@ -30,12 +30,12 @@ public class Do implements Directive {
         return re;
     }
 
-    public class Update implements Directive {
+    public static class Update implements Directive {
         Directive _prefix;
 
         @Override
         public String script() {
-            return String.format("%s update", _prefix.script());
+            return String.format("%s UPDATE", _prefix.script());
         }
 
         @Override

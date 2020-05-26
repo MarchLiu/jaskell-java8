@@ -10,7 +10,7 @@ public class On implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s on", _prefix.script());
+        return String.format("%s ON", _prefix.script());
     }
 
     @Override

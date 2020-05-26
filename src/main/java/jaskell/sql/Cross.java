@@ -17,7 +17,7 @@ public class Cross implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s cross", _prefix.script());
+        return String.format("%s CROSS", _prefix.script());
     }
 
     @Override

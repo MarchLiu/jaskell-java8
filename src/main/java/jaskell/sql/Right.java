@@ -17,7 +17,7 @@ public class Right implements Directive{
 
     @Override
     public String script() {
-        return String.format("%s right", _prefix.script());
+        return String.format("%s RIGHT", _prefix.script());
     }
 
     @Override

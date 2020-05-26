@@ -9,7 +9,7 @@ public class IsNotNull extends Predicate {
     Directive _prefix;
     @Override
     public String script() {
-        return String.format("%s is not null", _prefix.script());
+        return String.format("%s IS NOT NULL", _prefix.script());
     }
 
     @Override

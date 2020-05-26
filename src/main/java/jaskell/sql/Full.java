@@ -17,7 +17,7 @@ public class Full implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s full", _prefix.script());
+        return String.format("%s FULL", _prefix.script());
     }
 
     @Override

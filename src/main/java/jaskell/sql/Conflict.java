@@ -28,9 +28,9 @@ public class Conflict implements Directive {
     @Override
     public String script() {
         if(_items.isEmpty()) {
-            return String.format("%s conflict", _prefix.script());
+            return String.format("%s CONFLICT", _prefix.script());
         } else {
-            return String.format("%s conflict (%s)",
+            return String.format("%s CONFLICT (%s)",
                     _prefix.script(),
                     _items.stream().map(Name::script).collect(Collectors.joining(", ")));
         }
@@ -70,7 +70,7 @@ public class Conflict implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s on", _prefix.script());
+            return String.format("%s ON", _prefix.script());
         }
 
         @Override
@@ -105,7 +105,7 @@ public class Conflict implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s constraint %s", _prefix.script(), _constraint);
+            return String.format("%s CONSTRAINT %s", _prefix.script(), _constraint);
         }
 
         @Override
@@ -132,7 +132,7 @@ public class Conflict implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s where %s", _prefix.script(), _name.script());
+            return String.format("%s WHERE %s", _prefix.script(), _name.script());
         }
 
         @Override

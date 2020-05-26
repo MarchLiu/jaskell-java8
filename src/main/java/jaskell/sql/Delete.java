@@ -9,7 +9,7 @@ import java.util.List;
 public class Delete implements Directive {
     @Override
     public String script() {
-        return "delete";
+        return "DELETE";
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Delete implements Directive {
 
         @Override
         public String script() {
-            return String.format("delete from %s", _from.script());
+            return String.format("DELETE FROM %s", _from.script());
         }
 
         @Override

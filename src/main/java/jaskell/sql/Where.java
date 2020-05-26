@@ -15,7 +15,7 @@ public class Where extends Query {
 
     @Override
     public String script() {
-        return String.format("%s where %s", _prefix.script(), _predicate.script());
+        return String.format("%s WHERE %s", _prefix.script(), _predicate.script());
     }
 
     @Override

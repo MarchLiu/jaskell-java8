@@ -20,9 +20,9 @@ public class Not extends Predicate {
     @Override
     public String script() {
         if (_predicate.isPresent()){
-            return String.format("not(%s)", _predicate.get().script());
+            return String.format("NOT(%s)", _predicate.get().script());
         } else {
-            return "not ";
+            return "NOT ";
         }
     }
 

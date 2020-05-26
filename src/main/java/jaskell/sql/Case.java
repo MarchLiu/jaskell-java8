@@ -20,9 +20,9 @@ public class Case implements Directive {
     @Override
     public String script() {
         if(_argument == null) {
-            return String.format("case");
+            return String.format("CASE");
         }else{
-            return String.format("case %s", _argument.script());
+            return String.format("CASE %s", _argument.script());
         }
     }
 
@@ -44,7 +44,7 @@ public class Case implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s when %s", _prefix.script(), _cond.script());
+            return String.format("%s WHEN %s", _prefix.script(), _cond.script());
         }
 
         @Override
@@ -72,7 +72,7 @@ public class Case implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s then %s", _prefix.script(), _expr.script());
+            return String.format("%s THEN %s", _prefix.script(), _expr.script());
         }
 
         @Override
@@ -111,7 +111,7 @@ public class Case implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s else %s", _prefix.script(), _expr.script());
+            return String.format("%s ELSE %s", _prefix.script(), _expr.script());
         }
 
         @Override
@@ -133,7 +133,7 @@ public class Case implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s end", _prefix.script());
+            return String.format("%s END", _prefix.script());
         }
 
         @Override
@@ -168,7 +168,7 @@ public class Case implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s as %s", _prefix.script(), _name.script());
+            return String.format("%s AS %s", _prefix.script(), _name.script());
         }
 
         @Override

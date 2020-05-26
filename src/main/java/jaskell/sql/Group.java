@@ -10,7 +10,7 @@ public class Group implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s group", _prefix.script());
+        return String.format("%s GROUP", _prefix.script());
     }
 
     @Override

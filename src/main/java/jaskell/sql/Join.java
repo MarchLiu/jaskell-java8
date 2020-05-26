@@ -20,7 +20,7 @@ class Join implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s join %s", _prefix.script(), _join.script());
+        return String.format("%s JOIN %s", _prefix.script(), _join.script());
     }
 
     @Override
@@ -48,7 +48,7 @@ class Join implements Directive {
 
         @Override
         public String script() {
-            return String.format("%s on %s", _join.script(),
+            return String.format("%s ON %s", _join.script(),
                     _on.stream().map(Directive::script).collect(Collectors.joining(", ")));
         }
 

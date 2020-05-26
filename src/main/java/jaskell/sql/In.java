@@ -14,7 +14,7 @@ public class In implements Directive {
 
     @Override
     public String script() {
-        return String.format("in (%s)", _statement.script());
+        return String.format("IN (%s)", _statement.script());
     }
 
     @Override

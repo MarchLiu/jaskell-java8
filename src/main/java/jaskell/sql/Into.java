@@ -59,7 +59,7 @@ public class Into implements Directive, ThenSelect {
 
     @Override
     public String script() {
-        return String.format("%s into %s(%s)",
+        return String.format("%s INTO %s(%s)",
                 _prefix.script(),
                 _name.script(),
                 _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));

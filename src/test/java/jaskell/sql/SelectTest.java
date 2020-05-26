@@ -15,14 +15,14 @@ public class SelectTest {
     @Test
     public void basicTest0(){
         Query query = select(func("now"));
-        Assert.assertEquals("{} should be {}", "select now()", query.script());
+        Assert.assertEquals("{} should be {}", "SELECT now()", query.script());
     }
 
     @Test
     public void queryTest0(){
         Query query = select("id, content").from("log");
         Assert.assertEquals("{} should be {}",
-                "select id, content from log",
+                "SELECT id, content FROM log",
                 query.script());
     }
 
@@ -30,7 +30,7 @@ public class SelectTest {
     public void queryWhereTest0(){
         Query query = select("id, content").from("log").where(n("id").gt(l(1000)));
         Assert.assertEquals("{} should be {}",
-                "select id, content from log where id > 1000",
+                "SELECT id, content FROM log WHERE id > 1000",
                 query.script());
 
     }
@@ -41,7 +41,7 @@ public class SelectTest {
                 .from("log")
                 .where(n("id").gt(p("start")));
         Assert.assertEquals("{} should be {}",
-                "select id, content from log where id > ?",
+                "SELECT id, content FROM log WHERE id > ?",
                 query.script());
         Assert.assertEquals("should get first argument named start",
                 "start",
@@ -52,7 +52,7 @@ public class SelectTest {
     public void selectPagedTest0(){
         Query query = select("id", "content").from("log").limit(20).offset(60);
         Assert.assertEquals("{} should be {}",
-                "select id, content from log limit 20 offset 60",
+                "SELECT id, content FROM log LIMIT 20 OFFSET 60",
                 query.script());
     }
 

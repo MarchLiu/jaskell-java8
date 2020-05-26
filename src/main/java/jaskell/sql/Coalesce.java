@@ -49,7 +49,7 @@ public class Coalesce implements Directive {
 
     @Override
     public String script() {
-        return String.format("coalesce(%s)",
+        return String.format("COALESCE(%s)",
                 _args.stream().map(Directive::script).collect(Collectors.joining(", ")));
     }
 

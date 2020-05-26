@@ -17,7 +17,7 @@ public class Left implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s left", _prefix.script());
+        return String.format("%s LEFT", _prefix.script());
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Values extends Statement {
 
     @Override
     public String script() {
-        return String.format("%s values(%s)",
+        return String.format("%s VALUES(%s)",
                 _insert.script(),
                 _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
     }

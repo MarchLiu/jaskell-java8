@@ -17,7 +17,7 @@ public class Inner implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s inner", _prefix.script());
+        return String.format("%s INNER", _prefix.script());
     }
 
     @Override

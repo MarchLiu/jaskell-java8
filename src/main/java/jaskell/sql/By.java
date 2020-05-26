@@ -67,7 +67,7 @@ public class By extends Select.From {
 
     @Override
     public String script() {
-        return String.format("%s by %s", _prefix.script(),
+        return String.format("%s BY %s", _prefix.script(),
                 _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
     }
 

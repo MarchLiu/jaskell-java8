@@ -30,7 +30,7 @@ public class Limit extends Query {
 
     @Override
     public String script() {
-        return String.format("%s limit %s", _prefix.script(), _limit.script());
+        return String.format("%s LIMIT %s", _prefix.script(), _limit.script());
     }
 
     @Override

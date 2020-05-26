@@ -25,9 +25,9 @@ public class Sum extends Literal {
   @Override
   public String script() {
     if(_field != null) {
-      return String.format("sum(%s)", _field.script());
+      return String.format("SUM(%s)", _field.script());
     }else{
-      return "sum(*)";
+      return "SUM(*)";
     }
   }
 

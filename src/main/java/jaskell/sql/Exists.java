@@ -20,9 +20,9 @@ public class Exists extends Predicate {
     @Override
     public String script() {
         if(_prefix.isPresent()) {
-            return String.format("%s exists(%s)", _prefix.get().script(), directive.script());
+            return String.format("%s EXISTS(%s)", _prefix.get().script(), directive.script());
         }else {
-            return String.format("exists(%s)", directive.script());
+            return String.format("EXISTS(%s)", directive.script());
         }
     }
 

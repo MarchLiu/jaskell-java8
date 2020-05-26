@@ -18,7 +18,7 @@ public class Offset extends Query {
 
     @Override
     public String script() {
-        return String.format("%s offset %s", _prefix.script(), _offset.script());
+        return String.format("%s OFFSET %s", _prefix.script(), _offset.script());
     }
 
     @Override

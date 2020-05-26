@@ -103,7 +103,7 @@ public class Literal extends Predicate {
 
         @Override
         public String script() {
-            return String.format("%s as \"%s\"", _prefix.script(), _name.name().replace("\"", "\\\""));
+            return String.format("%s AS \"%s\"", _prefix.script(), _name.name().replace("\"", "\\\""));
         }
 
         @Override

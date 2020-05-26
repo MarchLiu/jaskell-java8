@@ -10,7 +10,7 @@ public class Nothing extends Statement {
 
     @Override
     public String script() {
-        return String.format("%s nothing", _prefix.script());
+        return String.format("%s NOTHING", _prefix.script());
     }
 
     @Override

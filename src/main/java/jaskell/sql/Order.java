@@ -10,7 +10,7 @@ public class Order implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s order", _prefix.script());
+        return String.format("%s ORDER", _prefix.script());
     }
 
     @Override

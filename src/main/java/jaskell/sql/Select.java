@@ -75,7 +75,7 @@ public class Select extends Query {
 
     @Override
     public String script() {
-        return String.format("select %s",
+        return String.format("SELECT %s",
                 _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
     }
 

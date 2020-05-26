@@ -8,6 +8,6 @@ import java.util.List;
 public class And extends Binary {
     @Override
     protected String operator() {
-        return " and ";
+        return " AND ";
     }
 }

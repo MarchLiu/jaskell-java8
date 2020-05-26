@@ -31,7 +31,7 @@ public class Using implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s using(%s)",
+        return String.format("%s USING(%s)",
                 _prefix.script(),
                 _items.stream().map(Directive::script).collect(Collectors.joining(",")));
     }

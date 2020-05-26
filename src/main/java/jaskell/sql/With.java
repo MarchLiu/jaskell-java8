@@ -68,9 +68,9 @@ public class With extends Query implements ThenSelect {
     @Override
     public String script() {
         if(_fields.isEmpty()) {
-            return String.format("with %s", _name.script());
+            return String.format("WITH %s", _name.script());
         }else{
-            return String.format("with %s(%s)", _name.script(),
+            return String.format("WITH %s(%s)", _name.script(),
                     _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
         }
     }
@@ -102,9 +102,9 @@ public class With extends Query implements ThenSelect {
         @Override
         public String script() {
             if(_fields.isEmpty()) {
-                return String.format("with recursive %s", _name.script());
+                return String.format("WITH RECURSIVE %s", _name.script());
             }else{
-                return String.format("with recursive %s(%s)", _name.script(),
+                return String.format("WITH RECURSIVE %s(%s)", _name.script(),
                         _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
             }
         }
@@ -119,7 +119,7 @@ public class With extends Query implements ThenSelect {
 
         @Override
         public String script() {
-            return String.format("%s as (%s)", _prefix.script(), _query.script());
+            return String.format("%s AS (%s)", _prefix.script(), _query.script());
         }
 
         @Override

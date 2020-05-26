@@ -15,7 +15,7 @@ public class Alias implements Directive {
 
     @Override
     public String script() {
-        return String.format("(%s) as %s",
+        return String.format("(%s) AS %s",
                 _query.script(),
                 _name.script());
     }

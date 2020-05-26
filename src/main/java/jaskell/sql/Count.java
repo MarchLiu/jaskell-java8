@@ -19,9 +19,9 @@ public class Count extends Literal {
     @Override
     public String script() {
         if(_field != null) {
-            return String.format("count(%s)", _field.script());
+            return String.format("COUNT(%s)", _field.script());
         }else{
-            return "count(*)";
+            return "COUNT(*)";
         }
     }
 
