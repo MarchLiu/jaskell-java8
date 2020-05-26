@@ -88,8 +88,8 @@ public class Txt {
         return new SkipSpaces<>();
     }
 
-    public static <Status, Tran> Whitespace<Status, Tran> skipWhiteSpaces() {
-        return new Whitespace<>();
+    public static <Status, Tran> SkipWhitespaces<Status, Tran> skipWhiteSpaces() {
+        return new SkipWhitespaces<>();
     }
 
     public static <Status, Tran> Text<Status, Tran> text(String value) {
