@@ -88,8 +88,8 @@ public class Txt {
         return new SkipSpaces();
     }
 
-    public static Whitespace skipWhiteSpaces() {
-        return new Whitespace();
+    public static SkipWhitespaces skipWhiteSpaces() {
+        return new SkipWhitespaces();
     }
 
     public static Text text(String value) {

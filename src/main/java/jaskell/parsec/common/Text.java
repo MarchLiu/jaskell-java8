@@ -1,5 +1,6 @@
 package jaskell.parsec.common;
 
+import jaskell.parsec.Neighborhood;
 import jaskell.parsec.ParsecException;
 
 import java.io.EOFException;

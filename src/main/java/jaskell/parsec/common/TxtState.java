@@ -7,6 +7,7 @@ import static jaskell.parsec.common.Combinator.choice;
 import static jaskell.parsec.common.Txt.newline;
 import static jaskell.parsec.common.Txt.text;
 
+import jaskell.parsec.Neighborhood;
 import jaskell.parsec.ParsecException;
 
 import java.io.EOFException;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
  */
 public class TxtState implements State<Character> {
   private final List<Character> buffer;
+  private final String content;
   private final Map<Integer, Integer> lines = new HashMap<>();
   private int current = 0;
   private int tran = -1;
@@ -82,6 +84,7 @@ public class TxtState implements State<Character> {
   }
 
   public TxtState(String content, String newLine) {
+    this.content = content;
     List<Character> characters = new ArrayList<>();
     for (char c : content.toCharArray()) {
       characters.add(c);
@@ -121,4 +124,17 @@ public class TxtState implements State<Character> {
     return -1;
   }
 
+  public Neighborhood neighborhood() {
+    return neighborhood(current);
+  }
+
+  public Neighborhood neighborhood(int index) {
+    int top = Math.min(index + 10, content.length());
+    int bottom = Math.max(index - 10, 0);
+    Neighborhood result = new Neighborhood();
+    result.setTop(top);
+    result.setBottom(bottom);
+    result.setContent(content.substring(bottom, top));
+    return result;
+  }
 }

@@ -10,32 +10,17 @@ import java.util.List;
  */
 public class Decimal<Status, Tran> implements Parsec<String, Character, Status, Tran> {
 
-    private final Parsec<List<Character>, Character, Status, Tran> parser =
-            new Choice<>(new Try<>(new Ch<Status, Tran>('-')
-                .then(new Return<>(new ArrayList<>('-')))),
-                    new Return<List<Character>, Character, Status, Tran>(new ArrayList<>()))
-                    .bind((List<Character> value) -> (State<Character, Status, Tran> s) -> {
-                        Parsec<List<Character>, Character, Status, Tran> numbers =
-                            new Many<>(new Digit<>());
-                        List<Character> left = numbers.parse(s);
-                        if (left.isEmpty()) {
-                            value.add('0');
-                        } else {
-                            value.addAll(left);
-                        }
-                        value.add(new Ch<Status, Tran>('.').parse(s));
-                        // 下面两行相当于一次 Many1
-                        value.add(new Digit<Status, Tran>().parse(s));
-                        value.addAll(numbers.parse(s));
-                        return value;
-                    });
+  private final Parsec<Character, Character, Status, Tran> sign = new Ch<>('-');
+  private final UDecimal<Status, Tran> decimal = new UDecimal<>();
 
-    @Override
-    public String parse(State<Character, Status, Tran> s)
-            throws EOFException, ParsecException {
-        List<Character> buffer = parser.parse(s);
-        StringBuilder sb = new StringBuilder();
-        buffer.forEach(sb::append);
-        return sb.toString();
+  @Override
+
+  public String parse(State<Character, Status, Tran> s)
+      throws EOFException, ParsecException {
+    if (sign.exec(s).isOk()) {
+      return "-" + decimal.parse(s);
+    } else {
+      return decimal.parse(s);
     }
+  }
 }

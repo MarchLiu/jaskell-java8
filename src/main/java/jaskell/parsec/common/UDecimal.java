@@ -1,6 +1,7 @@
 package jaskell.parsec.common;
 
 import jaskell.parsec.ParsecException;
+import javafx.util.Builder;
 
 import java.io.EOFException;
 import java.util.ArrayList;
@@ -12,22 +13,18 @@ import java.util.List;
  */
 public class UDecimal
     implements Parsec<String, Character> {
-    private final Parsec<List<Character>, Character> parser =
-        new Choice<>(new Try<>(new Many1<>(new Digit())),
-            new Return<>(new ArrayList<>('0'))).over(
-            new Ch('.')).bind(
-                (List<Character> value) -> s -> {
-                value.add('.');
-                value.addAll(new Many1<>(new Digit()).parse(s));
-                return value;
-            });
+  private final Parsec<String, Character> uint = new UInt();
+  private final Parsec<Character, Character> dot = new Try<>(new Ch('.'));
 
-    @Override
-    public String parse(State<Character> s)
-            throws EOFException, ParsecException {
-        List<Character> buffer = parser.parse(s);
-        StringBuilder sb = new StringBuilder();
-        buffer.forEach(sb::append);
-        return sb.toString();
+  @Override
+  public String parse(State<Character> s)
+      throws EOFException, ParsecException {
+    StringBuilder builder = new StringBuilder();
+    builder.append(uint.parse(s));
+    if(dot.exec(s).isOk()){
+      builder.append('.');
+      builder.append(uint.parse(s));
     }
+    return builder.toString();
+  }
 }
