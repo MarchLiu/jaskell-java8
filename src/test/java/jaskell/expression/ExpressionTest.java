@@ -86,9 +86,9 @@ public class ExpressionTest {
 
   @Test
   public void testPloyQuote() throws EOFException {
-    State<Character> state = new TxtState("5 * (3 + 7)");
+    String content = "5 * (3 + 7)";
     Parsec<Expression, Character> p = new Parser();
-    Expression expression = p.parse(state);
+    Expression expression = p.parse(content);
     expression = expression.makeAst();
     Assert.assertEquals(50, expression.eval(), 0.00001);
   }
@@ -104,9 +104,9 @@ public class ExpressionTest {
 
   @Test
   public void testPloyMoreComplex() throws EOFException {
-    State<Character> state = new TxtState("5 * (3 + 7) - -22.5");
+    String content = "5 * (3 + 7) - -22.5";
     Parsec<Expression, Character> p = new Parser();
-    Expression expression = p.parse(state);
+    Expression expression = p.parse(content);
     expression = expression.makeAst();
     Assert.assertEquals(72.5, expression.eval(), 0.00001);
   }

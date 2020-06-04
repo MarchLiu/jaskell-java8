@@ -1,5 +1,6 @@
 package jaskell.parsec;
 
+import jaskell.sql.Equal;
 import jaskell.util.Result;
 
 import java.io.EOFException;

@@ -4,7 +4,6 @@ import jaskell.parsec.ParsecException;
 import jaskell.util.Result;
 
 import java.io.EOFException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +15,17 @@ import java.util.List;
 public interface Parsec<T, E> {
   T parse(State<E> s)
       throws EOFException, ParsecException;
+
+  default <C extends List<E>> T parse(C collection) throws EOFException {
+    State<E> s = new SimpleState<>(collection);
+    return this.parse(s);
+  }
+
+  default T parse(String content) throws EOFException {
+      State<Character> s = new TxtState(content);
+      return ((Parsec<T, Character>)this).parse(s);
+
+  }
 
   default Result<T, Throwable> exec(State<E> s) {
     try {
