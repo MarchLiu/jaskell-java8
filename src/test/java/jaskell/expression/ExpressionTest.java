@@ -110,4 +110,27 @@ public class ExpressionTest {
     expression = expression.makeAst();
     Assert.assertEquals(72.5, expression.eval(), 0.00001);
   }
+
+  @Test
+  public void testPloyScientific() throws EOFException {
+    String content = "5 * (3 + 7e2) - -22.5";
+    Parsec<Expression, Character> p = new Parser();
+    Expression expression = p.parse(content);
+    expression = expression.makeAst();
+    Assert.assertEquals(3537.5, expression.eval(), 0.00001);
+
+    content = "5 * (3E-3 + 7) - -22.5e8";
+    expression = p.parse(content);
+    expression = expression.makeAst();
+    Assert.assertEquals(2.250000035015E9, expression.eval(), 0.00001);
+  }
+
+  @Test
+  public void testNormalExpression() throws EOFException {
+    String content = "3.14 + 7 * 8 - (2 + 3)";
+    Parsec<Expression, Character> p = new Parser();
+    Expression expression = p.parse(content);
+    expression = expression.makeAst();
+    Assert.assertEquals(54.14, expression.eval(), 0.00001);
+  }
 }

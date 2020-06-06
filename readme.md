@@ -30,4 +30,7 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
  - add expression parser library
  - bugs fixed
 
+### 1.4
+ 
+ - parsec can parse a Starte or String once by shortcut method
 

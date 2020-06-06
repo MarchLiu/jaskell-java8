@@ -4,8 +4,8 @@ import jaskell.expression.Expression;
 import jaskell.expression.Number;
 import jaskell.parsec.ParsecException;
 import jaskell.parsec.common.Parsec;
+import jaskell.parsec.common.ScNumber;
 import jaskell.parsec.common.State;
-import static jaskell.parsec.common.Txt.decimal;
 
 import java.io.EOFException;
 
@@ -18,7 +18,7 @@ import java.io.EOFException;
  * @since 2020/06/04 10:53
  */
 public class N implements Parsec<Expression, Character> {
-  private final Parsec<String, Character> decimal = decimal();
+  private final Parsec<String, Character> decimal = new ScNumber();
   @Override
   public Number parse(State<Character> s) throws EOFException, ParsecException {
     String re = decimal.parse(s);

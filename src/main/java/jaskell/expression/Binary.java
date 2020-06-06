@@ -15,20 +15,17 @@ abstract class Binary implements Expression {
 
   @Override
   public Expression makeAst() {
+    this.left = this.left.makeAst();
+    this.right = this.right.makeAst();
     if (right instanceof Binary) {
       Binary r = (Binary) right;
       if (this.getPriority() >= r.getPriority()) {
         Expression lx = r.left;
         this.right = lx;
         r.left = this;
-        r.right = r.right.makeAst();
         return r;
-      } else {
-        return this;
       }
-    } else {
-      this.right = this.right.makeAst();
-      return this;
     }
+    return this;
   }
 }

@@ -1,13 +1,16 @@
 package jaskell.util;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Function;
 
 // TODO: type safe
 @SuppressWarnings("unchecked")
-public class Result<T, E extends Throwable>{
+public class Result<T, E extends Throwable> implements Iterable<T>, Iterator<T> {
     private final Object slot;
     private final boolean _ok;
+    private int idx = 0;
 
     public Result(T value) {
         this.slot = value;
@@ -63,7 +66,7 @@ public class Result<T, E extends Throwable>{
         if (_ok) {
             return mapper.apply((T)this.slot);
         } else {
-            return new Result<U, E>((E)this.slot);
+            return new Result<>((E) this.slot);
         }
     }
 
@@ -88,6 +91,30 @@ public class Result<T, E extends Throwable>{
             return (T)this.slot;
         } else {
             return other.get();
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        if(isOk()){
+            return new Result<T, E>((T)slot);
+        } else {
+            return new Result<T, E>((E)slot);
+        }
+    }
+
+    @Override
+    public boolean hasNext() {
+        return isOk() && idx == 0;
+    }
+
+    @Override
+    public T next() {
+        if (isOk() && idx == 0) {
+            idx ++;
+            return (T)slot;
+        } else {
+            throw new NoSuchElementException();
         }
     }
 }
