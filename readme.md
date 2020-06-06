@@ -32,5 +32,7 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
 
 ### 1.4
  
- - parsec can parse a Starte or String once by shortcut method
-
+ - parsec can parse a Seq or String once by shortcut method
+ - add scientific number parser
+ - add a test include scientific number new test
+ - bug fixed
