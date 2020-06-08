@@ -7,11 +7,11 @@ import jaskell.util.Result;
 import java.io.EOFException;
 
 /**
- * TODO
+ * ScNumber Parser could parse scientific number text
  *
- * @author mars
+ * @author Mars Liu
  * @version 1.0.0
- * @since 2020/06/05 14:40
+ * @since 2020/06/05 12:40
  */
 public class ScNumber implements Parsec<String, Character> {
   private final Decimal decimal = new Decimal();

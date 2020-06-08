@@ -18,10 +18,10 @@ import java.io.EOFException;
  * @since 2020/06/04 10:53
  */
 public class N implements Parsec<Expression, Character> {
-  private final Parsec<String, Character> decimal = new ScNumber();
+  private final Parsec<String, Character> number = new ScNumber();
   @Override
   public Number parse(State<Character> s) throws EOFException, ParsecException {
-    String re = decimal.parse(s);
+    String re = number.parse(s);
     return new Number(Double.parseDouble(re));
   }
 }

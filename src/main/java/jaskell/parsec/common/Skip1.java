@@ -11,15 +11,17 @@ import java.io.EOFException;
 public class Skip1<T, E>
     implements Parsec<T, E> {
     private final Parsec<T, E> psc;
+    private final Parsec<T, E> skip;
 
     @Override
     public T parse(State<E> s) throws EOFException, ParsecException {
         psc.parse(s);
-        new Skip<>(psc).parse(s);
+        skip.parse(s);
         return null;
     }
 
     public Skip1(Parsec<T, E> psc) {
         this.psc = psc;
+        this.skip = new Skip<>(psc);
     }
 }
