@@ -36,3 +36,7 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
  - add scientific number parser
  - add a test include scientific number new test
  - bug fixed
+ 
+#### 1.4.1
+
+ - where could order and group
