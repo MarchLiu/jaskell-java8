@@ -18,6 +18,12 @@ public class Group implements Directive {
         return _prefix.parameters();
     }
 
+    public By by(){
+        By re =  new By();
+        re._prefix = this;
+        return re;
+    }
+
     public By by(String names){
         By re =  new By(names);
         re._prefix = this;
@@ -43,6 +49,10 @@ public class Group implements Directive {
     }
 
     public static class By extends jaskell.sql.By implements CouldOrder {
+        public By(){
+            super();
+        }
+
         public By(String names){
             super(names);
         }

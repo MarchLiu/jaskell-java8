@@ -12,6 +12,9 @@ public class By extends Select.From {
     Directive _prefix;
     private List<Directive> _fields = new ArrayList<>();
 
+    public By(){
+    }
+
     public By(String names){
         _fields.addAll(Arrays.stream(
                 names.split(",")).map(String::trim).map(Name::new).collect(Collectors.toList()));
