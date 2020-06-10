@@ -30,7 +30,7 @@ class Join implements Directive {
         return re;
     }
 
-    public static class On extends Select.From {
+    public static class On extends Select.From implements CouldAlias {
         Join _join;
         List<Predicate> _on = new ArrayList<>();
 

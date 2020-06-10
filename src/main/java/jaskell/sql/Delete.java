@@ -6,7 +6,7 @@ import jaskell.script.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Delete implements Directive {
+public class Delete implements Directive, CouldFrom {
     @Override
     public String script() {
         return "DELETE";
@@ -25,7 +25,7 @@ public class Delete implements Directive {
         return new From(name);
     }
 
-    public static class From extends Statement {
+    public static class From extends Statement implements jaskell.sql.From, CouldWhere {
         Directive _from;
 
         public From(String name){
@@ -65,17 +65,27 @@ public class Delete implements Directive {
         }
 
         public Where where(Predicate predicate){
-            Where re = new Where();
-            re._prefix = this;
-            re._predicate = predicate;
-            return re;
+            return new Where(this, predicate);
         }
 
     }
 
-    public static class Where extends Statement {
+    public static class Where extends jaskell.sql.Where {
         Directive _prefix;
         Predicate _predicate;
+
+        public Where(Directive prefix, Predicate predicate) {
+            super(predicate);
+            this._prefix = prefix;
+            this._predicate = predicate;
+        }
+
+        @Override
+        public Alias as(String name) {
+            Alias result = new Alias(name);
+            result._query = this;
+            return result;
+        }
 
         @Override
         public String script() {

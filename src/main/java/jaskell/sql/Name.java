@@ -5,7 +5,7 @@ import jaskell.script.Directive;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Name extends Literal {
+public class Name extends Literal implements CouldAlias {
 
     protected Name(){}
 

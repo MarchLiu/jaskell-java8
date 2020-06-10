@@ -5,7 +5,7 @@ import jaskell.script.Parameter;
 
 import java.util.List;
 
-public class On implements Directive {
+public class On implements Directive, CouldAlias {
     Directive _prefix;
 
     @Override

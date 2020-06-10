@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Select extends Query {
+public class Select extends Query implements CouldFrom, CouldAlias {
     private final List<Directive> _fields = new ArrayList<>();
 
     Select(){
@@ -89,7 +89,7 @@ public class Select extends Query {
         return re;
     }
 
-    public static class From extends Query implements CouldGroup, CouldOrder {
+    public static class From extends Query implements jaskell.sql.From, CouldGroup, CouldOrder, CouldAlias {
         Select _select;
         Directive _from;
 

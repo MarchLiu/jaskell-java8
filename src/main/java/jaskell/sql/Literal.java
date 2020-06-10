@@ -6,7 +6,7 @@ import jaskell.script.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Literal extends Predicate {
+public class Literal extends Predicate implements CouldAlias {
     protected Literal(){}
     String _literal;
 
@@ -85,15 +85,17 @@ public class Literal extends Predicate {
         return re;
     }
 
-    public static class Alias implements Directive {
+    public static class Alias extends jaskell.sql.Alias implements Directive, CouldAlias {
         Name _name;
         Directive _prefix;
 
         Alias(String alias) {
+            super(alias);
             this._name = new Name(alias);
         }
 
         Alias(Literal alias) {
+            super(alias.script());
             this._name = new Name(alias.script());
         }
 

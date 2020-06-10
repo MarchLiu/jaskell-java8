@@ -5,7 +5,7 @@ import jaskell.script.Parameter;
 
 import java.util.List;
 
-public class Limit extends Query {
+public class Limit extends Query implements CouldOffset {
     Directive _prefix;
     Directive _limit;
     Limit(int limit){

@@ -10,12 +10,6 @@ import java.util.Optional;
 
 public abstract class Query extends Statement implements CouldLimit, CouldOffset {
 
-    public Alias as(String name){
-        Alias re = new Alias(name);
-        re._query = this;
-        return re;
-    }
-
     public Union union(){
         Union re = new Union();
         re._prefix = this;

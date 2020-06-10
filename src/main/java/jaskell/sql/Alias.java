@@ -5,8 +5,8 @@ import jaskell.script.Parameter;
 
 import java.util.List;
 
-public class Alias implements Directive {
-    Query _query;
+public class Alias implements Directive, CouldJoin {
+    Directive _query;
     private final Name _name;
 
     public Alias(String name){

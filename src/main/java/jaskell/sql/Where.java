@@ -5,7 +5,7 @@ import jaskell.script.Parameter;
 
 import java.util.List;
 
-public class Where extends Query implements CouldOrder, CouldGroup {
+public class Where extends Query implements CouldOrder, CouldGroup, CouldLimit, CouldOffset, CouldAlias {
     Directive _prefix;
     Predicate _predicate;
 
