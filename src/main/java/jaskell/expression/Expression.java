@@ -8,6 +8,6 @@ package jaskell.expression;
  * @since 2020/06/04 10:51
  */
 public interface Expression {
-  double eval();
+  double eval(Env env) throws ExpressionException;
   Expression makeAst();
 }

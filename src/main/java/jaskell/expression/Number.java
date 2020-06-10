@@ -15,7 +15,7 @@ public class Number implements Expression {
   }
 
   @Override
-  public double eval() {
+  public double eval(Env env) {
     return value.doubleValue();
   }
 

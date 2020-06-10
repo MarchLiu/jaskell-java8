@@ -19,107 +19,119 @@ import java.io.EOFException;
  */
 public class ExpressionTest {
   private final Parser parser = new Parser();
+  private final Env emptyEnv = new Env();
+
   @Test
-  public void testNumber() throws EOFException {
+  public void testNumber() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("3.14");
     Parsec<Expression, Character> p = new N();
     Expression expression = p.parse(state);
-    Assert.assertEquals(3.14, expression.eval(), 0.00001);
+    Assert.assertEquals(3.14, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testBasic() throws EOFException {
+  public void testBasic() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("3.14");
     Expression expression = parser.parse(state);
-    Assert.assertEquals(3.14, expression.eval(), 0.00001);
+    Assert.assertEquals(3.14, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testAdd() throws EOFException {
+  public void testAdd() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("3.14+2.53");
     Expression expression = parser.parse(state);
-    Assert.assertEquals(5.67, expression.eval(), 0.00001);
+    Assert.assertEquals(5.67, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testSub() throws EOFException {
+  public void testSub() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("179- 8");
     Expression expression = parser.parse(state);
-    Assert.assertEquals(171, expression.eval(), 0.00001);
+    Assert.assertEquals(171, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testProduct() throws EOFException {
+  public void testProduct() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("8 * -8");
     Expression expression = parser.parse(state);
-    Assert.assertEquals(-64, expression.eval(), 0.00001);
+    Assert.assertEquals(-64, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testDivide() throws EOFException {
+  public void testDivide() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("128/8");
     Expression expression = parser.parse(state);
-    Assert.assertEquals(16, expression.eval(), 0.00001);
+    Assert.assertEquals(16, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testPriorities() throws EOFException {
+  public void testPriorities() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("7 + 15 * 3");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();
-    Assert.assertEquals(52, expression.eval(), 0.00001);
+    Assert.assertEquals(52, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testPrioritiesFlow() throws EOFException {
+  public void testPrioritiesFlow() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("5 * 3 + 7");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();
-    Assert.assertEquals(22, expression.eval(), 0.00001);
+    Assert.assertEquals(22, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testPloyQuote() throws EOFException {
+  public void testPloyQuote() throws EOFException, ExpressionException {
     String content = "5 * (3 + 7)";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
-    Assert.assertEquals(50, expression.eval(), 0.00001);
+    Assert.assertEquals(50, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testPloyComplex() throws EOFException {
+  public void testPloyComplex() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("5 * (3 + 7) -22.5");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();
-    Assert.assertEquals(27.5, expression.eval(), 0.00001);
+    Assert.assertEquals(27.5, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testPloyMoreComplex() throws EOFException {
+  public void testPloyMoreComplex() throws EOFException, ExpressionException {
     String content = "5 * (3 + 7) - -22.5";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
-    Assert.assertEquals(72.5, expression.eval(), 0.00001);
+    Assert.assertEquals(72.5, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testPloyScientific() throws EOFException {
+  public void testPloyScientific() throws EOFException, ExpressionException {
     String content = "5 * (3 + 7e2) - -22.5";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
-    Assert.assertEquals(3537.5, expression.eval(), 0.00001);
+    Assert.assertEquals(3537.5, expression.eval(emptyEnv), 0.00001);
 
     content = "5 * (3E-3 + 7) - -22.5e8";
     expression = parser.parse(content);
     expression = expression.makeAst();
-    Assert.assertEquals(2.250000035015E9, expression.eval(), 0.00001);
+    Assert.assertEquals(2.250000035015E9, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testNormalExpression() throws EOFException {
+  public void testNormalExpression() throws EOFException, ExpressionException {
     String content = "3.14 + 7 * 8 - (2 + 3)";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
-    Assert.assertEquals(54.14, expression.eval(), 0.00001);
+    Assert.assertEquals(54.14, expression.eval(emptyEnv), 0.00001);
+  }
+
+  @Test
+  public void testParameterExpression() throws EOFException, ExpressionException {
+    Env env = new Env();
+    env.put("p0", 15d);
+    String content = "3.14 + 7 * 8 - (2 + p0)";
+    Expression expression = parser.parse(content);
+    expression = expression.makeAst();
+    Assert.assertEquals(42.14, expression.eval(env), 0.00001);
   }
 }

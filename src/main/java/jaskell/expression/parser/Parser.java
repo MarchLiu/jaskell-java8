@@ -34,7 +34,7 @@ public class Parser implements Parsec<Expression, Character> {
 
   @Override
   public Expression parse(State<Character> s) throws EOFException, ParsecException {
-    Parsec<Expression, Character> np = choice(attempt(new N()), attempt(new Q()));
+    Parsec<Expression, Character> np = choice(attempt(new N()), attempt(new Param()), attempt(new Q()));
 
     Expression left = np.parse(s);
     skips.parse(s);

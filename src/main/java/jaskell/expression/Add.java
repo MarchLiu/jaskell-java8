@@ -14,8 +14,8 @@ public class Add extends Binary {
   }
 
   @Override
-  public double eval() {
-    return left.eval() + right.eval();
+  public double eval(Env env) throws ExpressionException {
+    return left.eval(env) + right.eval(env);
   }
 
   @Override

@@ -15,8 +15,8 @@ public class Quote implements Expression {
   }
 
   @Override
-  public double eval() {
-    return expression.eval();
+  public double eval(Env env) throws ExpressionException {
+    return expression.eval(env);
   }
 
   @Override

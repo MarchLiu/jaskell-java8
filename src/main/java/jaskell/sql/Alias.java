@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Alias implements Directive {
     Query _query;
-    private Name _name;
+    private final Name _name;
 
     public Alias(String name){
         this._name = new Name(name);
