@@ -48,3 +48,7 @@ Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之
 ### 1.5
 
  - make sql components easier to used.
+ 
+### 1.5.1
+
+ - add distinct

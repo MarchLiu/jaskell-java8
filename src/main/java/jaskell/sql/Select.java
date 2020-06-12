@@ -10,8 +10,14 @@ import java.util.stream.Collectors;
 
 public class Select extends Query implements CouldFrom, CouldAlias {
     private final List<Directive> _fields = new ArrayList<>();
+    private Boolean distinct = false;
 
     Select(){
+    }
+
+    public Select distinct() {
+        this.distinct = true;
+        return this;
     }
 
     Select(String names){
@@ -75,8 +81,13 @@ public class Select extends Query implements CouldFrom, CouldAlias {
 
     @Override
     public String script() {
-        return String.format("SELECT %s",
+        if (distinct) {
+            return String.format("SELECT DISTINCT %s",
                 _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
+        } else {
+            return String.format("SELECT %s",
+                _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
+        }
     }
 
     @Override
