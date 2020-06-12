@@ -107,4 +107,8 @@ public class Txt {
     public static JoinCharacters joinChars() {
         return new JoinCharacters();
     }
+
+    public static Letter letter() {
+        return new Letter();
+    }
 }

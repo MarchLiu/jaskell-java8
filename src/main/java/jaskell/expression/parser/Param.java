@@ -5,6 +5,7 @@ import static jaskell.parsec.common.Combinator.choice;
 import static jaskell.parsec.common.Combinator.many;
 import static jaskell.parsec.common.Txt.digit;
 import static jaskell.parsec.common.Txt.joining;
+import static jaskell.parsec.common.Txt.letter;
 
 import jaskell.expression.Expression;
 import jaskell.expression.Parameter;
@@ -13,7 +14,6 @@ import jaskell.parsec.common.Parsec;
 import jaskell.parsec.common.State;
 
 import java.io.EOFException;
-import java.util.List;
 
 /**
  * TODO
@@ -23,14 +23,7 @@ import java.util.List;
  * @since 2020/06/10 17:54
  */
 public class Param implements Parsec<Expression, Character> {
-  private final Parsec<Character, Character> head = s -> {
-    Character re = s.next();
-    if(Character.isLetter(re)){
-      return re;
-    }else {
-      throw s.trap("expect a letter but get " + re.toString());
-    }
-  };
+  private final Parsec<Character, Character> head = letter();
 
   private final Parsec<String, Character> tail = many(choice(attempt(head), digit())).bind(joining());
 
