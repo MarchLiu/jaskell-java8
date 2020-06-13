@@ -3,6 +3,7 @@
 一个特化的 Java 8 版 Jaskell ，专为在 Java 8 环境下的项目准备的一个纯 
 Java 版本。不带 Clojure 依赖，并且尽可能不依赖任何标准库之外的组件。
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.marchliu/jaskell-java8.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.marchliu%22%20AND%20a:%22jaskell-java8%22)
 
 ## INSTALLATION
 
