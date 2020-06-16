@@ -147,3 +147,8 @@ maven_jar(
 ### 1.5.4
 
  - add order by and group by list
+
+
+### 1.5.5
+
+ - add in predicate
