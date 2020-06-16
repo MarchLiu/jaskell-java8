@@ -2,7 +2,11 @@ package jaskell.sql;
 
 import jaskell.parsec.Eq;
 import jaskell.script.Directive;
+import jaskell.script.Parameter;
 import org.w3c.dom.ranges.DocumentRange;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Predicate implements Directive {
     public Predicate and(Predicate predicate){
@@ -59,6 +63,22 @@ public abstract class Predicate implements Directive {
         re._left = this;
         re._right = predicate;
         return re;
+    }
+
+    public Predicate in(List<Directive> data) {
+        Predicate _prefix = this;
+        return new Predicate() {
+            @Override
+            public String script() {
+                return String.format("%s in (%s)",
+                    _prefix.script(), data.stream().map(Directive::script).collect(Collectors.joining(", ")));
+            }
+
+            @Override
+            public List<Parameter<?>> parameters() {
+                return data.stream().flatMap(d -> d.parameters().stream()).collect(Collectors.toList());
+            }
+        };
     }
 
     public Predicate like(Directive predicate){

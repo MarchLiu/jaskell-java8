@@ -31,6 +31,11 @@ public class Select extends Query implements CouldFrom, CouldAlias {
         _fields.addAll(Arrays.stream(names).map(Name::new).collect(Collectors.toList()));
     }
 
+    Select(List<Directive> names){
+        _fields.addAll(names);
+    }
+
+
     Select(Directive... directives){
         _fields.addAll(Arrays.asList(directives));
     }
@@ -40,6 +45,11 @@ public class Select extends Query implements CouldFrom, CouldAlias {
                 .map(String::trim)
                 .map(Name::new)
                 .collect(Collectors.toList()));
+        return this;
+    }
+
+    public Select select(List<Directive> names){
+        _fields.addAll(names);
         return this;
     }
 

@@ -6,7 +6,7 @@
 
     <groupId>io.github.marchliu</groupId>
     <artifactId>jaskell-java8</artifactId>
-    <version>1.5.1</version>
+    <version>1.5.4</version>
     <packaging>jar</packaging>
     <name>io.github.marchliu:jaskell-java8</name>
     <licenses>

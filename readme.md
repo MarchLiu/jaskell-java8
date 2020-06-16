@@ -3,7 +3,7 @@
 Jaskell Java8 is Java8 Edition of [Jaskell Core library](https://github.com/MarchLiu/jaskell-core). 
 It rewritten completed by Java 8. So easy to use in Java8 projects.
 
-It includes a parsec combinators library , a SQL expressions library and a arithmetic expression parser.  
+It includes a parsec combinators library , a SQL expressions library and a arithmetic expressions parser.  
 
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.marchliu/jaskell-java8.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.marchliu%22%20AND%20a:%22jaskell-java8%22)
@@ -135,3 +135,15 @@ maven_jar(
 ### 1.5.1
 
  - add distinct
+ 
+### 1.5.2
+
+ - add select list
+ 
+### 1.5.3
+
+ - add select function
+ 
+### 1.5.4
+
+ - add order by and group by list
