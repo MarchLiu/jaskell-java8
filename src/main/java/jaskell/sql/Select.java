@@ -110,7 +110,7 @@ public class Select extends Query implements CouldFrom, CouldAlias {
         return re;
     }
 
-    public static class From extends Query implements jaskell.sql.From, CouldGroup, CouldOrder, CouldAlias {
+    public static class From extends Query implements jaskell.sql.From, CouldWhere, CouldGroup, CouldOrder, CouldAlias {
         Select _select;
         Directive _from;
 

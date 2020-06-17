@@ -152,3 +152,7 @@ maven_jar(
 ### 1.5.5
 
  - add in predicate
+ 
+### 1.5.6
+
+ - bug fixed, Select.From now is CouldFrom
