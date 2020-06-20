@@ -131,28 +131,13 @@ maven_jar(
 ### 1.5
 
  - make sql components easier to used.
- 
-### 1.5.1
-
  - add distinct
- 
-### 1.5.2
-
  - add select list
- 
-### 1.5.3
-
  - add select function
- 
-### 1.5.4
-
  - add order by and group by list
-
-
-### 1.5.5
-
  - add in predicate
- 
-### 1.5.6
-
  - bug fixed, Select.From now is CouldFrom
+ 
+### 1.6
+
+ - add more default methods sugar for parsec functions
