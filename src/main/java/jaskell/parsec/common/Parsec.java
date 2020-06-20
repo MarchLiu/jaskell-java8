@@ -24,7 +24,6 @@ public interface Parsec<T, E> {
   default T parse(String content) throws EOFException {
       State<Character> s = new TxtState(content);
       return ((Parsec<T, Character>)this).parse(s);
-
   }
 
   default Result<T, Throwable> exec(State<E> s) {
@@ -33,6 +32,16 @@ public interface Parsec<T, E> {
     } catch (Exception e) {
       return new Result<>(e);
     }
+  }
+
+  default <C extends List<E>> Result<T, Throwable> exec(C collection) {
+    State<E> s = new SimpleState<>(collection);
+    return this.exec(s);
+  }
+
+  default Result<T, Throwable> exec(String content) {
+    State<Character> s = new TxtState(content);
+    return ((Parsec<T, Character>)this).exec(s);
   }
 
   default <C> Parsec<C, E> bind(Binder<T, C, E> binder) {
