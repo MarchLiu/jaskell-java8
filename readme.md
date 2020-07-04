@@ -138,6 +138,7 @@ maven_jar(
  - add in predicate
  - bug fixed, Select.From now is CouldFrom
  
-### 1.6
+### 1.5.7
 
  - add more default methods sugar for parsec functions
+ - make binary public

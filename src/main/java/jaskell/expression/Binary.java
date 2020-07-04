@@ -7,7 +7,7 @@ package jaskell.expression;
  * @version 1.0.0
  * @since 2020/06/04 10:52
  */
-abstract class Binary implements Expression {
+public abstract class Binary implements Expression {
   protected Expression left;
   protected Expression right;
 
