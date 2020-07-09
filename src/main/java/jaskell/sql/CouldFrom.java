@@ -9,7 +9,7 @@ import jaskell.script.Directive;
  * @version 1.0.0
  * @since 2020/06/10 20:54
  */
-public interface CouldFrom {
+public interface CouldFrom extends CouldHaving {
   From from(String name);
 
   From from(Directive f);

@@ -146,3 +146,7 @@ maven_jar(
 ### 1.5.8
 
  - having now is a query
+ 
+### 1.5.9
+ 
+  - add could having

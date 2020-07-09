@@ -55,7 +55,7 @@ public class Group implements Directive {
     return re;
   }
 
-  public static class By extends jaskell.sql.By implements CouldOrder {
+  public static class By extends jaskell.sql.By implements CouldOrder, CouldHaving {
     public By() {
       super();
     }
@@ -76,11 +76,6 @@ public class Group implements Directive {
       super(names);
     }
 
-    public Having having(Predicate predicate) {
-      Having re = new Having(predicate);
-      re._by = this;
-      return re;
-    }
   }
 
 }

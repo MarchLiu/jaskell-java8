@@ -1,12 +1,13 @@
 package jaskell.sql;
 
+import jaskell.script.Directive;
 import jaskell.script.Parameter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Having extends Query {
-    Group.By _by;
+    CouldHaving _by;
     Predicate _predicate;
 
     public Having(Predicate _predicate){
