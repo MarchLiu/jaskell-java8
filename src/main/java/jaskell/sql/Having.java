@@ -5,7 +5,7 @@ import jaskell.script.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Having extends Statement {
+public class Having extends Query {
     Group.By _by;
     Predicate _predicate;
 

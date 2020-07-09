@@ -142,3 +142,7 @@ maven_jar(
 
  - add more default methods sugar for parsec functions
  - make binary public
+ 
+### 1.5.8
+
+ - having now is a query
