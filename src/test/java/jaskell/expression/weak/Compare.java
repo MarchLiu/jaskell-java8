@@ -1,4 +1,9 @@
-package jaskell.expression;
+package jaskell.expression.weak;
+
+import jaskell.expression.Binary;
+import jaskell.expression.Env;
+import jaskell.expression.Expression;
+import jaskell.expression.ExpressionException;
 
 /**
  * TODO
@@ -15,9 +20,9 @@ public abstract class Compare extends Binary {
 
   @Override
   public double eval(Env env) throws ExpressionException {
-    if (right instanceof Compare) {
-      return toInt(compare(left, ((Compare) right).left, env) &&
-          ((Compare) right).compare(((Compare) right).left, ((Compare) right).right, env));
+    if (left instanceof Compare) {
+      return toInt(((Compare) left).compare(((Compare) left).left, ((Compare) left).right, env) &&
+        compare(((Compare)left).right, right, env));
     } else {
       return toInt(compare(left, right, env));
     }

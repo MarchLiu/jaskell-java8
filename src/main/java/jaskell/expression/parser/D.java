@@ -5,7 +5,6 @@ import static jaskell.parsec.common.Txt.skipWhiteSpaces;
 
 import jaskell.expression.Divide;
 import jaskell.expression.Expression;
-import jaskell.expression.Product;
 import jaskell.parsec.ParsecException;
 import jaskell.parsec.common.Parsec;
 import jaskell.parsec.common.SkipWhitespaces;

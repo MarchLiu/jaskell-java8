@@ -1,5 +1,6 @@
-package jaskell.expression.parser;
+package jaskell.expression.weak.parser;
 
+import static jaskell.parsec.common.Atom.eof;
 import static jaskell.parsec.common.Combinator.ahead;
 import static jaskell.parsec.common.Combinator.attempt;
 import static jaskell.parsec.common.Combinator.choice;
@@ -15,8 +16,6 @@ import jaskell.parsec.common.State;
 
 import java.io.EOFException;
 
-import static jaskell.parsec.common.Atom.eof;
-
 /**
  * TODO
  *
@@ -24,7 +23,7 @@ import static jaskell.parsec.common.Atom.eof;
  * @version 1.0.0
  * @since 2020/06/04 11:16
  */
-public class Parser implements Parsec<Expression, Character> {
+public class WeakParser implements Parsec<Expression, Character> {
   private final Parsec<Character, Character> rq = attempt(ch(')'));
   private final SkipWhitespaces skips = skipWhiteSpaces();
   private final Eof<Character> e = eof();
@@ -42,7 +41,13 @@ public class Parser implements Parsec<Expression, Character> {
       Parsec<Expression, Character> next = choice(attempt(new A(left)),
           attempt(new S(left)),
           attempt(new P(left)),
-          attempt(new D(left)));
+          attempt(new D(left)),
+          attempt(new Eq(left)),
+          attempt(new NotEq(left)),
+          attempt(new Ls(left)),
+          attempt(new LsOrEq(left)),
+          attempt(new Grt(left)),
+          attempt(new GrtOrEq(left)));
       return next.parse(s);
     }
   }

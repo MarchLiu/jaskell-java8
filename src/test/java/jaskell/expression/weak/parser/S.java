@@ -1,4 +1,4 @@
-package jaskell.expression.parser;
+package jaskell.expression.weak.parser;
 
 import static jaskell.parsec.common.Txt.ch;
 import static jaskell.parsec.common.Txt.skipWhiteSpaces;
@@ -30,7 +30,7 @@ public class S implements Parsec<Expression, Character> {
 
   @Override
   public Sub parse(State<Character> s) throws EOFException, ParsecException {
-    Parsec<Expression, Character> parser = new Parser();
+    Parsec<Expression, Character> parser = new WeakParser();
     op.parse(s);
     return new Sub(prev, parser.parse(s));
   }
