@@ -150,3 +150,7 @@ maven_jar(
 ### 1.5.9
  
   - add could having
+  
+### 1.6.0
+
+ - add weak expression sample mix boolean and arithmetic expression
