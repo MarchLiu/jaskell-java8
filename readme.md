@@ -154,3 +154,7 @@ maven_jar(
 ### 1.6.0
 
  - add weak expression sample mix boolean and arithmetic expression
+ 
+### 1.6.1
+
+ - add could order, limit offset for having
