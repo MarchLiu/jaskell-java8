@@ -1,12 +1,13 @@
 package jaskell.sql;
 
+import jaskell.script.Directive;
 import jaskell.script.Parameter;
 
 import java.util.List;
 
 public class Union extends Query implements ThenSelect {
-  Query _prefix;
-  Query _query;
+  Directive _prefix;
+  Directive _query;
 
   public Union() {
   }

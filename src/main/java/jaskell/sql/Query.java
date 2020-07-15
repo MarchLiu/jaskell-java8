@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class Query extends Statement implements CouldLimit, CouldOffset {
+public abstract class Query extends Statement implements CouldLimit, CouldOffset, CouldUnion {
 
     public Union union(){
         Union re = new Union();
