@@ -6,7 +6,7 @@ import jaskell.script.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Having extends Query {
+public class Having extends Query implements CouldOrder, CouldLimit, CouldOffset {
     CouldHaving _by;
     Predicate _predicate;
 
