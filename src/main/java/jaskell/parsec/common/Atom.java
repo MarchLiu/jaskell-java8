@@ -1,6 +1,7 @@
 package jaskell.parsec.common;
 
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Created by march on 16/9/12.
@@ -38,5 +39,9 @@ public class Atom {
 
     public static <E> NoneOf<E> noneOf(Set<E> data) {
         return new NoneOf<>(data);
+    }
+
+    public static <E> Is<E> is(Predicate<E> predicate) {
+        return new Is<>(predicate);
     }
 }

@@ -158,3 +158,12 @@ maven_jar(
 ### 1.6.1
 
  - add could order, limit offset for having
+ 
+### 1.6.2
+
+ - add could union for query
+ - add could returning
+ 
+### 1.6.3
+
+ - add predicate parser

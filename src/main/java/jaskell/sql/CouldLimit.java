@@ -10,7 +10,15 @@ import jaskell.script.Directive;
  * @since 2020/05/15 17:04
  */
 public interface CouldLimit extends Directive {
-  Limit limit(int l);
+  default Limit limit(int l) {
+    Limit result = new Limit(l);
+    result._prefix = this;
+    return result;
+  }
 
-  Limit limit(Directive l);
+  default Limit limit(Directive l) {
+    Limit result = new Limit(l);
+    result._prefix = this;
+    return result;
+  }
 }

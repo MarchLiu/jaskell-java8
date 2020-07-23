@@ -9,5 +9,5 @@ import jaskell.script.Directive;
  * @version 1.0.0
  * @since 2020/06/10 20:55
  */
-public interface From extends Directive {
+public interface From extends Directive, CouldUnion, CouldLimit, CouldOffset {
 }

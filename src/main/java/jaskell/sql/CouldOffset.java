@@ -10,7 +10,15 @@ import jaskell.script.Directive;
  * @since 2020/05/15 17:04
  */
 public interface CouldOffset extends Directive {
-  public Offset offset(int o);
+  default Offset offset(int o) {
+    Offset result = new Offset(o);
+    result._prefix = this;
+    return result;
+  }
 
-  public Offset offset(Directive o);
+  default Offset offset(Directive o) {
+    Offset result = new Offset(o);
+    result._prefix = this;
+    return result;
+  }
 }
