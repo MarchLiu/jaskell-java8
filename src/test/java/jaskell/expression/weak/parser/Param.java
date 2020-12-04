@@ -22,12 +22,12 @@ import java.io.EOFException;
  * @version 1.0.0
  * @since 2020/06/10 17:54
  */
-public class Param implements Parsec<Expression, Character> {
+public class Param implements Parsec<Character, Expression> {
   private final Parsec<Character, Character> head = letter();
 
-  private final Parsec<String, Character> tail = many(choice(attempt(head), digit())).bind(joining());
+  private final Parsec<Character, String> tail = many(choice(attempt(head), digit())).bind(joining());
 
-  private final Parsec<String, Character> parser = s -> head.parse(s) + tail.parse(s);
+  private final Parsec<Character, String> parser = s -> head.parse(s) + tail.parse(s);
 
   @Override
   public Expression parse(State<Character> s) throws EOFException, ParsecException {

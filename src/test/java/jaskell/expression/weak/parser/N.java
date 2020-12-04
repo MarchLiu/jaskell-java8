@@ -17,8 +17,8 @@ import java.io.EOFException;
  * @version 1.0.0
  * @since 2020/06/04 10:53
  */
-public class N implements Parsec<Expression, Character> {
-  private final Parsec<String, Character> number = new ScNumber();
+public class N implements Parsec<Character, Expression> {
+  private final Parsec<Character, String> number = new ScNumber();
   @Override
   public Number parse(State<Character> s) throws EOFException, ParsecException {
     String re = number.parse(s);

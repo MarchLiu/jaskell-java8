@@ -11,8 +11,8 @@ import java.io.EOFException;
  * EndOfLine 尝试匹配 \r\n 或 \n
  */
 public class EndOfLine
-    implements Parsec<String, Character> {
-    private final Parsec<String, Character> parsec =
+    implements Parsec<Character, String> {
+    private final Parsec<Character, String> parsec =
         new Choice<>(new Text("\n"), new Text("\r\n"));
     @Override
     public String parse(State<Character> s)

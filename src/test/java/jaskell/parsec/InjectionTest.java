@@ -48,13 +48,13 @@ public class InjectionTest {
 
   Parsec<Character, Character> oneChar = choice(attempt(escapeChar), nCh('\''));
 
-  Parsec<String, Character> stringContent = between(ch('\''), ch('\''), many(oneChar)).bind(joining());
+  Parsec<Character, String> stringContent = between(ch('\''), ch('\''), many(oneChar)).bind(joining());
 
-  Parsec<String, Character> noString = many1(nCh('\'')).bind(joining());
+  Parsec<Character, String> noString = many1(nCh('\'')).bind(joining());
 
-  Parsec<String, Character> content = choice(attempt(noString), stringContent);
+  Parsec<Character, String> content = choice(attempt(noString), stringContent);
 
-  Parsec<String, Character> parser = many(notEof.then(content)).bind(values -> s -> {
+  Parsec<Character, String> parser = many(notEof.then(content)).bind(values -> s -> {
     e.parse(s);
     return String.join("", values);
   });

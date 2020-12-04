@@ -10,10 +10,10 @@ import java.util.List;
  * Created by Mars Liu on 2016-01-03.
  * SepBy 尝试匹配由给定规则分隔开的0到多次重复匹配.
  */
-public class SepBy<T, Sep, E>
-    implements Parsec<List<T>, E> {
-    private final Parsec<Sep, E> by;
-    private final Parsec<T, E> p;
+public class SepBy<E, T, Sep>
+    implements Parsec<E, List<T>> {
+    private final Parsec<E, Sep> by;
+    private final Parsec<E, T> p;
     @Override
     public List<T> parse(State<E> s)
             throws EOFException, ParsecException {
@@ -28,7 +28,7 @@ public class SepBy<T, Sep, E>
             return re;
         }
     }
-    public SepBy(Parsec<T, E> p, Parsec<Sep, E> by) {
+    public SepBy(Parsec<E, T> p, Parsec<E, Sep> by) {
         this.by = new Try<>(by);
         this.p = new Try<>(p);
     }

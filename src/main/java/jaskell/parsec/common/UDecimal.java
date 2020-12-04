@@ -12,8 +12,8 @@ import java.util.List;
  * UDecimal 尝试将后续信息流解析成一个表示无符号浮点数的字符串,如果匹配失败就抛出异常.
  */
 public class UDecimal
-    implements Parsec<String, Character> {
-  private final Parsec<String, Character> uint = new UInt();
+    implements Parsec<Character, String> {
+  private final Parsec<Character, String> uint = new UInt();
   private final Parsec<Character, Character> dot = new Try<>(new Ch('.'));
 
   @Override

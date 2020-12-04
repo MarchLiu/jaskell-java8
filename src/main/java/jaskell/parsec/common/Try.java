@@ -8,9 +8,9 @@ import java.io.EOFException;
  * Created by Mars Liu on 2016-01-03.
  * Try 尝试执行给定算子,如果失败,先将state复位,再抛出异常.
  */
-public class Try<T, E>
-    implements Parsec<T, E> {
-    private final Parsec<T, E> parsec;
+public class Try<E, T>
+    implements Parsec<E, T> {
+    private final Parsec<E, T> parsec;
 
     @Override
     public T parse(State<E> s) throws EOFException, ParsecException {
@@ -25,7 +25,7 @@ public class Try<T, E>
         }
     }
 
-    public Try(Parsec<T, E> parsec){
+    public Try(Parsec<E, T> parsec){
         this.parsec = parsec;
     }
 }

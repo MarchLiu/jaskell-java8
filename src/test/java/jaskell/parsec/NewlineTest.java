@@ -20,7 +20,7 @@ public class NewlineTest extends Base {
     @Test
     public void simpleCrlf() throws Exception {
         State<Character, Integer, Integer> state = newState("\r\n");
-        Parsec<String, Character, Integer, Integer> crlf = new Crlf<>();
+        Parsec<Character, String, Integer, Integer> crlf = new Crlf<>();
 
         String re = crlf.parse(state);
         Assert.assertEquals(re, "\r\n");

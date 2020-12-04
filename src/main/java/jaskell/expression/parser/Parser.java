@@ -24,22 +24,22 @@ import static jaskell.parsec.common.Atom.eof;
  * @version 1.0.0
  * @since 2020/06/04 11:16
  */
-public class Parser implements Parsec<Expression, Character> {
+public class Parser implements Parsec<Character, Expression> {
   private final Parsec<Character, Character> rq = attempt(ch(')'));
   private final SkipWhitespaces skips = skipWhiteSpaces();
   private final Eof<Character> e = eof();
-  private final Parsec<?, Character> end = ahead(choice(rq, e));
+  private final Parsec<Character, ?> end = ahead(choice(rq, e));
 
   @Override
   public Expression parse(State<Character> s) throws EOFException, ParsecException {
-    Parsec<Expression, Character> np = choice(attempt(new N()), attempt(new Param()), attempt(new Q()));
+    Parsec<Character, Expression> np = choice(attempt(new N()), attempt(new Param()), attempt(new Q()));
 
     Expression left = np.parse(s);
     skips.parse(s);
     if (end.exec(s).isOk()) {
       return left;
     } else {
-      Parsec<Expression, Character> next = choice(attempt(new A(left)),
+      Parsec<Character, Expression> next = choice(attempt(new A(left)),
           attempt(new S(left)),
           attempt(new P(left)),
           attempt(new D(left)));

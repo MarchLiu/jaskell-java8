@@ -52,7 +52,7 @@ public class BetweenTest extends Base {
         State<Character> state = newState("[hello]");
 
 
-        Parsec<String, Character> parser = between(
+        Parsec<Character, String> parser = between(
                 ch('['),
                 ch(']'),
                 many(ne(']'))

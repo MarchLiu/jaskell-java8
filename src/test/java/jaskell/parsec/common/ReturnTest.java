@@ -22,7 +22,7 @@ public class ReturnTest extends Base {
     @Test
     public void simple() throws Exception {
         State<Character> state = newState("Hello World");
-        Return<BigDecimal, Character> returns = new Return<>(new BigDecimal("3.1415926"));
+        Return<Character, BigDecimal> returns = new Return<>(new BigDecimal("3.1415926"));
         Integer idx = state.status();
         BigDecimal re = returns.parse(state);
         assertEquals(re, new BigDecimal("3.1415926"));

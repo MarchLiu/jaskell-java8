@@ -10,15 +10,15 @@ import java.util.List;
  * Created by Mars Liu on 2016-01-03.
  * Many1 匹配给定算子 1 到多次.
  */
-public class Many1<T, E>
-    implements Parsec<List<T>, E> {
-    private final Parsec<T, E> parser;
+public class Many1<E, T>
+    implements Parsec<E, List<T>> {
+    private final Parsec<E, T> parser;
 
     @Override
     public List<T> parse(State<E> s) throws EOFException, ParsecException {
         List<T> re = new ArrayList<>();
         re.add(this.parser.parse(s));
-        Parsec<T, E> p = new Try<>(parser);
+        Parsec<E, T> p = new Try<>(parser);
         try{
             while (true){
                 re.add(p.parse(s));
@@ -28,7 +28,7 @@ public class Many1<T, E>
         }
     }
 
-    public Many1(Parsec<T, E> parsec){
+    public Many1(Parsec<E, T> parsec){
         this.parser = parsec;
     }
 }

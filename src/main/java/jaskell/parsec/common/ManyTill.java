@@ -12,10 +12,10 @@ import java.util.List;
  * Created by Mars Liu on 2016-01-03.
  * ManyTil 尝试匹配 parser 0 到多次,直到终结算子成功,它是饥饿模式.
  */
-public class ManyTill<T, L, E>
-    implements Parsec<List<T>, E> {
-    private final Parsec<T, E> parser;
-    private final Parsec<L, E> end;
+public class ManyTill<E, T, L>
+    implements Parsec<E, List<T>> {
+    private final Parsec<E, T> parser;
+    private final Parsec<E, L> end;
     @Override
     public List<T> parse(State<E> s)
             throws EOFException, ParsecException {
@@ -30,7 +30,7 @@ public class ManyTill<T, L, E>
         }
     }
 
-    public ManyTill(Parsec<T, E> parser, Parsec<L, E> end) {
+    public ManyTill(Parsec<E, T> parser, Parsec<E, L> end) {
         this.parser = new Try<>(parser);
         this.end = end;
     }

@@ -47,7 +47,7 @@ public class BetweenTest extends Base {
         State<Character, Integer, Integer> state = newState("[hello]");
 
 
-        Parsec<String, Character, Integer, Integer> parser = new Between<>(
+        Parsec<Character, String, Integer, Integer> parser = new Between<>(
                 new Ch<Integer, Integer>('['),
                 new Ch<>(']'),
                 new Many1<>(new Ne<>(']'))

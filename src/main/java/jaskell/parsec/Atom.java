@@ -15,7 +15,7 @@ public class Atom {
         return new Eof<>();
     }
 
-    public static <T, E, Status, Tran> Return<T, E, Status, Tran> pack(T value) {
+    public static <E, T, Status, Tran> Return<E, T, Status, Tran> pack(T value) {
         return new Return<>(value);
     }
 

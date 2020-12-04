@@ -9,8 +9,8 @@ import java.util.List;
  * Int 算子尝试将后续的信息项组成一个整数,如果获得的信息不足以组成一个整数,抛出异常.
  */
 public class Int<Status, Tran>
-    implements Parsec<String, Character, Status, Tran> {
-    private final Parsec<List<Character>, Character, Status, Tran> parser =
+    implements Parsec<Character, String, Status, Tran> {
+    private final Parsec<Character, List<Character>, Status, Tran> parser =
          s -> {
           List<Character> re = new ArrayList<>();
           Option<Character, Character, Status, Tran> sign = new Option<>(new Try<>(new Ch<>('-')));

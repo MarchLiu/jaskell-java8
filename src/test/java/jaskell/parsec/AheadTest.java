@@ -18,7 +18,7 @@ public class AheadTest extends Base {
     @Test
     public void simple() throws Exception{
         State<Character, Integer, Integer> state = newState("this is a string data.");
-        Parsec<String, Character, Integer, Integer> parser =
+        Parsec<Character, String, Integer, Integer> parser =
                 new Text<Integer, Integer>("this").over(new Ahead<>(new Text<>(" is")));
 
         String re = parser.parse(state);
@@ -30,7 +30,7 @@ public class AheadTest extends Base {
     @Test
     public void result() throws Exception{
         State<Character, Integer, Integer> state = newState("this is a string data.");
-        Parsec<String, Character, Integer, Integer> parser =
+        Parsec<Character, String, Integer, Integer> parser =
                 new Text<Integer, Integer>("this").then(space()).then(new Ahead<>(new Text<>("is")));
 
         String re = parser.parse(state);
@@ -42,7 +42,7 @@ public class AheadTest extends Base {
     @Test
     public void fail() throws Exception{
         State<Character, Integer, Integer> state = newState("this is a string.");
-        Parsec<String, Character, Integer, Integer> parser =
+        Parsec<Character, String, Integer, Integer> parser =
                 new Text<Integer, Integer>("this").then(space()).then(new Ahead<>(new Text<>(" is")));
 
         try {

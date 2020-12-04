@@ -167,3 +167,7 @@ maven_jar(
 ### 1.6.3
 
  - add predicate parser
+
+### 2.0.0
+
+ - formal sync as jaskell-dotty

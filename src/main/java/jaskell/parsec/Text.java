@@ -7,7 +7,7 @@ import java.io.EOFException;
  * text 是特化的文本匹配算子,它期待后续的数据流是一个匹配给定字符串的字符序列,否则抛出异常.
  */
 public class Text<Status, Tran>
-    implements Parsec<String, Character, Status, Tran>{
+    implements Parsec<Character, String, Status, Tran>{
     private final String text;
     private final Boolean caseSensitive;
 

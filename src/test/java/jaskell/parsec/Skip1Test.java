@@ -32,7 +32,7 @@ public class Skip1Test extends Base {
     @Test
     public void simple() throws Exception {
         State<Character, Integer, Integer> state = newState("left right left right");
-        Parsec<String, Character, Integer, Integer> parser = skip1(text("left"));
+        Parsec<Character, String, Integer, Integer> parser = skip1(text("left"));
         String re = parser.parse(state);
         Assert.assertThat("Expect string \"left\".", re, IsNull.nullValue());
     }
@@ -40,7 +40,7 @@ public class Skip1Test extends Base {
     @Test
     public void simpleStatus() throws Exception {
         State<Character, Integer, Integer> state = newState("left right left right");
-        Parsec<String, Character, Integer, Integer> parser = skip1(text("left "));
+        Parsec<Character, String, Integer, Integer> parser = skip1(text("left "));
         parser.parse(state);
         Integer status = state.status();
         Assert.assertThat("Expect string \"left\".", status, IsEqual.equalTo(5));
@@ -49,7 +49,7 @@ public class Skip1Test extends Base {
     @Test
     public void statusMore() throws Exception {
         State<Character, Integer, Integer> state = newState("left left right right");
-        Parsec<String, Character, Integer, Integer> parser = skip1(text("left "));
+        Parsec<Character, String, Integer, Integer> parser = skip1(text("left "));
         parser.parse(state);
         Integer status = state.status();
         Assert.assertThat("Expect string \"left\".", status, IsEqual.equalTo(10));
@@ -58,7 +58,7 @@ public class Skip1Test extends Base {
     @Test
     public void fail() throws Exception {
         State<Character, Integer, Integer> state = newState("right right left left");
-        Parsec<String, Character, Integer, Integer> parser = skip1(text("left "));
+        Parsec<Character, String, Integer, Integer> parser = skip1(text("left "));
         try {
             parser.parse(state);
         } catch (Exception e) {

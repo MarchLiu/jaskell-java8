@@ -8,7 +8,7 @@ import java.io.EOFException;
  * Created by Mars Liu on 2016-01-11.
  * Crlf 即 haskell parsec 的 crlf 算子,匹配 \r\n .
  */
-public class Crlf implements Parsec<String, Character> {
+public class Crlf implements Parsec<Character, String> {
     @Override
     public String parse(State<Character> s)
             throws EOFException, ParsecException {

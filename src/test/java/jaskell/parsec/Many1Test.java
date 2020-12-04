@@ -40,7 +40,7 @@ public class Many1Test extends Base {
 
     @Test
     public void one() throws Exception {
-        Parsec<String, Character, Integer, Integer> m =
+        Parsec<Character, String, Integer, Integer> m =
                 new Many1<Character, Character, Integer, Integer>(new Eq<>('h')).bind(joining());
         State<Character, Integer, Integer> state1 = newState("hello");
         String re = m.parse(state1);
@@ -49,7 +49,7 @@ public class Many1Test extends Base {
 
     @Test
     public void all() throws Exception {
-        Parsec<String, Character, Integer, Integer> parser =
+        Parsec<Character, String, Integer, Integer> parser =
                 new Many1<Character, Character, Integer, Integer>(new One<>()).bind(joining());
         State<Character, Integer, Integer> state1 = newState("hello");
         String re = parser.parse(state1);

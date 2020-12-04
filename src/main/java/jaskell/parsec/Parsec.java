@@ -10,11 +10,11 @@ import java.io.EOFException;
  * Parsec defined base functions of parsec parsers.
  */
 @FunctionalInterface
-public interface Parsec<T, E, Status, Tran> {
+public interface Parsec<E, T, Status, Tran> {
   T parse(State<E, Status, Tran> s)
       throws EOFException, ParsecException;
 
-  default Result<T, Throwable> exec(State<E, Status, Tran> s) {
+  default Result<Throwable, T> exec(State<E, Status, Tran> s) {
     try {
       return new Result<>(Parsec.this.parse(s));
     } catch (Exception e) {
@@ -22,21 +22,21 @@ public interface Parsec<T, E, Status, Tran> {
     }
   }
 
-  default <C> Parsec<C, E, Status, Tran> bind(Binder<T, C, E, Status, Tran> binder) {
+  default <C> Parsec<E, C, Status, Tran> bind(Binder<E, T, C, Status, Tran> binder) {
     return s -> {
       T value = Parsec.this.parse(s);
       return binder.bind(value).parse(s);
     };
   }
 
-  default <C> Parsec<C, E, Status, Tran> then(Parsec<C, E, Status, Tran> parsec) {
+  default <C> Parsec<E, C, Status, Tran> then(Parsec<E, C, Status, Tran> parsec) {
     return s -> {
       Parsec.this.parse(s);
       return parsec.parse(s);
     };
   }
 
-  default <C> Parsec<T, E, Status, Tran> over(Parsec<C, E, Status, Tran> parsec) {
+  default <C> Parsec<E, T, Status, Tran> over(Parsec<E, C, Status, Tran> parsec) {
     return s -> {
       T value = Parsec.this.parse(s);
       parsec.parse(s);

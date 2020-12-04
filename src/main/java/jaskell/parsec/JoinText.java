@@ -11,10 +11,10 @@ import static java.util.stream.Collectors.joining;
  * JoinText is a binder. It join Character List to String.
  */
 public class JoinText<Status, Tran>
-    implements Binder<List<Character>, String, Character, Status, Tran> {
+    implements Binder<Character, List<Character>, String, Status, Tran> {
   private final String sep;
   @Override
-  public Parsec<String, Character, Status, Tran> bind(List<Character> value) {
+  public Parsec<Character, String, Status, Tran> bind(List<Character> value) {
     Collector<CharSequence, ?, String> j = sep == null ? joining() : joining(sep);
     return state -> value.stream().map(Object::toString).collect(j);
   }

@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
  */
 
 public class JoinCharacters<Status, Tran>
-    implements Binder<List<Character>, String, Character, Status, Tran> {
-    public Parsec<String, Character, Status, Tran> bind(List<Character> value) {
+    implements Binder<Character, List<Character>, String, Status, Tran> {
+    public Parsec<Character, String, Status, Tran> bind(List<Character> value) {
         return state -> {
             StringBuilder sb = new StringBuilder();
             value.forEach(sb::append);

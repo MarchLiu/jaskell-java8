@@ -8,9 +8,9 @@ import java.io.EOFException;
  * Created by Mars Liu on 2016-01-07.
  * 跳过 0 到多次重复匹配
  */
-public class Skip<T, E>
-    implements Parsec<T, E> {
-    private final Parsec<T, E> psc;
+public class Skip<E, T>
+    implements Parsec<E, T> {
+    private final Parsec<E, T> psc;
 
     @Override
     public  T parse(State<E> s)
@@ -28,7 +28,7 @@ public class Skip<T, E>
         return null;
     }
 
-    public Skip(Parsec<T, E> psc) {
+    public Skip(Parsec<E, T> psc) {
         this.psc = psc;
     }
 }

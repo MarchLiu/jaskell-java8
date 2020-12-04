@@ -7,8 +7,8 @@ import java.util.List;
  */
 
 public class JoinCharacters
-    implements Binder<List<Character>, String, Character> {
-    public Parsec<String, Character> bind(List<Character> value) {
+    implements Binder<Character, List<Character>, String> {
+    public Parsec<Character, String> bind(List<Character> value) {
         return state -> {
             StringBuilder sb = new StringBuilder();
             value.forEach(sb::append);

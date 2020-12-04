@@ -10,15 +10,15 @@ import java.util.List;
  * Choice 算子是多路分支选择算子, choice 顺序检查所有分路,返回第一个成功的算子的解析结果.如果某个算子解析失败以后没有复位,则将其错误
  * 信息抛出.如果所有的分路都解析失败,抛出异常.
  */
-public class Choice<T, E, Status, Tran>
-    implements Parsec<T, E, Status, Tran> {
-    private final List<Parsec<T, E, Status, Tran>> parsecs;
+public class Choice<E, T, Status, Tran>
+    implements Parsec<E, T, Status, Tran> {
+    private final List<Parsec<E, T, Status, Tran>> parsecs;
 
     @Override
     public T parse(State<E, Status, Tran> s) throws EOFException, ParsecException {
         Exception err = null;
         Status status = s.status();
-        for (Parsec<T, E, Status, Tran> psc : this.parsecs){
+        for (Parsec<E, T, Status, Tran> psc : this.parsecs){
             try {
                 return psc.parse(s);
             }catch (EOFException|ParsecException e){
@@ -40,11 +40,11 @@ public class Choice<T, E, Status, Tran>
     }
 
     @SafeVarargs
-    public Choice(Parsec<T, E, Status, Tran> ... parsecs) {
+    public Choice(Parsec<E, T, Status, Tran> ... parsecs) {
         this.parsecs = Arrays.asList(parsecs);
     }
 
-    public Choice(List<Parsec<T, E, Status, Tran>> parsecs) {
+    public Choice(List<Parsec<E, T, Status, Tran>> parsecs) {
         this.parsecs = new ArrayList<>(parsecs);
     }
 

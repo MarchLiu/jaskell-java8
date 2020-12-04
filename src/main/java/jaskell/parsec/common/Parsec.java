@@ -12,7 +12,7 @@ import java.util.List;
  * @param <E> 输入的元素类型
  */
 @FunctionalInterface
-public interface Parsec<T, E> {
+public interface Parsec<E, T> {
   T parse(State<E> s)
       throws EOFException, ParsecException;
 
@@ -23,10 +23,10 @@ public interface Parsec<T, E> {
 
   default T parse(String content) throws EOFException {
       State<Character> s = new TxtState(content);
-      return ((Parsec<T, Character>)this).parse(s);
+      return ((Parsec<Character, T>)this).parse(s);
   }
 
-  default Result<T, Throwable> exec(State<E> s) {
+  default Result<Throwable, T> exec(State<E> s) {
     try {
       return new Result<>(Parsec.this.parse(s));
     } catch (Exception e) {
@@ -34,31 +34,31 @@ public interface Parsec<T, E> {
     }
   }
 
-  default <C extends List<E>> Result<T, Throwable> exec(C collection) {
+  default <C extends List<E>> Result<Throwable, T> exec(C collection) {
     State<E> s = new SimpleState<>(collection);
     return this.exec(s);
   }
 
-  default Result<T, Throwable> exec(String content) {
+  default Result<Throwable, T> exec(String content) {
     State<Character> s = new TxtState(content);
-    return ((Parsec<T, Character>)this).exec(s);
+    return ((Parsec<Character, T>)this).exec(s);
   }
 
-  default <C> Parsec<C, E> bind(Binder<T, C, E> binder) {
+  default <C> Parsec<E, C> bind(Binder<E, T, C> binder) {
     return s -> {
       T value = Parsec.this.parse(s);
       return binder.bind(value).parse(s);
     };
   }
 
-  default <C> Parsec<C, E> then(Parsec<C, E> parsec) {
+  default <C> Parsec<E, C> then(Parsec<E, C> parsec) {
     return s -> {
       Parsec.this.parse(s);
       return parsec.parse(s);
     };
   }
 
-  default <C> Parsec<T, E> over(Parsec<C, E> parsec) {
+  default <C> Parsec<E, T> over(Parsec<E, C> parsec) {
     return s -> {
       T value = Parsec.this.parse(s);
       parsec.parse(s);

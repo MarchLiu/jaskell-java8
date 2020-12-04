@@ -24,7 +24,7 @@ public class ExpressionTest {
   @Test
   public void testNumber() throws EOFException, ExpressionException {
     State<Character> state = new TxtState("3.14");
-    Parsec<Expression, Character> p = new N();
+    Parsec<Character, Expression> p = new N();
     Expression expression = p.parse(state);
     Assert.assertEquals(3.14, expression.eval(emptyEnv), 0.00001);
   }

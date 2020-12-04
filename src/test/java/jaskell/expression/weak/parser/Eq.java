@@ -20,9 +20,9 @@ import java.io.EOFException;
  * @version 1.0.0
  * @since 2020/07/04 17:33
  */
-public class Eq implements Parsec<Expression, Character> {
+public class Eq implements Parsec<Character, Expression> {
   private final SkipWhitespaces skips = skipWhiteSpaces();
-  private final Parsec<?, Character> op = skips.then(text("==")).then(skips);
+  private final Parsec<Character, ?> op = skips.then(text("==")).then(skips);
   private final Expression prev;
 
   public Eq(Expression prev) {
@@ -31,7 +31,7 @@ public class Eq implements Parsec<Expression, Character> {
 
   @Override
   public Equals parse(State<Character> s) throws EOFException, ParsecException {
-    Parsec<Expression, Character> parser = new WeakParser();
+    Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new Equals(prev, parser.parse(s));
   }

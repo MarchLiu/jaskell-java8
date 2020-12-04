@@ -20,12 +20,12 @@ import java.io.EOFException;
  * @version 1.0.0
  * @since 2020/06/04 11:31
  */
-public class Q implements Parsec<Expression, Character> {
+public class Q implements Parsec<Character, Expression> {
   @Override
   public Quote parse(State<Character> s) throws EOFException, ParsecException {
     WeakParser p = new WeakParser();
     SkipWhitespaces skips = skipWhiteSpaces();
-    Parsec<Expression, Character> parser = between(ch('(').then(skips), skips.then(ch(')')), p);
+    Parsec<Character, Expression> parser = between(ch('(').then(skips), skips.then(ch(')')), p);
     return new Quote(parser.parse(s));
   }
 }

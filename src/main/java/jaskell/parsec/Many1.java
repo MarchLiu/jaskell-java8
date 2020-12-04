@@ -8,15 +8,15 @@ import java.util.List;
  * Created by Mars Liu on 2016-01-03.
  * Many1 匹配给定算子 1 到多次.
  */
-public class Many1<T, E, Status, Tran>
-    implements Parsec<List<T>, E, Status, Tran> {
-    private final Parsec<T, E, Status, Tran> parser;
+public class Many1<E, T, Status, Tran>
+    implements Parsec<E, List<T>, Status, Tran> {
+    private final Parsec<E, T, Status, Tran> parser;
 
     @Override
     public List<T> parse(State<E, Status, Tran> s) throws EOFException, ParsecException {
         List<T> re = new ArrayList<>();
         re.add(this.parser.parse(s));
-        Parsec<T, E, Status, Tran> p = new Try<>(parser);
+        Parsec<E, T, Status, Tran> p = new Try<>(parser);
         try{
             while (true){
                 re.add(p.parse(s));
@@ -26,7 +26,7 @@ public class Many1<T, E, Status, Tran>
         }
     }
 
-    public Many1(Parsec<T, E, Status, Tran> parsec){
+    public Many1(Parsec<E, T, Status, Tran> parsec){
         this.parser = parsec;
     }
 }

@@ -10,9 +10,9 @@ import java.util.List;
  * Created by Mars Liu on 2016-01-03.
  * Many 算子匹配给定算子0到多次.
  */
-public class Many<T, E>
-    implements Parsec<List<T>, E> {
-    private final Parsec<T, E> parsec;
+public class Many<E, T>
+    implements Parsec<E, List<T>> {
+    private final Parsec<E, T> parsec;
 
     @Override
     public  List<T> parse(State<E> s) throws EOFException, ParsecException {
@@ -26,7 +26,7 @@ public class Many<T, E>
         }
     }
 
-    public Many(Parsec<T, E> parsec) {
+    public Many(Parsec<E, T> parsec) {
         this.parsec = new Try<>(parsec);
     }
 }

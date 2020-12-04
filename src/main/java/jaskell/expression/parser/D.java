@@ -19,9 +19,9 @@ import java.io.EOFException;
  * @version 1.0.0
  * @since 2020/06/04 10:56
  */
-public class D implements Parsec<Expression, Character> {
+public class D implements Parsec<Character, Expression> {
   private final SkipWhitespaces skips = skipWhiteSpaces();
-  private final Parsec<?, Character> op = skips.then(ch('/')).then(skips);
+  private final Parsec<Character, ?> op = skips.then(ch('/')).then(skips);
   private final Expression prev;
 
   public D(Expression prev) {
@@ -30,7 +30,7 @@ public class D implements Parsec<Expression, Character> {
 
   @Override
   public Divide parse(State<Character> s) throws EOFException, ParsecException {
-    Parsec<Expression, Character> parser = new Parser();
+    Parsec<Character, Expression> parser = new Parser();
     op.parse(s);
     return new Divide(prev, parser.parse(s));
   }

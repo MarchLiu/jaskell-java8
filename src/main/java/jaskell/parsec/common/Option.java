@@ -7,15 +7,15 @@ import java.util.Optional;
 
 /**
  * Created by Mars Liu on 16/9/18.
- * Option accept a parsec&lt;T, E, Status, Tran&gt; and
+ * Option accept a parsec&lt;E, T, Status, Tran&gt; and
  * return new one parsec&lt;Optional&lt;T&gt;, E, Status, Tran&gt;.
  * If the parser fail, Option parsec just return option.empty without Exception thrown.
  */
-public class Option<T, E>
-    implements Parsec<Optional<T>, E> {
-    private final Parsec<T, E> parser;
+public class Option<E, T>
+    implements Parsec<E, Optional<T>> {
+    private final Parsec<E, T> parser;
 
-    public Option(Parsec<T, E> parser) {
+    public Option(Parsec<E, T> parser) {
         this.parser = parser;
     }
 

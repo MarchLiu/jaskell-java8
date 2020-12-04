@@ -8,57 +8,57 @@ import java.util.Optional;
  * helper toolbox for combinator.
  */
 public class Combinator {
-    public static <T, E> Try<T, E> attempt(Parsec<T, E> parser) {
+    public static <E, T> Try<E, T> attempt(Parsec<E, T> parser) {
         return new Try<>(parser);
     }
 
-    public static <T, E> Ahead<T, E> ahead(Parsec<T, E> parser) {
+    public static <E, T> Ahead<E, T> ahead(Parsec<E, T> parser) {
         return new Ahead<>(parser);
     }
 
     @SafeVarargs
-    public static <T, E> Choice<T, E> choice(Parsec<T, E>... parsers) {
+    public static <E, T> Choice<E, T> choice(Parsec<E, T>... parsers) {
         return new Choice<>(parsers);
     }
 
-    public static <T, E> Many<T, E> many(Parsec<T, E> parser) {
+    public static <E, T> Many<E, T> many(Parsec<E, T> parser) {
         return new Many<>(parser);
     }
 
-    public static <T, E> Many1<T, E> many1(Parsec<T, E> parser) {
+    public static <E, T> Many1<E, T> many1(Parsec<E, T> parser) {
         return new Many1<>(parser);
     }
 
-    public static <T, L, E> ManyTill<T, L, E> manyTill(Parsec<T, E> parser, Parsec<L, E> end) {
+    public static <E, T, L> ManyTill<E, T, L> manyTill(Parsec<E, T> parser, Parsec<E, L> end) {
         return new ManyTill<>(parser, end);
     }
 
-    public static <T, E> Skip<T, E> skip(Parsec<T, E> parser) {
+    public static <E, T> Skip<E, T> skip(Parsec<E, T> parser) {
         return new Skip<>(parser);
     }
 
-    public static <T, E> Skip1<T, E> skip1(Parsec<T, E> parser) {
+    public static <E, T> Skip1<E, T> skip1(Parsec<E, T> parser) {
         return new Skip1<>(parser);
     }
 
-    public static <T, Sep, E> SepBy<T, Sep, E> sepBy(Parsec<T, E> parser, Parsec<Sep, E> by) {
+    public static <E, T, Sep> SepBy<E, T, Sep> sepBy(Parsec<E, T> parser, Parsec<E, Sep> by) {
         return new SepBy<>(parser, by);
     }
 
-    public static <T, Sep, E> SepBy1<T, Sep, E> sepBy1(Parsec<T, E> parser, Parsec<Sep, E> by) {
+    public static <E, T, Sep> SepBy1<E, T, Sep> sepBy1(Parsec<E, T> parser, Parsec<E, Sep> by) {
         return new SepBy1<>(parser, by);
     }
 
-    public static <T, E> Find<T, E> find(Parsec<T, E> parser) {
+    public static <E, T> Find<E, T> find(Parsec<E, T> parser) {
         return new Find<>(parser);
     }
 
-    public static <T, E, O, C> Parsec<T, E> between(Parsec<O, E> open, Parsec<C, E> close,
-        Parsec<T, E> parser){
+    public static <E, T, O, C> Parsec<E, T> between(Parsec<E, O> open, Parsec<E, C> close,
+        Parsec<E, T> parser){
         return new Between<>(open, close, parser);
     }
 
-    public static <T, E> Parsec<Optional<T>, E> option(Parsec<T, E> parser){
+    public static <E, T> Parsec<E, Optional<T>> option(Parsec<E, T> parser){
         return new Option<>(parser);
     }
 }

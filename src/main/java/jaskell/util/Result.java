@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 // TODO: type safe
 @SuppressWarnings("unchecked")
-public class Result<T, E extends Throwable> implements Iterable<T>, Iterator<T> {
+public class Result<E extends Throwable, T> implements Iterable<T>, Iterator<T> {
     private final Object slot;
     private final boolean _ok;
     private int idx = 0;
@@ -50,11 +50,11 @@ public class Result<T, E extends Throwable> implements Iterable<T>, Iterator<T> 
         if (!this.slot.getClass().isInstance(obj)) {
             return false;
         }
-        Result<T, E> other = (Result<T, E>) (obj);
+        Result<E, T> other = (Result<E, T>) (obj);
         return this.isOk() == other.isOk() && this.slot.equals(other.slot);
     }
 
-    public <U> Result<U, E> map(Function<? super T, ? extends U> mapper) {
+    public <U> Result<E, U> map(Function<? super T, ? extends U> mapper) {
         if (_ok) {
             return new Result<>(mapper.apply((T)this.slot));
         } else {
@@ -62,7 +62,7 @@ public class Result<T, E extends Throwable> implements Iterable<T>, Iterator<T> 
         }
     }
 
-    public <U> Result<U, E> flatMap(Function<? super T, Result<U, E>> mapper) {
+    public <U> Result<E, U> flatMap(Function<? super T, Result<E, U>> mapper) {
         if (_ok) {
             return mapper.apply((T)this.slot);
         } else {
@@ -86,7 +86,7 @@ public class Result<T, E extends Throwable> implements Iterable<T>, Iterator<T> 
         }
     }
 
-    public T orElseGet(Result<?extends T, ? extends E> other) throws E {
+    public T orElseGet(Result<? extends E, ?extends T> other) throws E {
         if(this._ok){
             return (T)this.slot;
         } else {
@@ -97,9 +97,9 @@ public class Result<T, E extends Throwable> implements Iterable<T>, Iterator<T> 
     @Override
     public Iterator<T> iterator() {
         if(isOk()){
-            return new Result<T, E>((T)slot);
+            return new Result<E, T>((T)slot);
         } else {
-            return new Result<T, E>((E)slot);
+            return new Result<E, T>((E)slot);
         }
     }
 

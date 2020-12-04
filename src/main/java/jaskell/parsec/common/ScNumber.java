@@ -13,14 +13,14 @@ import java.io.EOFException;
  * @version 1.0.0
  * @since 2020/06/05 12:40
  */
-public class ScNumber implements Parsec<String, Character> {
+public class ScNumber implements Parsec<Character, String> {
   private final Decimal decimal = new Decimal();
   private final Parsec<Character, Character> ep = new Ch('e', false);
-  private final Parsec<String, Character> sp =
+  private final Parsec<Character, String> sp =
       new Choice<>(new Try<>(new Text("+")), new Try<>(new Text("-")), new Return<>(""));
-  private final Parsec<String, Character> np = new UInt();
+  private final Parsec<Character, String> np = new UInt();
 
-  private final Parsec<String, Character> exp = new Try<>(s -> ep.parse(s) + sp.parse(s) + np.parse(s));
+  private final Parsec<Character, String> exp = new Try<>(s -> ep.parse(s) + sp.parse(s) + np.parse(s));
 
   @Override
   public String parse(State<Character> s) throws EOFException, ParsecException {
