@@ -27,6 +27,6 @@ public class Many<E, T>
     }
 
     public Many(Parsec<E, T> parsec) {
-        this.parsec = new Try<>(parsec);
+        this.parsec = new Attempt<>(parsec);
     }
 }

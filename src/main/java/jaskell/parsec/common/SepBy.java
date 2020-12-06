@@ -29,7 +29,7 @@ public class SepBy<E, T, Sep>
         }
     }
     public SepBy(Parsec<E, T> p, Parsec<E, Sep> by) {
-        this.by = new Try<>(by);
-        this.p = new Try<>(p);
+        this.by = new Attempt<>(by);
+        this.p = new Attempt<>(p);
     }
 }

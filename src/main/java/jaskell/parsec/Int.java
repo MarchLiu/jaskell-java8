@@ -13,7 +13,7 @@ public class Int<Status, Tran>
     private final Parsec<Character, List<Character>, Status, Tran> parser =
          s -> {
           List<Character> re = new ArrayList<>();
-          Option<Character, Character, Status, Tran> sign = new Option<>(new Try<>(new Ch<>('-')));
+          Option<Character, Character, Status, Tran> sign = new Option<>(new Attempt<>(new Ch<>('-')));
           sign.parse(s).ifPresent(re::add);
           re.addAll(new Many1<Character, Character, Status, Tran>(new Digit<>()).parse(s));
           return re;

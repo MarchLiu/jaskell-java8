@@ -1,7 +1,7 @@
 package jaskell.parsec;
 
-import jaskell.sql.Equal;
 import jaskell.util.Result;
+import jaskell.util.Try;
 
 import java.io.EOFException;
 
@@ -14,11 +14,11 @@ public interface Parsec<E, T, Status, Tran> {
   T parse(State<E, Status, Tran> s)
       throws EOFException, ParsecException;
 
-  default Result<Throwable, T> exec(State<E, Status, Tran> s) {
+  default Try<T> exec(State<E, Status, Tran> s) {
     try {
-      return new Result<>(Parsec.this.parse(s));
+      return new Try<>(Parsec.this.parse(s));
     } catch (Exception e) {
-      return new Result<>(e);
+      return new Try(e);
     }
   }
 

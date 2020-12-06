@@ -12,7 +12,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class TryTest extends Base {
+public class AttemptTest extends Base {
 
     @Before
     public void before() throws Exception {
@@ -28,9 +28,9 @@ public class TryTest extends Base {
 
         State<String> state = new SimpleState<>(data);
         Integer idx = state.status();
-        Try<String, String> tryIt = new Try<>(eq("Hello"));
+        Attempt<String, String> attemptIt = new Attempt<>(eq("Hello"));
 
-        String re = tryIt.parse(state);
+        String re = attemptIt.parse(state);
 
         assertEquals(re, "Hello");
         assertNotEquals(idx, state.status());
@@ -40,10 +40,10 @@ public class TryTest extends Base {
         List<String> data = Arrays.asList("Hello", "World");
         SimpleState<String> state = new SimpleState<>(data);
         Integer idx = state.status();
-        Try<String, String> tryIt = new Try<>(new Eq<>("hello"));
+        Attempt<String, String> attemptIt = new Attempt<>(new Eq<>("hello"));
 
         try{
-            String re = tryIt.parse(state);
+            String re = attemptIt.parse(state);
             fail("Expect a error for Hello.");
         }catch(Exception e){
             assertEquals(idx, state.status());

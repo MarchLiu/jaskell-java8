@@ -2,6 +2,7 @@ package jaskell.parsec.common;
 
 import jaskell.parsec.ParsecException;
 import jaskell.util.Result;
+import jaskell.util.Try;
 
 import java.io.EOFException;
 import java.util.List;
@@ -26,11 +27,11 @@ public interface Parsec<E, T> {
       return ((Parsec<Character, T>)this).parse(s);
   }
 
-  default Result<Throwable, T> exec(State<E> s) {
+  default Try<T> exec(State<E> s) {
     try {
-      return new Result<>(Parsec.this.parse(s));
+      return new Try<>(Parsec.this.parse(s));
     } catch (Exception e) {
-      return new Result<>(e);
+      return new Try<>(e);
     }
   }
 

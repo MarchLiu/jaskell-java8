@@ -171,3 +171,8 @@ maven_jar(
 ### 2.0.0
 
  - formal sync as jaskell-dotty
+
+### 2.0.1
+
+ - try now named attempt
+ - create a try type like scala try

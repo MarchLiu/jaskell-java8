@@ -16,7 +16,7 @@ public class Many1<E, T, Status, Tran>
     public List<T> parse(State<E, Status, Tran> s) throws EOFException, ParsecException {
         List<T> re = new ArrayList<>();
         re.add(this.parser.parse(s));
-        Parsec<E, T, Status, Tran> p = new Try<>(parser);
+        Parsec<E, T, Status, Tran> p = new Attempt<>(parser);
         try{
             while (true){
                 re.add(p.parse(s));

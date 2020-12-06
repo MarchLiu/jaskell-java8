@@ -19,7 +19,7 @@ public class SepBy1<E, T, Sep>
             throws EOFException, ParsecException {
         List<T> re = new ArrayList<>();
         re.add(this.p.parse(s));
-        Parsec<E, T> parser = new Try<>(p);
+        Parsec<E, T> parser = new Attempt<>(p);
         try {
             while (true) {
                 this.by.parse(s);
@@ -31,7 +31,7 @@ public class SepBy1<E, T, Sep>
     }
 
     public SepBy1(Parsec<E, T> p, Parsec<E, Sep> by) {
-        this.by = new Try<>(by);
+        this.by = new Attempt<>(by);
         this.p = p;
     }
 }

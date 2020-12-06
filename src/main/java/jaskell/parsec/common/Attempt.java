@@ -1,4 +1,6 @@
-package jaskell.parsec;
+package jaskell.parsec.common;
+
+import jaskell.parsec.ParsecException;
 
 import java.io.EOFException;
 
@@ -6,13 +8,13 @@ import java.io.EOFException;
  * Created by Mars Liu on 2016-01-03.
  * Try 尝试执行给定算子,如果失败,先将state复位,再抛出异常.
  */
-public class Try<E, T, Status, Tran>
-    implements Parsec<E, T, Status, Tran> {
-    private final Parsec<E, T, Status, Tran> parsec;
+public class Attempt<E, T>
+    implements Parsec<E, T> {
+    private final Parsec<E, T> parsec;
 
     @Override
-    public T parse(State<E, Status, Tran> s) throws EOFException, ParsecException {
-        Tran tran = s.begin();
+    public T parse(State<E> s) throws EOFException, ParsecException {
+        Integer tran = s.begin();
         try{
             T re = this.parsec.parse(s);
             s.commit(tran);
@@ -23,7 +25,7 @@ public class Try<E, T, Status, Tran>
         }
     }
 
-    public Try(Parsec<E, T, Status, Tran> parsec){
+    public Attempt(Parsec<E, T> parsec){
         this.parsec = parsec;
     }
 }

@@ -1,11 +1,8 @@
 package jaskell.parsec.common;
 
 import jaskell.parsec.ParsecException;
-import javafx.util.Builder;
 
 import java.io.EOFException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Mars Liu on 2016-01-07.
@@ -14,7 +11,7 @@ import java.util.List;
 public class UDecimal
     implements Parsec<Character, String> {
   private final Parsec<Character, String> uint = new UInt();
-  private final Parsec<Character, Character> dot = new Try<>(new Ch('.'));
+  private final Parsec<Character, Character> dot = new Attempt<>(new Ch('.'));
 
   @Override
   public String parse(State<Character> s)

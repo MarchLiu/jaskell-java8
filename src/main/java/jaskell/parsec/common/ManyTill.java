@@ -31,7 +31,7 @@ public class ManyTill<E, T, L>
     }
 
     public ManyTill(Parsec<E, T> parser, Parsec<E, L> end) {
-        this.parser = new Try<>(parser);
+        this.parser = new Attempt<>(parser);
         this.end = end;
     }
 }

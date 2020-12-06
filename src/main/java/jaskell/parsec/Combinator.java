@@ -1,15 +1,14 @@
 package jaskell.parsec;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by march on 16/9/12.
  * helper toolbox for combinator.
  */
 public class Combinator {
-    public static <E, T, Status, Tran> Try<E, T, Status, Tran> attempt(Parsec<E, T, Status, Tran> parser) {
-        return new Try<>(parser);
+    public static <E, T, Status, Tran> Attempt<E, T, Status, Tran> attempt(Parsec<E, T, Status, Tran> parser) {
+        return new Attempt<>(parser);
     }
 
     public static <E, T, Status, Tran> Ahead<E, T, Status, Tran> ahead(Parsec<E, T, Status, Tran> parser) {
