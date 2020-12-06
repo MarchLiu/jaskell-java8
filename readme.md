@@ -50,12 +50,13 @@ libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "1.5.1"
 @Grapes(
   @Grab(group='io.github.marchliu', module='jaskell-java8', version='1.5.1')
 )
+
 ```
 
 ### Leiningen
 
 ```clojure
-[io.github.marchliu/jaskell-java8 "1.5.1"]
+[io.github.marchliu/jaskell-java8 "2.0.1"]
 ```
 
 ### Apache Bluildr
