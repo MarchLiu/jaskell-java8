@@ -185,3 +185,7 @@ maven_jar(
 ### 2.1.1
 
  - add map and recover for try
+
+### 2.1.2
+
+ - add simple failure for try
