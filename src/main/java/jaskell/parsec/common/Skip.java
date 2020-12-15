@@ -14,7 +14,7 @@ public class Skip<E, T>
 
     @Override
     public  T parse(State<E> s)
-            throws EOFException, ParsecException {
+            throws Throwable {
         Integer tran = null;
         try {
             while (true) {

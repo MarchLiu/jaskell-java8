@@ -18,7 +18,7 @@ public class IntTest extends Base {
     }
 
     @Test
-    public void simple() throws Exception {
+    public void simple() throws Throwable {
         State<Character> state = newState("23413214");
 
         Int intParser = new Int();
@@ -29,7 +29,7 @@ public class IntTest extends Base {
     }
 
     @Test
-    public void stop() throws Exception {
+    public void stop() throws Throwable {
         State<Character> state = newState("23413a214");
 
         Int intParse = new Int();
@@ -48,13 +48,13 @@ public class IntTest extends Base {
         try {
             String s = intParse.parse(state);
             throw new Exception("Expect fail when no digit at start.");
-        }catch (ParsecException e) {
+        }catch (Throwable e) {
             assertTrue(true);
         }
     }
 
     @Test
-    public void nSimple() throws Exception {
+    public void nSimple() throws Throwable {
         State<Character> state = newState("-23413214");
 
         Int intParser = new Int();
@@ -65,7 +65,7 @@ public class IntTest extends Base {
     }
 
     @Test
-    public void nStop() throws Exception {
+    public void nStop() throws Throwable {
         State<Character> state = newState("-23413a214");
 
         Int intParser = new Int();
@@ -84,7 +84,7 @@ public class IntTest extends Base {
         try {
             String s = intParser.parse(state);
             throw new Exception("Expect fail when no digit at start.");
-        }catch (ParsecException e) {
+        }catch (Throwable e) {
             assertTrue(true);
         }
     }

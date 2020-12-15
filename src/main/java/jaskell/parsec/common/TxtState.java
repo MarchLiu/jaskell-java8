@@ -83,7 +83,7 @@ public class TxtState implements State<Character> {
     return new ParsecException(this.current, message);
   }
 
-  public TxtState(String content, String newLine) {
+  public TxtState(String content, String newLine) throws Throwable {
     this.content = content;
     List<Character> characters = new ArrayList<>();
     for (char c : content.toCharArray()) {
@@ -109,7 +109,7 @@ public class TxtState implements State<Character> {
     this.buffer = buffer;
   }
 
-  public TxtState(String content) {
+  public TxtState(String content) throws Throwable {
     this(content, "\n");
   }
 

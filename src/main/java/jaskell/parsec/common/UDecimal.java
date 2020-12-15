@@ -15,7 +15,7 @@ public class UDecimal
 
   @Override
   public String parse(State<Character> s)
-      throws EOFException, ParsecException {
+          throws Throwable {
     StringBuilder builder = new StringBuilder();
     builder.append(uint.parse(s));
     if(dot.exec(s).isOk()){

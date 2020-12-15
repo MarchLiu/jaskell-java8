@@ -23,7 +23,7 @@ public class AttemptTest extends Base {
     }
 
     @Test
-    public void simple() throws Exception {
+    public void simple() throws Throwable {
         List<String> data = Arrays.asList("Hello", "World");
 
         State<String> state = new SimpleState<>(data);
@@ -36,7 +36,7 @@ public class AttemptTest extends Base {
         assertNotEquals(idx, state.status());
     }
     @Test
-    public void rollback() throws Exception {
+    public void rollback() {
         List<String> data = Arrays.asList("Hello", "World");
         SimpleState<String> state = new SimpleState<>(data);
         Integer idx = state.status();
@@ -45,7 +45,7 @@ public class AttemptTest extends Base {
         try{
             String re = attemptIt.parse(state);
             fail("Expect a error for Hello.");
-        }catch(Exception e){
+        }catch(Throwable e){
             assertEquals(idx, state.status());
         }
     }

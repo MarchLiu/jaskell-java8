@@ -8,9 +8,9 @@ import java.util.function.Function;
 // TODO: type safe
 @SuppressWarnings("unchecked")
 public class Result<E extends Throwable, T> implements Iterable<T>, Iterator<T> {
-    private final Object slot;
-    private final boolean _ok;
-    private int idx = 0;
+    final Object slot;
+    final boolean _ok;
+    int idx = 0;
 
     public Result(T value) {
         this.slot = value;

@@ -30,7 +30,7 @@ public class WeakParser implements Parsec<Character, Expression> {
   private final Parsec<Character, ?> end = ahead(choice(rq, e));
 
   @Override
-  public Expression parse(State<Character> s) throws EOFException, ParsecException {
+  public Expression parse(State<Character> s) throws Throwable {
     Parsec<Character, Expression> np = choice(attempt(new N()), attempt(new Param()), attempt(new Q()));
 
     Expression left = np.parse(s);

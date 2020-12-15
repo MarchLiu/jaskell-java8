@@ -177,3 +177,11 @@ maven_jar(
 
  - try now named attempt
  - create a try type like scala try
+
+### 2.1.0
+
+ - reflections of Try
+
+### 2.1.1
+
+ - add map and recover for try

@@ -21,7 +21,7 @@ public class SepByTest extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void TestSepBy() throws Exception {
+    public void TestSepBy() throws Throwable {
         State<Character> state = newState("hlhlhlhlhlhll");
 
         SepBy<Character, Character, Character> m = new SepBy<>(

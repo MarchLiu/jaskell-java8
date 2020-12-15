@@ -15,14 +15,14 @@ import java.util.List;
 @FunctionalInterface
 public interface Parsec<E, T> {
   T parse(State<E> s)
-      throws EOFException, ParsecException;
+          throws Throwable;
 
-  default <C extends List<E>> T parse(C collection) throws EOFException {
+  default <C extends List<E>> T parse(C collection) throws Throwable {
     State<E> s = new SimpleState<>(collection);
     return this.parse(s);
   }
 
-  default T parse(String content) throws EOFException {
+  default T parse(String content) throws Throwable {
       State<Character> s = new TxtState(content);
       return ((Parsec<Character, T>)this).parse(s);
   }
@@ -30,17 +30,17 @@ public interface Parsec<E, T> {
   default Try<T> exec(State<E> s) {
     try {
       return new Try<>(Parsec.this.parse(s));
-    } catch (Exception e) {
+    } catch (Throwable e) {
       return new Try<>(e);
     }
   }
 
-  default <C extends List<E>> Result<Throwable, T> exec(C collection) {
+  default <C extends List<E>> Try<T> exec(C collection) {
     State<E> s = new SimpleState<>(collection);
     return this.exec(s);
   }
 
-  default Result<Throwable, T> exec(String content) {
+  default Try<T> exec(String content) throws Throwable {
     State<Character> s = new TxtState(content);
     return ((Parsec<Character, T>)this).exec(s);
   }

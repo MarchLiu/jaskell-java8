@@ -14,7 +14,7 @@ public class Skip1<E, T>
     private final Parsec<E, T> skip;
 
     @Override
-    public T parse(State<E> s) throws EOFException, ParsecException {
+    public T parse(State<E> s) throws Throwable {
         psc.parse(s);
         skip.parse(s);
         return null;

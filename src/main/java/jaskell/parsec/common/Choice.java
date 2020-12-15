@@ -17,7 +17,7 @@ public class Choice<E, T>
   private final List<Parsec<E, T>> parsecs;
 
   @Override
-  public T parse(State<E> s) throws EOFException, ParsecException {
+  public T parse(State<E> s) throws Throwable {
     Exception err = null;
     Integer status = s.status();
     for (Parsec<E, T> psc : this.parsecs) {

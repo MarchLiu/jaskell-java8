@@ -60,25 +60,25 @@ public class InjectionTest {
   });
 
   @Test
-  public void testBasic() throws EOFException {
+  public void testBasic() throws Throwable {
     String content = "a data without text content";
     Assert.assertEquals(content, parser.parse(content));
   }
 
   @Test
-  public void testEscape() throws EOFException {
+  public void testEscape() throws Throwable {
     String content = "'a data with text content'";
     Assert.assertEquals("a data with text content", parser.parse(content));
   }
 
   @Test
-  public void testEscapeMore() throws EOFException {
+  public void testEscapeMore() throws Throwable {
     String content = "some content included 'a data without\ttext content'";
     Assert.assertEquals("some content included a data without\ttext content", parser.parse(content));
   }
 
   @Test
-  public void testInjection() {
+  public void testInjection() throws Throwable {
     String content = "some content included 'a data without 'text content'";
     Assert.assertTrue(parser.exec(content).isErr());
   }

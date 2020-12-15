@@ -18,7 +18,7 @@ import static jaskell.parsec.common.Txt.*;
 public class AheadTest extends Base {
 
     @Test
-    public void simple() throws Exception{
+    public void simple() throws Throwable {
         State<Character> state = newState("this is a string data.");
         Parsec<Character, String> parser =
                 text("this").over(new Ahead<>(text(" is")));
@@ -30,7 +30,7 @@ public class AheadTest extends Base {
     }
 
     @Test
-    public void result() throws Exception{
+    public void result() throws Throwable {
         State<Character> state = newState("this is a string data.");
         Parsec<Character, String> parser =
                 text("this").then(space()).then(new Ahead<>(text("is")));
@@ -49,7 +49,7 @@ public class AheadTest extends Base {
 
         try {
             String re = parser.parse(state);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             assertThat("Expect status stop after this (5) but is. ", state.status(), IsEqual.equalTo(5));
             assertThat("Expect the parser fail when try match \" is\"",
                     e, IsInstanceOf.instanceOf(ParsecException.class));

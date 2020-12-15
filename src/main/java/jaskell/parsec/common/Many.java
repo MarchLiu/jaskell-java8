@@ -21,7 +21,7 @@ public class Many<E, T>
             while (true){
                 re.add(this.parsec.parse(s));
             }
-        } catch (Exception e){
+        } catch (Throwable e){
             return re;
         }
     }

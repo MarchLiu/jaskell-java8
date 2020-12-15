@@ -20,7 +20,7 @@ public class FindTest extends Base {
     }
 
     @Test
-    public void simple() throws Exception {
+    public void simple() throws Throwable {
         State<Character> state = newState(data);
         Parsec<Character, String> parser = new Find<>(text("find"));
         String re = parser.parse(state);
@@ -33,7 +33,7 @@ public class FindTest extends Base {
         Parsec<Character, String> parser = new Find<>(new Text("Fail"));
         try {
             String re = parser.parse(state);
-        } catch (Exception e){
+        } catch (Throwable e){
             Assert.assertTrue(e instanceof ParsecException);
         }
     }

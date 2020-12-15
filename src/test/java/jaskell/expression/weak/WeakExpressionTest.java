@@ -25,7 +25,7 @@ public class WeakExpressionTest {
   private final Env emptyEnv = new Env();
 
   @Test
-  public void testNumber() throws EOFException, ExpressionException {
+  public void testNumber() throws Throwable {
     State<Character> state = new TxtState("3.14");
     Parsec<Character, Expression> p = new N();
     Expression expression = p.parse(state);
@@ -33,21 +33,21 @@ public class WeakExpressionTest {
   }
 
   @Test
-  public void testBasic() throws EOFException, ExpressionException {
+  public void testBasic() throws Throwable {
     State<Character> state = new TxtState("3.14<6.18");
     Expression expression = parser.parse(state);
     Assert.assertEquals(1, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testGreat() throws EOFException, ExpressionException {
+  public void testGreat() throws Throwable {
     State<Character> state = new TxtState("3>1");
     Expression expression = parser.parse(state);
     Assert.assertEquals(1, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testSubMixed() throws EOFException, ExpressionException {
+  public void testSubMixed() throws Throwable {
     State<Character> state = new TxtState("179- (8>5)");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();
@@ -55,7 +55,7 @@ public class WeakExpressionTest {
   }
 
   @Test
-  public void testProductMixed() throws EOFException, ExpressionException {
+  public void testProductMixed() throws Throwable {
     State<Character> state = new TxtState("8 * (1<5<3) - 8");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();

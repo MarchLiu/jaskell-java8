@@ -20,7 +20,7 @@ import java.io.EOFException;
 public class N implements Parsec<Character, Expression> {
   private final Parsec<Character, String> number = new ScNumber();
   @Override
-  public Number parse(State<Character> s) throws EOFException, ParsecException {
+  public Number parse(State<Character> s) throws Throwable {
     String re = number.parse(s);
     return new Number(Double.parseDouble(re));
   }

@@ -15,7 +15,7 @@ public class Many1<E, T>
     private final Parsec<E, T> parser;
 
     @Override
-    public List<T> parse(State<E> s) throws EOFException, ParsecException {
+    public List<T> parse(State<E> s) throws Throwable {
         List<T> re = new ArrayList<>();
         re.add(this.parser.parse(s));
         Parsec<E, T> p = new Attempt<>(parser);

@@ -21,7 +21,7 @@ public class SkipTest extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void oneSkip() throws Exception {
+    public void oneSkip() throws Throwable {
         State<Character> state = newState("hello World");
         Skip<Character, Character> skip = skip(eq('h'));
         skip.parse(state);
@@ -30,7 +30,7 @@ public class SkipTest extends Base {
     }
 
     @Test
-    public void stopAtStart() throws Exception {
+    public void stopAtStart() throws Throwable {
         State<Character> state = newState("hello World");
         Skip<Character, Character> skip = skip(eq('e'));
         skip.parse(state);
@@ -43,7 +43,7 @@ public class SkipTest extends Base {
      * @throws Exception
      */
     @Test
-    public void skipSpaces() throws Exception {
+    public void skipSpaces() throws Throwable {
         State<Character> state = newState("\t\t \thello World");
         Parsec<Character, Character> spaces = skip(new ChIn(" \t"));
         spaces.parse(state);
@@ -56,7 +56,7 @@ public class SkipTest extends Base {
      * @throws Exception
      */
     @Test
-    public void skipNothing() throws Exception {
+    public void skipNothing() throws Throwable {
         State<Character> state = newState("\nhello World");
         Parsec<Character, Character> spaces = skip(new ChIn(" \t"));
         spaces.parse(state);

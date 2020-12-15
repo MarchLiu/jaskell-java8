@@ -18,7 +18,7 @@ public class NewlineTest extends Base {
 
 
     @Test
-    public void simpleCrlf() throws Exception {
+    public void simpleCrlf() throws Throwable {
         State<Character> state = newState("\r\n");
         Parsec<Character, String> crlf = new Crlf();
 
@@ -30,7 +30,7 @@ public class NewlineTest extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void simpleNl() throws Exception {
+    public void simpleNl() throws Throwable {
         State<Character> state = newState("\r\n");
 
         Parsec<Character, Character> enter = new Newline();

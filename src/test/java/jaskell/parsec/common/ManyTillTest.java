@@ -27,7 +27,7 @@ public class ManyTillTest extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void TestManyTill() throws Exception {
+    public void TestManyTill() throws Throwable {
         State<Character> state = newState("hhhhhhlhhhll");
 
         ManyTill<Character, Character, Character> m = new ManyTill<>(

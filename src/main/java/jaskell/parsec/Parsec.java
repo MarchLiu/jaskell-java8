@@ -1,6 +1,5 @@
 package jaskell.parsec;
 
-import jaskell.util.Result;
 import jaskell.util.Try;
 
 import java.io.EOFException;
@@ -16,22 +15,22 @@ public interface Parsec<E, T, Status, Tran> {
 
   default Try<T> exec(State<E, Status, Tran> s) {
     try {
-      return new Try<>(Parsec.this.parse(s));
+      return Try.success(parse(s));
     } catch (Exception e) {
-      return new Try(e);
+      return Try.failure(e);
     }
   }
 
   default <C> Parsec<E, C, Status, Tran> bind(Binder<E, T, C, Status, Tran> binder) {
     return s -> {
-      T value = Parsec.this.parse(s);
+      T value = parse(s);
       return binder.bind(value).parse(s);
     };
   }
 
   default <C> Parsec<E, C, Status, Tran> then(Parsec<E, C, Status, Tran> parsec) {
     return s -> {
-      Parsec.this.parse(s);
+      parse(s);
       return parsec.parse(s);
     };
   }

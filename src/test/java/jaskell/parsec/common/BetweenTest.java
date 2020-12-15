@@ -32,7 +32,7 @@ public class BetweenTest extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void simple() throws Exception {
+    public void simple() throws Throwable {
 
         State<Character> state = newState("hello");
 
@@ -47,7 +47,7 @@ public class BetweenTest extends Base {
     }
 
     @Test
-    public void brackets() throws Exception {
+    public void brackets() throws Throwable {
 
         State<Character> state = newState("[hello]");
 

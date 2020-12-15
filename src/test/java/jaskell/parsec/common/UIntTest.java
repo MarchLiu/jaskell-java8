@@ -19,7 +19,7 @@ public class UIntTest extends Base {
     }
 
     @Test
-    public void simple() throws Exception {
+    public void simple() throws Throwable {
         State<Character> state = newState("23413214");
 
         UInt uint = uinteger();
@@ -30,7 +30,7 @@ public class UIntTest extends Base {
     }
 
     @Test
-    public void stop() throws Exception {
+    public void stop() throws Throwable {
         State<Character> state = newState("23413a214");
 
         UInt uint = uinteger();
@@ -41,7 +41,7 @@ public class UIntTest extends Base {
     }
 
     @Test
-    public void fail() throws Exception {
+    public void fail() throws Throwable {
         State<Character> state = newState("x2344");
 
         UInt uint = new UInt();

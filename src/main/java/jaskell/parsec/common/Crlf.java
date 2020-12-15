@@ -11,7 +11,7 @@ import java.io.EOFException;
 public class Crlf implements Parsec<Character, String> {
     @Override
     public String parse(State<Character> s)
-            throws EOFException, ParsecException {
+            throws Throwable {
         new Ch('\r').parse(s);
         new Newline().parse(s);
         return "\r\n";

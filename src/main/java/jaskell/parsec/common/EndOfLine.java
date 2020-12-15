@@ -16,7 +16,7 @@ public class EndOfLine
         new Choice<>(new Text("\n"), new Text("\r\n"));
     @Override
     public String parse(State<Character> s)
-            throws EOFException, ParsecException {
+            throws Throwable {
         return parsec.parse(s);
     }
 }

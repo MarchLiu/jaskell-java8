@@ -29,7 +29,7 @@ public class Skip1Test extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void simple() throws Exception {
+    public void simple() throws Throwable {
         State<Character> state = newState("left right left right");
         Parsec<Character, String> parser = skip1(text("left"));
         String re = parser.parse(state);
@@ -37,7 +37,7 @@ public class Skip1Test extends Base {
     }
 
     @Test
-    public void simpleStatus() throws Exception {
+    public void simpleStatus() throws Throwable {
         State<Character> state = newState("left right left right");
         Parsec<Character, String> parser = skip1(text("left "));
         parser.parse(state);
@@ -46,7 +46,7 @@ public class Skip1Test extends Base {
     }
 
     @Test
-    public void statusMore() throws Exception {
+    public void statusMore() throws Throwable {
         State<Character> state = newState("left left right right");
         Parsec<Character, String> parser = skip1(text("left "));
         parser.parse(state);
@@ -60,7 +60,7 @@ public class Skip1Test extends Base {
         Parsec<Character, String> parser = skip1(text("left "));
         try {
             parser.parse(state);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Integer status = state.status();
             Assert.assertThat("Expect failed and stop at 1.", status, IsEqual.equalTo(1));
 

@@ -30,7 +30,7 @@ public class Grt implements Parsec<Character, Expression> {
   }
 
   @Override
-  public Great parse(State<Character> s) throws EOFException, ParsecException {
+  public Great parse(State<Character> s) throws Throwable {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new Great(prev, parser.parse(s));

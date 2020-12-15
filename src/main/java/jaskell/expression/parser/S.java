@@ -29,7 +29,7 @@ public class S implements Parsec<Character, Expression> {
   }
 
   @Override
-  public Sub parse(State<Character> s) throws EOFException, ParsecException {
+  public Sub parse(State<Character> s) throws Throwable {
     Parsec<Character, Expression> parser = new Parser();
     op.parse(s);
     return new Sub(prev, parser.parse(s));

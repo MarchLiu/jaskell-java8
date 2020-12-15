@@ -30,7 +30,7 @@ public class Param implements Parsec<Character, Expression> {
   private final Parsec<Character, String> parser = s -> head.parse(s) + tail.parse(s);
 
   @Override
-  public Expression parse(State<Character> s) throws EOFException, ParsecException {
+  public Expression parse(State<Character> s) throws Throwable {
     return new Parameter(parser.parse(s));
   }
 }
