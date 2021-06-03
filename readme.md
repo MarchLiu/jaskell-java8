@@ -16,7 +16,7 @@ It includes a parsec combinators library , a SQL expressions library and a arith
 <dependency>
   <groupId>io.github.marchliu</groupId>
   <artifactId>jaskell-java8</artifactId>
-  <version>1.5.1</version>
+  <version>2.1.3</version>
 </dependency>
 ```
 
