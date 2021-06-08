@@ -25,7 +25,7 @@ import static jaskell.parsec.common.Atom.eof;
  * @since 2020/06/04 11:16
  */
 public class Parser implements Parsec<Character, Expression> {
-  private final Parsec<Character, Character> rq = attempt(ch(')'));
+  private final Parsec<Character, Character> rq = ch(')');
   private final SkipWhitespaces skips = skipWhiteSpaces();
   private final Eof<Character> e = eof();
   private final Parsec<Character, ?> end = ahead(choice(rq, e));
