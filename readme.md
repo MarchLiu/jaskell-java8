@@ -16,7 +16,7 @@ It includes a parsec combinators library , a SQL expressions library and a arith
 <dependency>
   <groupId>io.github.marchliu</groupId>
   <artifactId>jaskell-java8</artifactId>
-  <version>1.5.1</version>
+  <version>2.1.3</version>
 </dependency>
 ```
 
@@ -189,3 +189,8 @@ maven_jar(
 ### 2.1.2
 
  - add simple failure for try
+
+### 2.1.3
+
+ - auto attempt in option
+ - add attempt method in parsec
