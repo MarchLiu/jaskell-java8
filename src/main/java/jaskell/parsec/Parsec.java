@@ -42,4 +42,8 @@ public interface Parsec<E, T, Status, Tran> {
       return value;
     };
   }
+
+  default Parsec<E, T, Status, Tran> attempt() {
+      return new Attempt<>(this);
+  }
 }

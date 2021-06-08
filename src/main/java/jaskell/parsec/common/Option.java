@@ -16,7 +16,7 @@ public class Option<E, T>
     private final Parsec<E, T> parser;
 
     public Option(Parsec<E, T> parser) {
-        this.parser = parser;
+        this.parser = new Attempt<>(parser);
     }
 
     @Override
