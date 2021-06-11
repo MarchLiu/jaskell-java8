@@ -22,15 +22,14 @@ public class Option<E, T>
     @Override
     public  Optional<T> parse(State<E> s)
             throws Throwable {
-        Integer status = s.status();
+        Integer tran = s.begin();
         try{
-            return Optional.of(parser.parse(s));
+            Optional<T> result = Optional.of(parser.parse(s));
+            s.commit(tran);
+            return result;
         } catch (Throwable e) {
-            if(status.equals(s.status())) {
-                return Optional.empty();
-            } else {
-                throw e;
-            }
+            s.rollback(tran);
+            return Optional.empty();
         }
     }
 }

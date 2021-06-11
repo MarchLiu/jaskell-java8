@@ -92,6 +92,14 @@ public class Txt {
         return new SkipWhitespaces();
     }
 
+    public static Skip1Spaces skip1Spaces() {
+        return new Skip1Spaces();
+    }
+
+    public static Skip1Whitespaces skip1WhiteSpaces() {
+        return new Skip1Whitespaces();
+    }
+
     public static Text text(String value) {
         return new Text(value);
     }
