@@ -33,7 +33,6 @@ public class Distance {
                 matrix[i][j] = value;
             }
         }
-
         return matrix[src_length - 1][tgt_length - 1];
     }
 }

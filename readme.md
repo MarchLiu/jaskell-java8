@@ -194,3 +194,7 @@ maven_jar(
 
  - auto attempt in option
  - add attempt method in parsec
+
+### 2.1.6
+
+ - improve Try type

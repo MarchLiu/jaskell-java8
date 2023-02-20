@@ -1,5 +1,6 @@
 package jaskell.util;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -32,6 +33,7 @@ public class Try<T>{
         }
     }
 
+    @SuppressWarnings("unchecked")
     public <U> Try<U> map(Function<T, U> mapper) {
         if(_ok) {
             try {
@@ -60,10 +62,15 @@ public class Try<T>{
         if(_ok) {
             return this;
         } else {
-            return func.apply((Throwable)slot);
+            try {
+                return func.apply((Throwable) slot);
+            } catch (Throwable err){
+                return Try.failure(err);
+            }
         }
     }
 
+    @SuppressWarnings("unchecked")
     public T get() throws Throwable {
         if(_ok){
             return (T)slot;
@@ -72,6 +79,7 @@ public class Try<T>{
         }
     }
 
+    @SuppressWarnings("unchecked")
     public T orElse(T other) throws Throwable {
         if(_ok) {
             return (T)slot;
@@ -80,11 +88,30 @@ public class Try<T>{
         }
     }
 
+    @SuppressWarnings("unchecked")
     public T orElseGet(Try<? extends T> other) throws Throwable {
         if(_ok) {
             return (T)slot;
         } else {
             return other.get();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public T getOr(Function<? super Throwable, ? extends T> other) {
+        if(_ok) {
+            return (T)slot;
+        } else {
+            return other.apply((Throwable) slot);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public T getRecovery(Function<? super Throwable, Try<? extends T>> other) throws Throwable {
+        if(_ok) {
+            return (T)slot;
+        } else {
+            return other.apply((Throwable) slot).get();
         }
     }
 
@@ -96,12 +123,28 @@ public class Try<T>{
         return !_ok;
     }
 
+    @SuppressWarnings("unchecked")
     public <U> Try<U> flatMap(Function<? super T, Try<U>> mapper) {
         if (_ok) {
-            return mapper.apply((T)this.slot);
+            try {
+                return mapper.apply((T)slot);
+            } catch (Throwable err) {
+                return Try.failure(err);
+            }
         } else {
             return Try.failure((Throwable) this.slot);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void foreach(Consumer<T> consumer) {
+        if(_ok) {
+            consumer.accept((T)slot);
+        }
+    }
+
+    public Throwable error() {
+        return (Throwable)this.slot;
     }
 
     public static <T> Try<T> success(T value) {

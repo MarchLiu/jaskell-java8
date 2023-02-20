@@ -16,7 +16,6 @@ public class NewlineTest extends Base {
     public void after() throws Exception {
     }
 
-
     @Test
     public void simpleCrlf() throws Exception {
         State<Character, Integer, Integer> state = newState("\r\n");
