@@ -1,23 +1,13 @@
 package jaskell.parsec;
 
-import static jaskell.parsec.Combinator.sepBy1;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static jaskell.parsec.Combinator.sepBy1;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 public class SepBy1Test extends Base {
-
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     /**
      * Method: script(State<E> s)
@@ -30,19 +20,19 @@ public class SepBy1Test extends Base {
                 sepBy1(new Ch<>('h'), new Ch<>('l'));
 
         List<Character> a = m.parse(state);
-        Assert.assertEquals(a.size(), 6);
+        assertEquals(6, a.size());
 
         State<Character, Integer, Integer> state1 = newState("hlh,h.hlhlhll");
 
         List<Character> b = m.parse(state1);
-        Assert.assertEquals(b.size(), 2);
+        assertEquals(2, b.size());
 
         try {
             List<Character> c = m.parse(state1);
             String message = String.format("Expect a exception but %s", c);
-            Assert.fail(message);
+            fail(message);
         } catch (ParsecException e) {
-            Assert.assertTrue(true);
+            assertTrue(true);
         }
     }
 

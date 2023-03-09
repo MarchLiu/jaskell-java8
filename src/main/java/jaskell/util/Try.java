@@ -2,6 +2,7 @@ package jaskell.util;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * TODO
@@ -80,7 +81,7 @@ public class Try<T>{
     }
 
     @SuppressWarnings("unchecked")
-    public T orElse(T other) throws Throwable {
+    public T orElse(T other) {
         if(_ok) {
             return (T)slot;
         } else {
@@ -159,4 +160,19 @@ public class Try<T>{
         return new Try<>(new Exception(message));
     }
 
+    public static <T> Try<T> tryIt(Supplier<T> supplier) {
+        try {
+            return Try.success(supplier.get());
+        } catch (Exception err){
+            return Try.failure(err);
+        }
+    }
+
+    public static <T, U> Try<U> call(Function<T, U> func, T arg) {
+        try {
+            return Try.success(func.apply(arg));
+        } catch (Exception err){
+            return Try.failure(err);
+        }
+    }
 }

@@ -1,9 +1,8 @@
 package jaskell.parsec;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Eof Tester.
@@ -13,14 +12,6 @@ import org.junit.Test;
  * @since <pre>一月 9, 2016</pre>
  */
 public class EofTest extends Base {
-
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     /**
      * Method: script(State<T> s)
@@ -33,6 +24,6 @@ public class EofTest extends Base {
 
             new Text<Integer, Integer>("hello").parse(state);
             Object e = eof.parse(state);
-        Assert.assertNull(e);
+        assertNull(e);
     }
 }

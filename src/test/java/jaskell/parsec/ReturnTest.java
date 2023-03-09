@@ -1,22 +1,13 @@
 package jaskell.parsec;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class ReturnTest extends Base {
-    @Before
-    public void before() throws Exception {
-    }
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    @After
-    public void after() throws Exception {
-    }
+public class ReturnTest extends Base {
     /**
      * Method: script(State<E> s)
      */

@@ -1,22 +1,13 @@
 package jaskell.parsec;
 
 
-import static jaskell.parsec.Combinator.skip;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static jaskell.parsec.Combinator.skip;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class SkipTest extends Base {
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
     /**
      * Method: script(State<E> s)
      */
@@ -26,7 +17,7 @@ public class SkipTest extends Base {
         Skip<Character, Character, Integer, Integer> skip = new Skip<>(new Eq<>('h'));
         skip.parse(state);
 
-        Assert.assertEquals("Now state should skip first item.", 1, (int) state.status());
+        assertEquals(1, (int) state.status(), "Now state should skip first item.");
     }
 
     @Test
@@ -35,11 +26,12 @@ public class SkipTest extends Base {
         Skip<Character, Character, Integer, Integer> skip = new Skip<>(new Eq<>('e'));
         skip.parse(state);
 
-        Assert.assertEquals("Now state should stop before first item.", 0, (int) state.status());
+        assertEquals(0, (int) state.status(), "Now state should stop before first item.");
     }
 
     /**
      * Check skip space or tab at string start.
+     *
      * @throws Exception
      */
     @Test
@@ -48,11 +40,13 @@ public class SkipTest extends Base {
         Parsec<Character, Character, Integer, Integer> spaces = skip(new ChIn(" \t"));
         spaces.parse(state);
 
-        Assert.assertEquals("Now state should stop after four characters what space or tab.", 4, (int) state.status());
+        assertEquals(4, (int) state.status(),
+                "Now state should stop after four characters what space or tab.");
     }
 
     /**
      * Check skip nothing at string start.
+     *
      * @throws Exception
      */
     @Test
@@ -61,6 +55,7 @@ public class SkipTest extends Base {
         Parsec<Character, Character, Integer, Integer> spaces = skip(new ChIn<>(" \t"));
         spaces.parse(state);
 
-        Assert.assertEquals("Now state should stop at start.", 0, (int) state.status());
+        assertEquals(0, (int) state.status(),
+                "Now state should stop at start.");
     }
 }

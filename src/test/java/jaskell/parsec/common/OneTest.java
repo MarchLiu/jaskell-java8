@@ -1,20 +1,10 @@
 package jaskell.parsec.common;
 
-import jaskell.parsec.ParsecException;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OneTest extends Base {
-
-  @Before
-  public void before() throws Exception {
-  }
-
-  @After
-  public void after() throws Exception {
-  }
 
   /**
    * Method: script(State<T> s)
@@ -27,7 +17,7 @@ public class OneTest extends Base {
 
 
     Character c = one.parse(state);
-    Assert.assertEquals('h', (char) c);
+    assertEquals('h', (char) c);
   }
 
 } 

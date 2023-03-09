@@ -1,9 +1,8 @@
 package jaskell.parsec.common;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Eq Tester.
@@ -14,14 +13,6 @@ import org.junit.Test;
  */
 public class EqTest extends Base {
 
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
-
     /**
      * Method: script(State<T> s)
      */
@@ -31,7 +22,7 @@ public class EqTest extends Base {
 
         Eq<Character> eq = new Eq<>('h');
         Character c = eq.parse(state);
-        Assert.assertEquals(c, new Character('h'));
+        assertEquals(new Character('h'), c);
     }
 
 

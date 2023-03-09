@@ -1,18 +1,16 @@
 package jaskell.parsec.common;
 
-import static jaskell.parsec.common.Combinator.ahead;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-
 import jaskell.parsec.ParsecException;
-import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsInstanceOf;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static jaskell.parsec.common.Combinator.ahead;
 import static jaskell.parsec.common.Txt.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 /**
  * Created by Mars Liu on 16/9/15.
- *
+ * <p>
  * Tests About look behind.
  */
 public class AheadTest extends Base {
@@ -25,8 +23,8 @@ public class AheadTest extends Base {
 
         String re = parser.parse(state);
 
-        assertEquals(re, "this");
-        assertThat("Expect status stop after this but is. ", state.status(), IsEqual.equalTo(4));
+        assertEquals("this", re);
+        assertEquals(4, state.status(), "Expect status stop after this but is.");
     }
 
     @Test
@@ -38,21 +36,19 @@ public class AheadTest extends Base {
         String re = parser.parse(state);
 
         assertEquals(re, "is");
-        assertThat("Expect status stop after this (5) but is. ", state.status(), IsEqual.equalTo(5));
+        assertEquals(5, state.status(), "Expect status stop after this (5) but is.");
     }
 
     @Test
-    public void fail() throws Exception{
+    public void fail() throws Exception {
         State<Character> state = newState("this is a string.");
         Parsec<Character, String> parser =
                 text("this").then(space()).then(ahead(text(" is")));
 
-        try {
-            String re = parser.parse(state);
-        } catch (Throwable e) {
-            assertThat("Expect status stop after this (5) but is. ", state.status(), IsEqual.equalTo(5));
-            assertThat("Expect the parser fail when try match \" is\"",
-                    e, IsInstanceOf.instanceOf(ParsecException.class));
-        }
+        assertThrowsExactly(ParsecException.class,
+                () -> parser.parse(state),
+                "Expect the parser fail when try match \" is\"");
+        assertEquals(5, state.status(), "Expect status stop after this (5) but is.");
+
     }
 }

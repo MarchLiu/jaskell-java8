@@ -1,11 +1,12 @@
 package jaskell.parsec;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.EOFException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * BasicState Tester.
@@ -16,15 +17,6 @@ import java.io.EOFException;
  */
 public class SimpleStateTest extends Base {
 
-
-    @Before
-    public void before() throws Exception {
-
-    }
-
-    @After
-    public void after() throws Exception {
-    }
     /**
      *
      * Method: Index()
@@ -38,14 +30,14 @@ public class SimpleStateTest extends Base {
             int index = state.status();
             Character c = state.next();
             Character chr = data.charAt(index);
-            Assert.assertEquals(c, chr);
+            assertEquals(c, chr);
         }
         try{
             Character failed = state.next();
             String message = String.format("The state next at preview line should failed but %c.", failed);
-            Assert.fail(message);
+            fail(message);
         } catch (EOFException e) {
-            Assert.assertSame("the error is Eof", EOFException.class, e.getClass());
+            assertSame(e.getClass(), EOFException.class, "the error is Eof");
         }
     }
 
@@ -62,7 +54,7 @@ public class SimpleStateTest extends Base {
 
 
 
-        Assert.assertEquals(c,new Character('h'));
+        assertEquals(c,new Character('h'));
 
         Integer a = state.begin();
 
@@ -74,7 +66,7 @@ public class SimpleStateTest extends Base {
 
         Character d = state.next();
 
-        Assert.assertEquals(d,new Character('e'));
+        assertEquals(d,new Character('e'));
     }
 
     /**
@@ -89,14 +81,14 @@ public class SimpleStateTest extends Base {
         Character c = state.next();
 
 
-        Assert.assertEquals(c,new Character('h'));
+        assertEquals(c,new Character('h'));
         state.next();
 
         state.commit(a);
 
         Character d = state.next();
 
-        Assert.assertEquals(d,new Character('l'));
+        assertEquals(d,new Character('l'));
     }
 
     /**
@@ -112,13 +104,13 @@ public class SimpleStateTest extends Base {
         Character c = state.next();
 
 
-        Assert.assertEquals(c,new Character('h'));
+        assertEquals(c,new Character('h'));
 
         state.rollback(a);
 
         Character d = state.next();
 
-        Assert.assertEquals(d,new Character('h'));
+        assertEquals(d,new Character('h'));
     }
 
     /**
@@ -133,20 +125,20 @@ public class SimpleStateTest extends Base {
 
         Character c = state.next();
 
-        Assert.assertEquals(c, new Character('h'));
+        assertEquals(c, new Character('h'));
 
         Character d = state.next();
 
-        Assert.assertEquals(d,new Character('e'));
+        assertEquals(d,new Character('e'));
         Character e = state.next();
 
-        Assert.assertEquals(e,new Character('l'));
+        assertEquals(e,new Character('l'));
         Character f = state.next();
 
-        Assert.assertEquals(f,new Character('l'));
+        assertEquals(f,new Character('l'));
         Character g = state.next();
 
-        Assert.assertEquals(g,new Character('o'));
+        assertEquals(g,new Character('o'));
 
     }
 

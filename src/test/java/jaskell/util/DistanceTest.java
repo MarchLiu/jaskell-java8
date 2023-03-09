@@ -1,9 +1,9 @@
 package jaskell.util;
 
-import static jaskell.util.Distance.levenshtein;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static jaskell.util.Distance.levenshtein;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DistanceTest {
     @Test

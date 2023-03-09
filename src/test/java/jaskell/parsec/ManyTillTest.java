@@ -1,11 +1,11 @@
 package jaskell.parsec;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * ManyTil Tester.
@@ -15,13 +15,6 @@ import java.util.List;
  */
 public class ManyTillTest extends Base {
 
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     /**
      * Method: script(State<E> s)
@@ -36,7 +29,7 @@ public class ManyTillTest extends Base {
         );
 
         List<Character> a = m.parse(state);
-        Assert.assertEquals(a.size(), 6);
+        assertEquals(a.size(), 6);
     }
 
 

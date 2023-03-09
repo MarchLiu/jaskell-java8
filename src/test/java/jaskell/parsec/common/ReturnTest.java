@@ -1,21 +1,13 @@
 package jaskell.parsec.common;
 
-import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class ReturnTest extends Base {
-    @Before
-    public void before() throws Exception {
-    }
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    @After
-    public void after() throws Exception {
-    }
+public class ReturnTest extends Base {
     /**
      * Method: script(State<E> s)
      */
@@ -25,7 +17,7 @@ public class ReturnTest extends Base {
         Return<Character, BigDecimal> returns = new Return<>(new BigDecimal("3.1415926"));
         Integer idx = state.status();
         BigDecimal re = returns.parse(state);
-        assertEquals(re, new BigDecimal("3.1415926"));
-        assertEquals(state.status(), idx);
+        assertEquals(new BigDecimal("3.1415926"), re);
+        assertEquals(idx, state.status());
     }
 }

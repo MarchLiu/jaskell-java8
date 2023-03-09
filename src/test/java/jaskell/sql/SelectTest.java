@@ -1,59 +1,57 @@
 package jaskell.sql;
 
-import static jaskell.sql.SQL.func;
-import static jaskell.sql.SQL.l;
-import static jaskell.sql.SQL.n;
-import static jaskell.sql.SQL.p;
-import static jaskell.sql.SQL.select;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static jaskell.sql.SQL.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class SelectTest {
 
     @Test
-    public void basicTest0(){
+    public void basicTest0() {
         Query query = select(func("now"));
-        Assert.assertEquals("{} should be {}", "SELECT now()", query.script());
+        assertEquals("SELECT now()", query.script(), "{} should be {}");
     }
 
     @Test
-    public void queryTest0(){
+    public void queryTest0() {
         Query query = select("id, content").from("log");
-        Assert.assertEquals("{} should be {}",
-                "SELECT id, content FROM log",
-                query.script());
+        assertEquals("SELECT id, content FROM log",
+                query.script(),
+                "{} should be {}");
     }
 
     @Test
-    public void queryWhereTest0(){
+    public void queryWhereTest0() {
         Query query = select("id, content").from("log").where(n("id").gt(l(1000)));
-        Assert.assertEquals("{} should be {}",
-                "SELECT id, content FROM log WHERE id > 1000",
-                query.script());
+        assertEquals("SELECT id, content FROM log WHERE id > 1000",
+                query.script(),
+                "{} should be {}");
 
     }
 
     @Test
-    public void queryWhereTest1(){
+    public void queryWhereTest1() {
         Query query = select("id, content")
                 .from("log")
                 .where(n("id").gt(p("start")));
-        Assert.assertEquals("{} should be {}",
-                "SELECT id, content FROM log WHERE id > ?",
-                query.script());
-        Assert.assertEquals("should get first argument named start",
-                "start",
-                query.parameters().get(0).key());
+        assertEquals("SELECT id, content FROM log WHERE id > ?",
+                query.script(),
+                "{} should be {}");
+        assertEquals("start",
+                query.parameters().get(0).key().toString(),
+                "should get first argument named start");
     }
 
     @Test
-    public void selectPagedTest0(){
+    public void selectPagedTest0() {
         Query query = select("id", "content").from("log").limit(20).offset(60);
-        Assert.assertEquals("{} should be {}",
-                "SELECT id, content FROM log LIMIT 20 OFFSET 60",
-                query.script());
+        assertEquals("SELECT id, content FROM log LIMIT 20 OFFSET 60",
+                query.script(),
+                "{} should be {}");
     }
 
 }

@@ -1,20 +1,12 @@
 package jaskell.parsec;
 
-import static jaskell.parsec.Txt.ch;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static jaskell.parsec.Txt.ch;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class NewlineTest extends Base {
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     @Test
     public void simpleCrlf() throws Exception {
@@ -22,7 +14,7 @@ public class NewlineTest extends Base {
         Parsec<Character, String, Integer, Integer> crlf = new Crlf<>();
 
         String re = crlf.parse(state);
-        Assert.assertEquals(re, "\r\n");
+        assertEquals("\r\n", re);
     }
 
     /**
@@ -36,6 +28,6 @@ public class NewlineTest extends Base {
 
         Character c = new Ch<Integer, Integer>('\r').then(enter).parse(state);
 
-        Assert.assertEquals(c.charValue(), '\n');
+        assertEquals(c.charValue(), '\n');
     }
 }

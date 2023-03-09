@@ -1,22 +1,14 @@
 package jaskell.parsec.common;
 
+import org.junit.jupiter.api.Test;
+
 import static jaskell.parsec.common.Atom.eq;
 import static jaskell.parsec.common.Combinator.skip;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class SkipTest extends Base {
-    @Before
-    public void before() throws Exception {
-    }
 
-    @After
-    public void after() throws Exception {
-    }
     /**
      * Method: script(State<E> s)
      */
@@ -26,7 +18,7 @@ public class SkipTest extends Base {
         Skip<Character, Character> skip = skip(eq('h'));
         skip.parse(state);
 
-        Assert.assertTrue("Now state should skip first item.", state.status() == 1);
+        assertEquals(1, state.status(), "Now state should skip first item.");
     }
 
     @Test
@@ -35,12 +27,12 @@ public class SkipTest extends Base {
         Skip<Character, Character> skip = skip(eq('e'));
         skip.parse(state);
 
-        Assert.assertEquals("Now state should stop before first item.", 0, (int) state.status());
+        assertEquals(0, (int) state.status(), "Now state should stop before first item.");
     }
 
     /**
      * Check skip space or tab at string start.
-     * @throws Exception
+     * @throws Exception ParsecException
      */
     @Test
     public void skipSpaces() throws Throwable {
@@ -48,12 +40,13 @@ public class SkipTest extends Base {
         Parsec<Character, Character> spaces = skip(new ChIn(" \t"));
         spaces.parse(state);
 
-        Assert.assertEquals("Now state should stop after four characters what space or tab.", 4, (int) state.status());
+        assertEquals(4, state.status(),
+                "Now state should stop after four characters what space or tab.");
     }
 
     /**
      * Check skip nothing at string start.
-     * @throws Exception
+     * @throws Exception ParsecException
      */
     @Test
     public void skipNothing() throws Throwable {
@@ -61,6 +54,7 @@ public class SkipTest extends Base {
         Parsec<Character, Character> spaces = skip(new ChIn(" \t"));
         spaces.parse(state);
 
-        Assert.assertEquals("Now state should stop at start.", 0, (int) state.status());
+        assertEquals(0, state.status(),
+                "Now state should stop at start.");
     }
 }

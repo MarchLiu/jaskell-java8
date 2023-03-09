@@ -11,10 +11,11 @@ import static jaskell.parsec.common.Combinator.many1;
 import static jaskell.parsec.common.Txt.ch;
 import static jaskell.parsec.common.Txt.joining;
 import static jaskell.parsec.common.Txt.nCh;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jaskell.parsec.common.Parsec;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.EOFException;
 
@@ -62,25 +63,25 @@ public class InjectionTest {
   @Test
   public void testBasic() throws Throwable {
     String content = "a data without text content";
-    Assert.assertEquals(content, parser.parse(content));
+    assertEquals(content, parser.parse(content));
   }
 
   @Test
   public void testEscape() throws Throwable {
     String content = "'a data with text content'";
-    Assert.assertEquals("a data with text content", parser.parse(content));
+    assertEquals("a data with text content", parser.parse(content));
   }
 
   @Test
   public void testEscapeMore() throws Throwable {
     String content = "some content included 'a data without\ttext content'";
-    Assert.assertEquals("some content included a data without\ttext content", parser.parse(content));
+    assertEquals("some content included a data without\ttext content", parser.parse(content));
   }
 
   @Test
   public void testInjection() throws Throwable {
     String content = "some content included 'a data without 'text content'";
-    Assert.assertTrue(parser.exec(content).isErr());
+    assertTrue(parser.exec(content).isErr());
   }
 
 

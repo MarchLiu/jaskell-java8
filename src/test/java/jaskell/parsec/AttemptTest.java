@@ -1,25 +1,14 @@
 package jaskell.parsec;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class AttemptTest extends Base {
-
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     @Test
     public void simple() throws Exception {
@@ -34,6 +23,7 @@ public class AttemptTest extends Base {
         assertEquals(re, "Hello");
         assertNotEquals(idx, state.status());
     }
+
     @Test
     public void rollback() throws Exception {
         List<String> data = Arrays.asList("Hello", "World");
@@ -41,11 +31,9 @@ public class AttemptTest extends Base {
         Integer idx = state.status();
         Attempt<String, String, Integer, Integer> attemptIt = new Attempt<>(new Eq<>("hello"));
 
-        try{
-            String re = attemptIt.parse(state);
-            fail("Expect a error for Hello.");
-        }catch(Exception e){
-            assertEquals(idx, state.status());
-        }
+        assertThrowsExactly(ParsecException.class,
+                () -> attemptIt.parse(state),
+                "Expect a error for Hello.");
+        assertEquals(idx, state.status());
     }
 }

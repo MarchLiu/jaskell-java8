@@ -1,15 +1,13 @@
 package jaskell.parsec.common;
 
+import org.junit.jupiter.api.Test;
+
 import static jaskell.parsec.common.Atom.eq;
 import static jaskell.parsec.common.Atom.ne;
 import static jaskell.parsec.common.Combinator.between;
 import static jaskell.parsec.common.Combinator.many;
 import static jaskell.parsec.common.Txt.ch;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Between Tester.
@@ -19,14 +17,6 @@ import org.junit.Test;
  *
  */
 public class BetweenTest extends Base {
-
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     /**
      * Method: script(State<E> s)
@@ -43,7 +33,7 @@ public class BetweenTest extends Base {
         );
 
         Character c = bmw.parse(state);
-        Assert.assertEquals('e', (char) c);
+        assertEquals('e', (char) c);
     }
 
     @Test
@@ -59,7 +49,7 @@ public class BetweenTest extends Base {
         ).bind(new JoinText());
 
         String re = parser.parse(state);
-        Assert.assertEquals("hello", re);
+        assertEquals("hello", re);
     }
 
 

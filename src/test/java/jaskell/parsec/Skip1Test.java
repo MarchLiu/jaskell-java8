@@ -1,17 +1,12 @@
 package jaskell.parsec;
 
 
+import org.junit.jupiter.api.Test;
+
 import static jaskell.parsec.Combinator.skip1;
 import static jaskell.parsec.Txt.text;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsInstanceOf;
-import org.hamcrest.core.IsNull;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.internal.runners.statements.*;
 
 /**
  * Created by Mars Liu on 16/1/10.
@@ -19,13 +14,6 @@ import org.junit.internal.runners.statements.*;
  * Skip1 tests
  */
 public class Skip1Test extends Base {
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
     /**
      * Method: script(State<E> s)
      */
@@ -34,7 +22,7 @@ public class Skip1Test extends Base {
         State<Character, Integer, Integer> state = newState("left right left right");
         Parsec<Character, String, Integer, Integer> parser = skip1(text("left"));
         String re = parser.parse(state);
-        Assert.assertThat("Expect string \"left\".", re, IsNull.nullValue());
+        assertNull(re, "Expect string \"left\".");
     }
 
     @Test
@@ -43,7 +31,7 @@ public class Skip1Test extends Base {
         Parsec<Character, String, Integer, Integer> parser = skip1(text("left "));
         parser.parse(state);
         Integer status = state.status();
-        Assert.assertThat("Expect string \"left\".", status, IsEqual.equalTo(5));
+        assertEquals(5, status,  "Expect string \"left\".");
     }
 
     @Test
@@ -52,7 +40,7 @@ public class Skip1Test extends Base {
         Parsec<Character, String, Integer, Integer> parser = skip1(text("left "));
         parser.parse(state);
         Integer status = state.status();
-        Assert.assertThat("Expect string \"left\".", status, IsEqual.equalTo(10));
+        assertEquals(10, status, "Expect string \"left\".");
     }
 
     @Test
@@ -63,9 +51,9 @@ public class Skip1Test extends Base {
             parser.parse(state);
         } catch (Exception e) {
             Integer status = state.status();
-            Assert.assertThat("Expect failed and stop at 1.", status, IsEqual.equalTo(1));
+            assertEquals(1, status, "Expect failed and stop at 1.");
 
-            Assert.assertThat("Expect a ParsecException", e, IsInstanceOf.instanceOf(ParsecException.class));
+            assertInstanceOf(ParsecException.class, e, "Expect a ParsecException");
         }
     }
 }

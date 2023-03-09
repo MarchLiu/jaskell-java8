@@ -1,21 +1,11 @@
 package jaskell.parsec;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UIntTest extends Base {
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     @Test
     public void simple() throws Exception {
@@ -25,7 +15,7 @@ public class UIntTest extends Base {
 
         String s = uint.parse(state);
 
-        assertEquals(s,"23413214");
+        assertEquals("23413214", s);
     }
 
     @Test
@@ -36,7 +26,7 @@ public class UIntTest extends Base {
 
         String s = uint.parse(state);
 
-        assertEquals(s,"23413");
+        assertEquals("23413", s);
     }
 
     @Test
@@ -45,11 +35,8 @@ public class UIntTest extends Base {
 
         UInt<Integer, Integer> uint = new UInt<>();
 
-        try {
-            String s = uint.parse(state);
-            throw new Exception("Expect fail when no digit at start.");
-        }catch (ParsecException e) {
-            assertTrue(true);
-        }
+        assertThrowsExactly(ParsecException.class,
+                () -> uint.parse(state),
+                "Expect fail when no digit at start.");
     }
 }

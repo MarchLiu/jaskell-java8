@@ -1,22 +1,21 @@
 package jaskell.parsec;
 
-import static jaskell.parsec.Txt.space;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import org.junit.jupiter.api.Test;
 
-import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsInstanceOf;
-import org.junit.Test;
+import static jaskell.parsec.Txt.space;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
 
 /**
  * Created by Mars Liu on 16/9/15.
- *
+ * <p>
  * Tests About look behind.
  */
 public class AheadTest extends Base {
 
     @Test
-    public void simple() throws Exception{
+    public void simple() throws Exception {
         State<Character, Integer, Integer> state = newState("this is a string data.");
         Parsec<Character, String, Integer, Integer> parser =
                 new Text<Integer, Integer>("this").over(new Ahead<>(new Text<>(" is")));
@@ -24,11 +23,11 @@ public class AheadTest extends Base {
         String re = parser.parse(state);
 
         assertEquals(re, "this");
-        assertThat("Expect status stop after this but is. ", state.status(), IsEqual.equalTo(4));
+        assertEquals(4, state.status(), "Expect status stop after this but is. ");
     }
 
     @Test
-    public void result() throws Exception{
+    public void result() throws Exception {
         State<Character, Integer, Integer> state = newState("this is a string data.");
         Parsec<Character, String, Integer, Integer> parser =
                 new Text<Integer, Integer>("this").then(space()).then(new Ahead<>(new Text<>("is")));
@@ -36,11 +35,11 @@ public class AheadTest extends Base {
         String re = parser.parse(state);
 
         assertEquals(re, "is");
-        assertThat("Expect status stop after this (5) but is. ", state.status(), IsEqual.equalTo(5));
+        assertEquals(5, state.status(), "Expect status stop after this (5) but is. ");
     }
 
     @Test
-    public void fail() throws Exception{
+    public void fail() throws Exception {
         State<Character, Integer, Integer> state = newState("this is a string.");
         Parsec<Character, String, Integer, Integer> parser =
                 new Text<Integer, Integer>("this").then(space()).then(new Ahead<>(new Text<>(" is")));
@@ -48,9 +47,8 @@ public class AheadTest extends Base {
         try {
             String re = parser.parse(state);
         } catch (Exception e) {
-            assertThat("Expect status stop after this (5) but is. ", state.status(), IsEqual.equalTo(5));
-            assertThat("Expect the parser fail when try match \" is\"",
-                    e, IsInstanceOf.instanceOf(ParsecException.class));
+            assertEquals(5, state.status(), "Expect status stop after this (5) but is. ");
+            assertInstanceOf(ParsecException.class, e, "Expect the parser fail when try match \" is\"");
         }
     }
 }

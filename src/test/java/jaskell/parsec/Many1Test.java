@@ -1,11 +1,10 @@
 package jaskell.parsec;
 
-import static jaskell.parsec.Txt.joining;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static jaskell.parsec.Txt.joining;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 /**
  * Many1 Tester.
@@ -13,14 +12,6 @@ import org.junit.Test;
  * @author Mars Liu
  */
 public class Many1Test extends Base {
-
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     @Test
     public void fail() throws Exception {
@@ -30,12 +21,8 @@ public class Many1Test extends Base {
                 new Eq<>('h')
         );
 
-        try {
-            m.parse(state);
-            Assert.fail();
-        } catch (ParsecException e) {
-            Assert.assertTrue(true);
-        }
+        assertThrowsExactly(ParsecException.class,
+                () -> m.parse(state));
     }
 
     @Test
@@ -44,7 +31,7 @@ public class Many1Test extends Base {
                 new Many1<Character, Character, Integer, Integer>(new Eq<>('h')).bind(joining());
         State<Character, Integer, Integer> state1 = newState("hello");
         String re = m.parse(state1);
-        Assert.assertEquals(re, "h");
+        assertEquals("h", re);
     }
 
     @Test
@@ -53,6 +40,6 @@ public class Many1Test extends Base {
                 new Many1<Character, Character, Integer, Integer>(new One<>()).bind(joining());
         State<Character, Integer, Integer> state1 = newState("hello");
         String re = parser.parse(state1);
-        Assert.assertEquals(re, "hello");
+        assertEquals("hello", re);
     }
 } 

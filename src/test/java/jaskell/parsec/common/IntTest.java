@@ -1,21 +1,14 @@
 package jaskell.parsec.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+import jaskell.parsec.Parsec;
 import jaskell.parsec.ParsecException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 public class IntTest extends Base {
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     @Test
     public void simple() throws Throwable {
@@ -45,12 +38,9 @@ public class IntTest extends Base {
 
         Int intParse = new Int();
 
-        try {
-            String s = intParse.parse(state);
-            throw new Exception("Expect fail when no digit at start.");
-        }catch (Throwable e) {
-            assertTrue(true);
-        }
+        assertThrowsExactly(ParsecException.class,
+                () -> intParse.parse(state),
+                "Expect fail when no digit at start.");
     }
 
     @Test
@@ -81,12 +71,9 @@ public class IntTest extends Base {
 
         Int intParser = new Int();
 
-        try {
-            String s = intParser.parse(state);
-            throw new Exception("Expect fail when no digit at start.");
-        }catch (Throwable e) {
-            assertTrue(true);
-        }
+        assertThrowsExactly(ParsecException.class,
+                () -> intParser.parse(state),
+                "Expect fail when no digit at start.");
     }
 
 }
