@@ -1,4 +1,4 @@
-package jaskell.util.croupier;
+package jaskell.croupier;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +11,10 @@ import java.util.Random;
  * @version 1.0.0
  * @since 2023/03/28 18:53
  */
-public class DampingPoker<T> implements Poker<T> {
+class InvertedPoker<T> implements Poker<T> {
     private final Random random;
 
-    public DampingPoker(Random random) {
+    public InvertedPoker(Random random) {
         this.random = random;
     }
 
@@ -26,8 +26,8 @@ public class DampingPoker<T> implements Poker<T> {
         if (cards.size() == 1) {
             return Optional.of(0);
         }
-        double range = Math.log(cards.size());
+        double range = Math.exp(cards.size());
         double value = random.nextFloat() * range;
-        return Optional.of((int) Math.floor(Math.exp(value)));
+        return Optional.of((int) Math.floor(Math.log(value)));
     }
 }

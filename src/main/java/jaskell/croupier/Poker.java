@@ -1,4 +1,4 @@
-package jaskell.util.croupier;
+package jaskell.croupier;
 
 import java.util.List;
 import java.util.Optional;

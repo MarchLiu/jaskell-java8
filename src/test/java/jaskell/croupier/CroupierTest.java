@@ -1,7 +1,6 @@
-package jaskell.util;
+package jaskell.croupier;
 
-import jaskell.sql.In;
-import jaskell.util.croupier.Croupier;
+import jaskell.croupier.Croupier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
