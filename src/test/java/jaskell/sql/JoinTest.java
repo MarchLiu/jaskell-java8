@@ -1,5 +1,10 @@
 package jaskell.sql;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static jaskell.sql.SQL.count;
 import static jaskell.sql.SQL.func;
 import static jaskell.sql.SQL.insert;
@@ -8,10 +13,6 @@ import static jaskell.sql.SQL.n;
 import static jaskell.sql.SQL.p;
 import static jaskell.sql.SQL.select;
 
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +29,7 @@ public class JoinTest {
             .values(p("pid", int.class),
                     p("content", String.class));
 
-    @BeforeClass
+    @BeforeAll
     static public void init() {
         try {
             // create a connection to the database
@@ -56,7 +57,7 @@ public class JoinTest {
         }
     }
 
-    @AfterClass
+    @AfterAll
     static public void close(){
         try {
             conn.close();
@@ -70,10 +71,10 @@ public class JoinTest {
         try {
             Query q = select(count()).from("test");
             Optional<Integer> c = q.scalar(conn, Integer.class);
-            Assert.assertTrue(c.isPresent());
-            Assert.assertEquals("expect 10 lines of data", 10, c.get().intValue());
+            Assertions.assertTrue(c.isPresent());
+            Assertions.assertEquals( 10, c.get().intValue(), "expect 10 lines of data");
         } catch (SQLException e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
     }
 
@@ -86,11 +87,11 @@ public class JoinTest {
         try(PreparedStatement statement = q.prepare(conn);
             ResultSet rs = q.query(statement)){
             while (rs.next()){
-                Assert.assertEquals(rs.getString(3), rs.getString(4));
-                Assert.assertEquals(rs.getInt(1)+1, rs.getInt(2));
+                Assertions.assertEquals(rs.getString(3), rs.getString(4));
+                Assertions.assertEquals(rs.getInt(1)+1, rs.getInt(2));
             }
         } catch (SQLException e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
     }
 
@@ -103,10 +104,10 @@ public class JoinTest {
         try(PreparedStatement statement = q.prepare(conn);
             ResultSet rs = q.query(statement)){
             while (rs.next()){
-                Assert.assertNull(rs.getObject(2));
+                Assertions.assertNull(rs.getObject(2));
             }
         } catch (SQLException e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
     }
 
@@ -117,9 +118,9 @@ public class JoinTest {
                         .left().join(n("test").as("r")).on(l("l.id=r.pid")))
                 .where(l("r.id").isNull());
         try{
-            Assert.assertFalse(q.scalar(conn).isPresent());
+            Assertions.assertFalse(q.scalar(conn).isPresent());
         } catch (SQLException e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
     }
 }

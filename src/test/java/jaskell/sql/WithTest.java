@@ -1,12 +1,13 @@
 package jaskell.sql;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import static jaskell.sql.SQL.l;
 import static jaskell.sql.SQL.n;
 import static jaskell.sql.SQL.select;
 import static jaskell.sql.SQL.with;
 
-import org.junit.Assert;
-import org.junit.Test;
 
 public class WithTest {
 
@@ -17,7 +18,7 @@ public class WithTest {
         Query query = with("t1").as(select("n").from("t"))
                 .cte("t2").as(select("m").from("t"))
                 .select(l("m * n")).from("t1").join(n("t2")).on(n("t1.n").ne(n("t2.m")));
-        Assert.assertEquals(script, query.script());
+        Assertions.assertEquals(script, query.script());
     }
 
     @Test
@@ -27,7 +28,7 @@ public class WithTest {
         Query query = with().recursive().name("t(f)")
                 .as(select(l(1)).union().select(l("f+1")).from("t").where(n("f").lt(100)))
                 .select("f").from("t");
-        Assert.assertEquals(script, query.script());
+        Assertions.assertEquals(script, query.script());
 
     }
 }
