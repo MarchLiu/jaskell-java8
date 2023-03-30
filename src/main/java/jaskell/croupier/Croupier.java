@@ -146,6 +146,40 @@ public class Croupier<T> {
         return new Croupier<>(porker);
     }
 
+    public static <T> Croupier<T> byWeightLite(Scale<T> scale) {
+        Random random = new Random();
+        Poker<T> porker = new LiteScaled<>(scale, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byWeightLite(Scale<T> scale, Random random) {
+        Poker<T> porker = new LiteScaled<>(scale, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byWeightLite(Scale<T> scale, long seed) {
+        Random random = new Random(seed);
+        Poker<T> porker = new LiteScaled<>(scale, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byWeightBinary(Scale<T> scale) {
+        Random random = new Random();
+        Poker<T> porker = new BinaryScaled<>(scale, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byWeightBinary(Scale<T> scale, Random random) {
+        Poker<T> porker = new BinaryScaled<>(scale, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byWeightBinary(Scale<T> scale, long seed) {
+        Random random = new Random(seed);
+        Poker<T> porker = new BinaryScaled<>(scale, random);
+        return new Croupier<>(porker);
+    }
+
     public static <T> Croupier<T> byRank(Rank<T> rank) {
         Random random = new Random();
         Poker<T> porker = new Ranked<>(rank, random);
@@ -160,6 +194,23 @@ public class Croupier<T> {
     public static <T> Croupier<T> byRank(Rank<T> rank, long seed) {
         Random random = new Random(seed);
         Poker<T> porker = new Ranked<>(rank, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byRankBinary(Rank<T> rank) {
+        Random random = new Random();
+        Poker<T> porker = new BinaryRanked<>(rank, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byRankBinary(Rank<T> rank, Random random) {
+        Poker<T> porker = new BinaryRanked<>(rank, random);
+        return new Croupier<>(porker);
+    }
+
+    public static <T> Croupier<T> byRankBinary(Rank<T> rank, long seed) {
+        Random random = new Random(seed);
+        Poker<T> porker = new BinaryRanked<>(rank, random);
         return new Croupier<>(porker);
     }
 

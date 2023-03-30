@@ -207,3 +207,9 @@ maven_jar(
 
  - use junit 5
  - add croupier type for custom random select algo
+
+### 2.2.1
+
+ - add lite scaled algo for croupier
+ - add binary scaled
+ - add binary rank

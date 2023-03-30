@@ -128,40 +128,80 @@ public class CroupierTest {
     }
 
     @Test
-    public void testRank() {
+    public void testWeightLite() {
         Random random = new Random();
-        Croupier<Double[]> croupier = Croupier.byRank(item -> item[1]);
-        List<Double[]> data = IntStream.range(0, 100)
+        Croupier<Integer[]> croupier = Croupier.byWeightLite(item -> item[1]);
+        List<Integer[]> data = IntStream.range(0, 100)
                 .mapToObj(idx -> {
-                    double value = random.nextDouble() * 10;
-                    Double[] result = new Double[2];
-                    result[0] = (double) idx;
+                    int value = random.nextInt(10);
+                    Integer[] result = new Integer[2];
+                    result[0] = idx;
                     result[1] = value;
                     return result;
                 }).collect(Collectors.toList());
 
-        Map<Double, Double[]> counter = new TreeMap<>();
-        for(Double[] item: data){
-            Double[] values = new Double[2];
+        Map<Integer, Integer[]> counter = new TreeMap<>();
+        for(Integer[] item: data){
+            Integer[] values = new Integer[2];
             values[0] = item[1];
-            values[1] = 0d;
+            values[1] = 0;
             counter.put(item[0], values);
         }
 
 
         for (int times = 0; times < 10000; times++) {
-            List<Double[]> sample = croupier.select(data, 10);
+            List<Integer[]> sample = croupier.select(data, 10);
             Assertions.assertEquals(10, sample.size());
-            for (Double[] element : sample) {
-                double index = element[0];
-                Double[] item = counter.get(index);
+            for (Integer[] element : sample) {
+                int index = element[0];
+                Integer[] item = counter.get(index);
                 item[1] = item[1] + 1;
                 counter.put(index, item);
             }
         }
 
-        for(Map.Entry<Double, Double[]> entry: counter.entrySet()){
-            String message = String.format("Rand by weight croupier select %f item weight %f times %f",
+        for(Map.Entry<Integer, Integer[]> entry: counter.entrySet()){
+            String message = String.format("Rand by weight croupier select %d item weight %d times %d",
+                    entry.getKey(), entry.getValue()[0], entry.getValue()[1]);
+            System.out.println(message);
+        }
+    }
+
+    @Test
+    public void testWeightBinary() {
+        Random random = new Random();
+        Croupier<Integer[]> croupier = Croupier.byWeightBinary(item -> item[1]);
+        List<Integer[]> data = IntStream.range(0, 100)
+                .mapToObj(idx -> {
+                    int value = random.nextInt(10);
+                    Integer[] result = new Integer[2];
+                    result[0] = idx;
+                    result[1] = value;
+                    return result;
+                }).collect(Collectors.toList());
+
+        Map<Integer, Integer[]> counter = new TreeMap<>();
+        for(Integer[] item: data){
+            Integer[] values = new Integer[2];
+            values[0] = item[1];
+            values[1] = 0;
+            counter.put(item[0], values);
+        }
+
+
+        for (int times = 0; times < 10000; times++) {
+            List<Integer[]> sample = croupier.select(data, 10);
+            Assertions.assertEquals(10, sample.size());
+            for (Integer[] element : sample) {
+                int index = element[0];
+                Integer[] item = counter.get(index);
+                item[1] = item[1] + 1;
+                counter.put(index, item);
+            }
+        }
+
+        for(Map.Entry<Integer, Integer[]> entry: counter.entrySet()){
+            String message = String.format("Rand by weight croupier select %d item weight %d times %d",
                     entry.getKey(), entry.getValue()[0], entry.getValue()[1]);
             System.out.println(message);
         }
@@ -202,6 +242,86 @@ public class CroupierTest {
 
         for(Map.Entry<Integer, Integer[]> entry: counter.entrySet()){
             String message = String.format("Rand by weight croupier select %d item weight %d times %d",
+                    entry.getKey(), entry.getValue()[0], entry.getValue()[1]);
+            System.out.println(message);
+        }
+    }
+
+    @Test
+    public void testRank() {
+        Random random = new Random();
+        Croupier<Double[]> croupier = Croupier.byRank(item -> item[1]);
+        List<Double[]> data = IntStream.range(0, 100)
+                .mapToObj(idx -> {
+                    double value = random.nextDouble() * 10;
+                    Double[] result = new Double[2];
+                    result[0] = (double) idx;
+                    result[1] = value;
+                    return result;
+                }).collect(Collectors.toList());
+
+        Map<Double, Double[]> counter = new TreeMap<>();
+        for(Double[] item: data){
+            Double[] values = new Double[2];
+            values[0] = item[1];
+            values[1] = 0d;
+            counter.put(item[0], values);
+        }
+
+
+        for (int times = 0; times < 10000; times++) {
+            List<Double[]> sample = croupier.select(data, 10);
+            Assertions.assertEquals(10, sample.size());
+            for (Double[] element : sample) {
+                double index = element[0];
+                Double[] item = counter.get(index);
+                item[1] = item[1] + 1;
+                counter.put(index, item);
+            }
+        }
+
+        for(Map.Entry<Double, Double[]> entry: counter.entrySet()){
+            String message = String.format("Rand by weight croupier select %f item weight %f times %f",
+                    entry.getKey(), entry.getValue()[0], entry.getValue()[1]);
+            System.out.println(message);
+        }
+    }
+
+    @Test
+    public void testBinaryRank() {
+        Random random = new Random();
+        Croupier<Double[]> croupier = Croupier.byRank(item -> item[1]);
+        List<Double[]> data = IntStream.range(0, 100)
+                .mapToObj(idx -> {
+                    double value = random.nextDouble() * 10;
+                    Double[] result = new Double[2];
+                    result[0] = (double) idx;
+                    result[1] = value;
+                    return result;
+                }).collect(Collectors.toList());
+
+        Map<Double, Double[]> counter = new TreeMap<>();
+        for(Double[] item: data){
+            Double[] values = new Double[2];
+            values[0] = item[1];
+            values[1] = 0d;
+            counter.put(item[0], values);
+        }
+
+
+        for (int times = 0; times < 10000; times++) {
+            List<Double[]> sample = croupier.select(data, 10);
+            Assertions.assertEquals(10, sample.size());
+            for (Double[] element : sample) {
+                double index = element[0];
+                Double[] item = counter.get(index);
+                item[1] = item[1] + 1;
+                counter.put(index, item);
+            }
+        }
+
+        for(Map.Entry<Double, Double[]> entry: counter.entrySet()){
+            String message = String.format("Rand by weight croupier select %f item weight %f times %f",
                     entry.getKey(), entry.getValue()[0], entry.getValue()[1]);
             System.out.println(message);
         }
