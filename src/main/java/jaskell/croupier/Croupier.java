@@ -106,27 +106,27 @@ public class Croupier<T> {
     }
 
     public static <T> Croupier<T> damping() {
-        return new Croupier<T>(new DampingPoker<>(new Random()));
+        return new Croupier<T>(new Damping<>(new Random()));
     }
 
     public static <T> Croupier<T> damping(Random random) {
-        return new Croupier<T>(new DampingPoker<>(random));
+        return new Croupier<T>(new Damping<>(random));
     }
 
     public static <T> Croupier<T> damping(long seed) {
-        return new Croupier<T>(new DampingPoker<>(new Random(seed)));
+        return new Croupier<T>(new Damping<>(new Random(seed)));
     }
 
     public static <T> Croupier<T> inverted() {
-        return new Croupier<T>(new InvertedPoker<>(new Random()));
+        return new Croupier<T>(new Inverted<>(new Random()));
     }
 
     public static <T> Croupier<T> inverted(Random random) {
-        return new Croupier<T>(new InvertedPoker<>(random));
+        return new Croupier<T>(new Inverted<>(random));
     }
 
     public static <T> Croupier<T> inverted(long seed) {
-        return new Croupier<T>(new InvertedPoker<>(new Random(seed)));
+        return new Croupier<T>(new Inverted<>(new Random(seed)));
     }
 
     public static <T> Croupier<T> byWeight(Scale<T> scale) {

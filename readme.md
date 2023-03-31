@@ -213,3 +213,8 @@ maven_jar(
  - add lite scaled algo for croupier
  - add binary scaled
  - add binary rank
+
+### 2.2.2
+
+ - fixed edge condition mistake in damping
+ - make invert smoothness. now it just be a negative damping

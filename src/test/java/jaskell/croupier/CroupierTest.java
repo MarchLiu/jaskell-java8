@@ -21,7 +21,7 @@ public class CroupierTest {
 
     @BeforeAll
     public static void setup() {
-        data = IntStream.range(0, 100)
+        data = IntStream.range(0, 10)
                 .boxed()
                 .collect(Collectors.toList());
     }
@@ -49,8 +49,8 @@ public class CroupierTest {
             Assertions.assertTrue(item.isPresent());
             item.ifPresent(num -> counter.put(num, counter.getOrDefault(num, 0) + 1));
         }
-        for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
-            System.out.printf("damping croupier select %d times %d%n", entry.getKey(), entry.getValue());
+        for (Integer num: data) {
+            System.out.printf("damping croupier select %d times %d%n", num, counter.getOrDefault(num, 0));
         }
     }
 
@@ -63,8 +63,8 @@ public class CroupierTest {
             Assertions.assertTrue(item.isPresent());
             item.ifPresent(num -> counter.put(num, counter.getOrDefault(num, 0) + 1));
         }
-        for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
-            System.out.printf("invert croupier select %d times %d%n", entry.getKey(), entry.getValue());
+        for (Integer num: data) {
+            System.out.printf("invert croupier select %d times %d%n", num, counter.getOrDefault(num, 0));
         }
     }
 

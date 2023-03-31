@@ -11,10 +11,10 @@ import java.util.Random;
  * @version 1.0.0
  * @since 2023/03/28 18:53
  */
-public class DampingPoker<T> implements Poker<T> {
+class Inverted<T> implements Poker<T> {
     private final Random random;
 
-    public DampingPoker(Random random) {
+    public Inverted(Random random) {
         this.random = random;
     }
 
@@ -26,8 +26,9 @@ public class DampingPoker<T> implements Poker<T> {
         if (cards.size() == 1) {
             return Optional.of(0);
         }
-        double range = Math.log(cards.size());
+        double range = Math.log(cards.size() + 1);
         double value = random.nextFloat() * range;
-        return Optional.of((int) Math.floor(Math.exp(value)));
+        int score = (cards.size() - (int) Math.floor(Math.exp(value)));
+        return Optional.of(score);
     }
 }
