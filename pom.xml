@@ -6,7 +6,7 @@
 
     <groupId>io.github.marchliu</groupId>
     <artifactId>jaskell-java8</artifactId>
-    <version>2.2.2</version>
+    <version>2.4.0</version>
     <packaging>jar</packaging>
     <name>io.github.marchliu:jaskell-java8</name>
     <licenses>
@@ -66,13 +66,13 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.41.2.2</version>
+            <version>3.42.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.7.1</version>
+            <version>7.7.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

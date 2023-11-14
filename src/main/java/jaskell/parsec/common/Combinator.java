@@ -1,5 +1,6 @@
 package jaskell.parsec.common;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -46,6 +47,14 @@ public class Combinator {
 
     public static <E, T, Sep> SepBy1<E, T, Sep> sepBy1(Parsec<E, T> parser, Parsec<E, Sep> by) {
         return new SepBy1<>(parser, by);
+    }
+
+    public static <E, T> Enumerate<E, T> enumerate(List<Parsec<E, T>> parsers) {
+        return new Enumerate<>(parsers);
+    }
+
+    public static <E, T> Enumerate<E, T> enumerate(List<Parsec<E, T>> parsers, Parsec<E, ?> sep) {
+        return new Enumerate<>(parsers).by(sep);
     }
 
     public static <E, T> Find<E, T> find(Parsec<E, T> parser) {

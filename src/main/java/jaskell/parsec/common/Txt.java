@@ -1,6 +1,7 @@
 package jaskell.parsec.common;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Mars Liu on 16/9/12.
@@ -106,6 +107,27 @@ public class Txt {
 
     public static Text text(String value, boolean caseSensitive) {
         return new Text(value, caseSensitive);
+    }
+
+    public static Enumerate<Character, Character> enumerate(String enumerates) {
+        List<Parsec<Character, Character>> parsers = enumerates.chars()
+                .mapToObj(c -> (char) c)
+                .map(Txt::ch)
+                .collect(Collectors.toList());
+        return new Enumerate<>(parsers);
+    }
+
+    public static Enumerate<Character, Character> enumerate(String enumerates, String sep) {
+        Parsec<Character, String> p = new Text(sep);
+        return enumerate(enumerates).by(p);
+    }
+
+    public static Enumerate<Character, Character> enumerate(String enumerates, char sep) {
+        return enumerate(enumerates).by(ch(sep));
+    }
+
+    public static Enumerate<Character, Character> enumerate(String enumerates, Parsec<Character, ?> sep) {
+        return enumerate(enumerates).by(sep);
     }
 
     public static JoinText joining() {

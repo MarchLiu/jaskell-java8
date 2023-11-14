@@ -16,39 +16,39 @@ It includes a parsec combinators library , a SQL expressions library and a arith
 <dependency>
   <groupId>io.github.marchliu</groupId>
   <artifactId>jaskell-java8</artifactId>
-  <version>2.1.7</version>
+  <version>2.3.2</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'io.github.marchliu:jaskell-java8:2.1.7'
+implementation 'io.github.marchliu:jaskell-java8:2.3.2'
 ```
 
 ### Gradle Kotlin
 
 ```
-implementation("io.github.marchliu:jaskell-java8:2.1.7")
+implementation("io.github.marchliu:jaskell-java8:2.3.2")
 ```
 
 ### SBT
 
 ```sbtshell
-libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.1.7"
+libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.3.2"
 ```
 
 ### Apache Ivy
 
 ```xml
-<dependency org="io.github.marchliu" name="jaskell-java8" rev="2.1.7" />
+<dependency org="io.github.marchliu" name="jaskell-java8" rev="2.3.2" />
 ```
 
 ### Groovy Grap
 
 ```groovy
 @Grapes(
-  @Grab(group='io.github.marchliu', module='jaskell-java8', version='2.1.7')
+  @Grab(group='io.github.marchliu', module='jaskell-java8', version='2.3.2')
 )
 
 ```
@@ -62,7 +62,7 @@ libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.1.7"
 ### Apache Bluildr
 
 ```
-'io.github.marchliu:jaskell-java8:jar:2.1.7'
+'io.github.marchliu:jaskell-java8:jar:2.3.2'
 ```
 
 ### Maven Central Badge
@@ -74,18 +74,9 @@ libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.1.7"
 ### PURL
 
 ```
-pkg:maven/io.github.marchliu/jaskell-java8@2.1.7
+pkg:maven/io.github.marchliu/jaskell-java8@2.3.2
 ```
 
-### Bazel
-
-```
-maven_jar(
-    name = "jaskell-java8",
-    artifact = "io.github.marchliu:jaskell-java8:2.1.7",
-    sha1 = "6a405e182efbd5bf1923b5b83cbbc1890329e759",
-)
-```
 
 ## Update Log
 
@@ -218,3 +209,12 @@ maven_jar(
 
  - fixed edge condition mistake in damping
  - make invert smoothness. now it just be a negative damping
+
+### 2.3.2
+
+ - add enumerate parser
+ - add enumerate utils methods in object Txt and Combinator
+
+### 2.4.0
+
+ -  add join map/flat map from 1 to 8 for Try type
