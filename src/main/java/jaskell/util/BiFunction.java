@@ -1,19 +1,14 @@
 package jaskell.util;
 
 import java.util.Objects;
-import java.util.function.Function;
 
 
 /**
  * @param <T> type of arg1
  * @param <U> type of arg2
- * @param <V> type of arg3
- * @param <W> type of arg4
- * @param <X> type of arg5
- * @param <Y> type of arg6
  * @param <R> type of result
  */
-public interface Function6<T, U, V, W, X, Y, R> {
+public interface BiFunction<T, U, R> {
 
     /**
      * Applies this function to the given arguments.
@@ -22,7 +17,7 @@ public interface Function6<T, U, V, W, X, Y, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(T t, U u, V v, W w, X x, Y y) throws Throwable;
+    R apply(T t, U u) throws Throwable;
 
     /**
      * Returns a composed function that first applies this function to
@@ -37,14 +32,14 @@ public interface Function6<T, U, V, W, X, Y, R> {
      * applies the {@code after} function
      * @throws NullPointerException if after is null
      */
-    default <O> Function6<T, U, V, W, X, Y, O> andThen(Function<? super R, ? extends O> after) {
+    default <O> BiFunction<T, U, O> andThen(Function<? super R, ? extends O> after) {
         Objects.requireNonNull(after);
-        return (T t, U u, V v, W w, X x, Y y) -> after.apply(apply(t, u, v, w, x, y));
+        return (T t, U u) -> after.apply(apply(t, u));
     }
 
-    default Try<R> tryIt(T t, U u, V v, W w, X x, Y y) {
+    default Try<R> tryIt(T t, U u) {
         try {
-            return Try.success(apply(t, u, v, w, x, y));
+            return Try.success(apply(t, u));
         } catch (Throwable e) {
             return Try.failure(e);
         }

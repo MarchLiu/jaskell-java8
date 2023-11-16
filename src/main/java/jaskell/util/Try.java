@@ -9,7 +9,7 @@ import java.util.function.*;
  * @version 1.0.0
  * @since 2020/12/06 13:56
  */
-public class Try<T> {
+public final class Try<T> {
     final Object slot;
     final boolean _ok;
     int idx = 0;
@@ -125,7 +125,7 @@ public class Try<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public T getOr(Function<? super Throwable, ? extends T> other) {
+    public T getOr(Function<? super Throwable, ? extends T> other) throws Throwable {
         if (_ok) {
             return (T) slot;
         } else {
@@ -195,15 +195,15 @@ public class Try<T> {
         return new Try<>(new Exception(message));
     }
 
-    public static <T> Try<T> tryIt(Supplier<T> supplier) {
+    public static <T> Try<T> tryIt(Supp<T> supplier) {
         try {
             return Try.success(supplier.get());
-        } catch (Exception err) {
+        } catch (Throwable err) {
             return Try.failure(err);
         }
     }
 
-    public static <T, U> Try<U> call(Function<T, U> func, T arg) {
+    public static <T, U> Try<U> call(Function<T, U> func, T arg) throws Throwable{
         try {
             return Try.success(func.apply(arg));
         } catch (Exception err) {
@@ -350,8 +350,8 @@ public class Try<T> {
      * @return return result of the function
      */
     static <T, U, V, W, R> Try<? extends R> joinFlatMap4(Try<T> t1, Try<U> t2, Try<V> t3, Try<W> t4,
-                                                         Function4<? super T, ? super U, ? super V, ? super W,
-                                                                 Try<? extends R>> func) {
+                                                         Function4<? super T, ? super U, ? super V,
+                                                                 ? super W, Try<? extends R>> func) {
         try {
             T r1 = t1.get();
             U r2 = t2.get();
@@ -381,8 +381,8 @@ public class Try<T> {
      * @return return a Try include result of the function
      */
     static <T, U, V, W, X, R> Try<? extends R> joinMap5(Try<T> t1, Try<U> t2, Try<V> t3, Try<W> t4, Try<X> t5,
-                                                        Function5<? super T, ? super U, ? super V, ? super W, ? super X,
-                                                                ? extends R> func) {
+                                                        Function5<? super T, ? super U, ? super V,
+                                                                ? super W, ? super X, ? extends R> func) {
         try {
             T r1 = t1.get();
             U r2 = t2.get();

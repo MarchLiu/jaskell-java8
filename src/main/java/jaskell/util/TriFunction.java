@@ -19,7 +19,7 @@ public interface TriFunction<T, U, V, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(T t, U u, V v);
+    R apply(T t, U u, V v) throws Throwable;
 
     /**
      * Returns a composed function that first applies this function to
@@ -37,5 +37,13 @@ public interface TriFunction<T, U, V, R> {
     default <O> TriFunction<T, U, V, O> andThen(Function<? super R, ? extends O> after) {
         Objects.requireNonNull(after);
         return (T t, U u, V v) -> after.apply(apply(t, u, v));
+    }
+
+    default Try<R> tryIt(T t, U u, V v) {
+        try {
+            return Try.success(apply(t, u, v));
+        } catch (Throwable e) {
+            return Try.failure(e);
+        }
     }
 }

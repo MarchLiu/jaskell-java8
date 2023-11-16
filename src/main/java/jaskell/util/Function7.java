@@ -23,7 +23,7 @@ public interface Function7<T, U, V, W, X, Y, Z, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(T t, U u, V v, W w, X x, Y y, Z z);
+    R apply(T t, U u, V v, W w, X x, Y y, Z z) throws Throwable;
 
     /**
      * Returns a composed function that first applies this function to
@@ -41,5 +41,13 @@ public interface Function7<T, U, V, W, X, Y, Z, R> {
     default <O> Function7<T, U, V, W, X, Y, Z, O> andThen(Function<? super R, ? extends O> after) {
         Objects.requireNonNull(after);
         return (T t, U u, V v, W w, X x, Y y, Z z) -> after.apply(apply(t, u, v, w, x, y, z));
+    }
+
+    default Try<R> tryIt(T t, U u, V v, W w, X x, Y y, Z z) {
+        try {
+            return Try.success(apply(t, u, v, w, x, y, z));
+        } catch (Throwable e) {
+            return Try.failure(e);
+        }
     }
 }

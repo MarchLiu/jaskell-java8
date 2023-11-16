@@ -20,7 +20,7 @@ public interface Function4<T, U, V, W, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(T t, U u, V v, W w);
+    R apply(T t, U u, V v, W w) throws Throwable;
 
     /**
      * Returns a composed function that first applies this function to
@@ -38,5 +38,13 @@ public interface Function4<T, U, V, W, R> {
     default <O> Function4<T, U, V, W, O> andThen(Function<? super R, ? extends O> after) {
         Objects.requireNonNull(after);
         return (T t, U u, V v, W w) -> after.apply(apply(t, u, v, w));
+    }
+
+    default Try<R> tryIt(T t, U u, V v, W w) {
+        try {
+            return Try.success(apply(t, u, v, w));
+        } catch (Throwable e) {
+            return Try.failure(e);
+        }
     }
 }

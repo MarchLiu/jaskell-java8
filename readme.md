@@ -16,39 +16,39 @@ It includes a parsec combinators library , a SQL expressions library and a arith
 <dependency>
   <groupId>io.github.marchliu</groupId>
   <artifactId>jaskell-java8</artifactId>
-  <version>2.3.2</version>
+  <version>2.4.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'io.github.marchliu:jaskell-java8:2.3.2'
+implementation 'io.github.marchliu:jaskell-java8:2.40'
 ```
 
 ### Gradle Kotlin
 
 ```
-implementation("io.github.marchliu:jaskell-java8:2.3.2")
+implementation("io.github.marchliu:jaskell-java8:2.40")
 ```
 
 ### SBT
 
 ```sbtshell
-libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.3.2"
+libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.40"
 ```
 
 ### Apache Ivy
 
 ```xml
-<dependency org="io.github.marchliu" name="jaskell-java8" rev="2.3.2" />
+<dependency org="io.github.marchliu" name="jaskell-java8" rev="2.40" />
 ```
 
 ### Groovy Grap
 
 ```groovy
 @Grapes(
-  @Grab(group='io.github.marchliu', module='jaskell-java8', version='2.3.2')
+  @Grab(group='io.github.marchliu', module='jaskell-java8', version='2.40')
 )
 
 ```
@@ -62,7 +62,7 @@ libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.3.2"
 ### Apache Bluildr
 
 ```
-'io.github.marchliu:jaskell-java8:jar:2.3.2'
+'io.github.marchliu:jaskell-java8:jar:2.40'
 ```
 
 ### Maven Central Badge
@@ -74,7 +74,7 @@ libraryDependencies += "io.github.marchliu" % "jaskell-java8" % "2.3.2"
 ### PURL
 
 ```
-pkg:maven/io.github.marchliu/jaskell-java8@2.3.2
+pkg:maven/io.github.marchliu/jaskell-java8@2.40
 ```
 
 
@@ -217,4 +217,10 @@ pkg:maven/io.github.marchliu/jaskell-java8@2.3.2
 
 ### 2.4.0
 
- -  add join map/flat map from 1 to 8 for Try type
+ - add join map/flat map from 1 to 8 for Try type
+
+### 2.5.0
+
+ - add tryIt methods for function types
+ - make Try Class final
+ - function types could throw when apply call
