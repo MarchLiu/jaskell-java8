@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 public class IntTest extends Base {
 
     @Test
-    public void simple() throws Throwable {
+    public void simple() throws Exception {
         State<Character> state = newState("23413214");
 
         Int intParser = new Int();
@@ -22,7 +22,7 @@ public class IntTest extends Base {
     }
 
     @Test
-    public void stop() throws Throwable {
+    public void stop() throws Exception {
         State<Character> state = newState("23413a214");
 
         Int intParse = new Int();
@@ -44,7 +44,7 @@ public class IntTest extends Base {
     }
 
     @Test
-    public void nSimple() throws Throwable {
+    public void nSimple() throws Exception {
         State<Character> state = newState("-23413214");
 
         Int intParser = new Int();
@@ -55,7 +55,7 @@ public class IntTest extends Base {
     }
 
     @Test
-    public void nStop() throws Throwable {
+    public void nStop() throws Exception {
         State<Character> state = newState("-23413a214");
 
         Int intParser = new Int();

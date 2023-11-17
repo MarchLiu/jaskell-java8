@@ -29,7 +29,7 @@ public class P implements Parsec<Character, Expression> {
   }
 
   @Override
-  public Product parse(State<Character> s) throws Throwable {
+  public Product parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new Product(prev, parser.parse(s));

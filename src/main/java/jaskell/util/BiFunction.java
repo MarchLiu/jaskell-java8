@@ -17,7 +17,7 @@ public interface BiFunction<T, U, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(T t, U u) throws Throwable;
+    R apply(T t, U u) throws Exception;
 
     /**
      * Returns a composed function that first applies this function to
@@ -40,7 +40,7 @@ public interface BiFunction<T, U, R> {
     default Try<R> tryIt(T t, U u) {
         try {
             return Try.success(apply(t, u));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }

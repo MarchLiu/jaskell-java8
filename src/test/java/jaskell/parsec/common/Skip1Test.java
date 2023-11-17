@@ -17,7 +17,7 @@ public class Skip1Test extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void simple() throws Throwable {
+    public void simple() throws Exception {
         State<Character> state = newState("left right left right");
         Parsec<Character, String> parser = skip1(text("left"));
         String re = parser.parse(state);
@@ -25,7 +25,7 @@ public class Skip1Test extends Base {
     }
 
     @Test
-    public void simpleStatus() throws Throwable {
+    public void simpleStatus() throws Exception {
         State<Character> state = newState("left right left right");
         Parsec<Character, String> parser = skip1(text("left "));
         parser.parse(state);
@@ -34,7 +34,7 @@ public class Skip1Test extends Base {
     }
 
     @Test
-    public void statusMore() throws Throwable {
+    public void statusMore() throws Exception {
         State<Character> state = newState("left left right right");
         Parsec<Character, String> parser = skip1(text("left "));
         parser.parse(state);

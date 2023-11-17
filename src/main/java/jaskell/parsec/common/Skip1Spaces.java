@@ -10,7 +10,7 @@ public class Skip1Spaces
 
     @Override
     public Character parse(State<Character> s)
-            throws Throwable {
+            throws Exception {
         return parser.parse(s);
     }
 }

@@ -22,7 +22,7 @@ public interface Function6<T, U, V, W, X, Y, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(T t, U u, V v, W w, X x, Y y) throws Throwable;
+    R apply(T t, U u, V v, W w, X x, Y y) throws Exception;
 
     /**
      * Returns a composed function that first applies this function to
@@ -45,7 +45,7 @@ public interface Function6<T, U, V, W, X, Y, R> {
     default Try<R> tryIt(T t, U u, V v, W w, X x, Y y) {
         try {
             return Try.success(apply(t, u, v, w, x, y));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }

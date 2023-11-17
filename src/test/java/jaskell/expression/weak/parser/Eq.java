@@ -30,7 +30,7 @@ public class Eq implements Parsec<Character, Expression> {
   }
 
   @Override
-  public Equals parse(State<Character> s) throws Throwable {
+  public Equals parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new Equals(prev, parser.parse(s));

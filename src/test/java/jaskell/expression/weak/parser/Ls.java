@@ -29,7 +29,7 @@ public class Ls  implements Parsec<Character, Expression> {
   }
 
   @Override
-  public Less parse(State<Character> s) throws Throwable {
+  public Less parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new Less(prev, parser.parse(s));

@@ -14,7 +14,7 @@ public class Find<E, T>
     private final One<E> one;
     private final Parsec<E, T> parser;
     @Override
-    public T parse(State<E> s) throws Throwable {
+    public T parse(State<E> s) throws Exception {
         Integer start = s.status();
         try {
             while (true) {

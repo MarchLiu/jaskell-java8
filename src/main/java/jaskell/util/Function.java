@@ -8,12 +8,12 @@ package jaskell.util;
  * @since 2023/11/16 18:42
  */
 public interface Function<T, U> {
-    U apply(T arg) throws Throwable;
+    U apply(T arg) throws Exception;
 
     default Try<U> tryIt(T arg) {
         try {
             return Try.success(apply(arg));
-        } catch (Throwable err) {
+        } catch (Exception err) {
             return Try.failure(err);
         }
     }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class UIntTest extends Base {
 
     @Test
-    public void simple() throws Throwable {
+    public void simple() throws Exception {
         State<Character> state = newState("23413214");
 
         UInt uint = uinteger();
@@ -21,7 +21,7 @@ public class UIntTest extends Base {
     }
 
     @Test
-    public void stop() throws Throwable {
+    public void stop() throws Exception {
         State<Character> state = newState("23413a214");
 
         UInt uint = uinteger();
@@ -32,7 +32,7 @@ public class UIntTest extends Base {
     }
 
     @Test
-    public void fail() throws Throwable {
+    public void fail() throws Exception {
         State<Character> state = newState("x2344");
 
         UInt uint = new UInt();

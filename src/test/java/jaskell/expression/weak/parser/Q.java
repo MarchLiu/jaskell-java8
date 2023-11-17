@@ -22,7 +22,7 @@ import java.io.EOFException;
  */
 public class Q implements Parsec<Character, Expression> {
   @Override
-  public Quote parse(State<Character> s) throws Throwable {
+  public Quote parse(State<Character> s) throws Exception {
     WeakParser p = new WeakParser();
     SkipWhitespaces skips = skipWhiteSpaces();
     Parsec<Character, Expression> parser = between(ch('(').then(skips), skips.then(ch(')')), p);

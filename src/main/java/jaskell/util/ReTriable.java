@@ -1,6 +1,5 @@
 package jaskell.util;
 
-import java.util.function.*;
 
 /**
  * TODO
@@ -9,15 +8,15 @@ import java.util.function.*;
  * @version 1.0.0
  * @since 2020/12/06 13:56
  */
-public class ReTriable<T> implements Supp<T> {
-    private final Supp<T> supplier;
+public class ReTriable<T> implements Supplier<T> {
+    private final Supplier<T> supplier;
     final private int times;
 
     private int rest = 0;
 
-    private BiConsumer<Throwable, Integer> onErr;
+    private BiConsumer<Exception, Integer> onErr;
 
-    public ReTriable(Supp<T> supplier) {
+    public ReTriable(Supplier<T> supplier) {
         this.supplier = supplier;
         times = 3;
         rest = 3;
@@ -31,8 +30,8 @@ public class ReTriable<T> implements Supp<T> {
     }
 
     @Override
-    public T get() throws Throwable {
-        Throwable e = null;
+    public T get() throws Exception {
+        Exception e = null;
         while (rest > 0) {
             try {
                 return supplier.get();
@@ -53,13 +52,17 @@ public class ReTriable<T> implements Supp<T> {
         }
     }
 
-    public ReTriable(Supp<T> supplier, int times) {
+    public Try<T> confirm() {
+        return Try.tryIt(this);
+    }
+
+    public ReTriable(Supplier<T> supplier, int times) {
         this.supplier = supplier;
         this.times = times;
         this.rest = times;
     }
 
-    public ReTriable(Supp<T> supplier, int times, BiConsumer<Throwable, Integer> onErr) {
+    public ReTriable(Supplier<T> supplier, int times, BiConsumer<Exception, Integer> onErr) {
         this.supplier = supplier;
         this.times = times;
         this.rest = times;
@@ -74,8 +77,8 @@ public class ReTriable<T> implements Supp<T> {
         return rest;
     }
 
-    public static <T> T times(int times, Supplier<T> supplier) throws Throwable {
-        Throwable e = null;
+    public static <T> T times(int times, Supplier<T> supplier) throws Exception {
+        Exception e = null;
         int rest = times;
         while (rest > 0) {
             try {
@@ -97,13 +100,13 @@ public class ReTriable<T> implements Supp<T> {
         }
     }
 
-    public static <T> T retries(int times, Supp<T> supplier, BiConsumer<Throwable, Integer> onErr) {
-        Throwable e = null;
+    public static <T> T retries(int times, Supplier<T> supplier, BiConsumer<Exception, Integer> onErr) throws Exception {
+        Exception e = null;
         int rest = times;
         while (rest > 0) {
             try {
                 return supplier.get();
-            } catch (Throwable err){
+            } catch (Exception err){
                 e = err;
                 onErr.accept(err, rest);
                 rest --;
@@ -116,15 +119,15 @@ public class ReTriable<T> implements Supp<T> {
         }
     }
 
-    public static <T> ReTriable<T> retry(Supp<T> supplier) {
+    public static <T> ReTriable<T> retry(Supplier<T> supplier) {
         return new ReTriable<>(supplier);
     }
 
-    public static <T> ReTriable<T> retry(Supp<T> supplier, int times) {
+    public static <T> ReTriable<T> retry(Supplier<T> supplier, int times) {
         return new ReTriable<>(supplier, times);
     }
 
-    public static <T> ReTriable<T> retry(Supp<T> supplier, int times, BiConsumer<Throwable, Integer> onErr) {
+    public static <T> ReTriable<T> retry(Supplier<T> supplier, int times, BiConsumer<Exception, Integer> onErr) {
         return new ReTriable<>(supplier, times, onErr);
     }
 

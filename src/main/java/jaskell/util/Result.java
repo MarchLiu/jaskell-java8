@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 // TODO: type safe
 @SuppressWarnings("unchecked")
-public class Result<E extends Throwable, T> implements Iterable<T>, Iterator<T> {
+public class Result<E extends Exception, T> implements Iterable<T>, Iterator<T> {
     final Object slot;
     final boolean _ok;
     int idx = 0;

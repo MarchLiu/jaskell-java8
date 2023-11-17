@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
  */
 public class ReTriableTest {
     @Test
-    public void testSuccess() throws Throwable {
+    public void testSuccess() throws Exception {
         ReTriable<Integer> zero = ReTriable.retry(() -> 0);
         assertEquals(0, zero.get());
         assertEquals(3, zero.getRest());
@@ -22,8 +22,8 @@ public class ReTriableTest {
     }
 
     @Test
-    public void testRetries2() throws Throwable {
-        Supp<Integer> supplier = new Supp<Integer>() {
+    public void testRetries2() throws Exception {
+        Supplier<Integer> supplier = new Supplier<Integer>() {
             int rest = 2;
 
             @Override
@@ -43,8 +43,8 @@ public class ReTriableTest {
     }
 
     @Test
-    public void testFailed() throws Throwable {
-        Supp<Integer> supplier = new Supp<Integer>() {
+    public void testFailed() throws Exception {
+        Supplier<Integer> supplier = new Supplier<Integer>() {
             int rest = 2;
 
             @Override

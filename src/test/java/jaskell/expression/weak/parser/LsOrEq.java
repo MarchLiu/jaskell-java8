@@ -30,7 +30,7 @@ public class LsOrEq  implements Parsec<Character, Expression> {
   }
 
   @Override
-  public LessOrEquals parse(State<Character> s) throws Throwable {
+  public LessOrEquals parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new LessOrEquals(prev, parser.parse(s));

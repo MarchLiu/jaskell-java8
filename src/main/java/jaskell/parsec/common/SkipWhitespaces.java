@@ -13,7 +13,7 @@ public class SkipWhitespaces
     private final Parsec<Character, Character> parser = new Skip<>(new Whitespace());
     @Override
     public Character parse(State<Character> s)
-            throws Throwable {
+            throws Exception {
         return parser.parse(s);
     }
 }

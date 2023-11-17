@@ -14,7 +14,7 @@ public class UInt
     private final Parsec<Character, List<Character>> parser = new Many1<>(new Digit());
     @Override
     public String parse(State<Character> s)
-            throws Throwable {
+            throws Exception {
         List<Character> buffer = parser.parse(s);
         StringBuilder sb = new StringBuilder();
         buffer.forEach(sb::append);

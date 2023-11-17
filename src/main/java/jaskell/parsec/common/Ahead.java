@@ -14,7 +14,7 @@ public class Ahead<E, T>
     Parsec<E, T> parser;
 
     @Override
-    public T parse(State<E> s) throws Throwable {
+    public T parse(State<E> s) throws Exception {
         Integer tran = s.begin();
         try {
             return parser.parse(s);

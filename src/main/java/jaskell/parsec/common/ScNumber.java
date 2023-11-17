@@ -23,7 +23,7 @@ public class ScNumber implements Parsec<Character, String> {
   private final Parsec<Character, String> exp = new Attempt<>(s -> ep.parse(s) + sp.parse(s) + np.parse(s));
 
   @Override
-  public String parse(State<Character> s) throws Throwable {
+  public String parse(State<Character> s) throws Exception {
     String mantissa = decimal.parse(s);
     return exp.exec(s).flatMap(e -> new Try<>(mantissa + e)).orElse(mantissa);
   }

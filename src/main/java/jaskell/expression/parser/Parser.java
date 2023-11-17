@@ -31,7 +31,7 @@ public class Parser implements Parsec<Character, Expression> {
   private final Parsec<Character, ?> end = ahead(choice(rq, e));
 
   @Override
-  public Expression parse(State<Character> s) throws Throwable {
+  public Expression parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> np = choice(attempt(new N()), attempt(new Param()), attempt(new Q()));
 
     Expression left = np.parse(s);

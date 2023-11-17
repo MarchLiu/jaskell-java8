@@ -14,7 +14,7 @@ public class Newline
     private final Parsec<Character, Character> parser = new Ch('\n');
     @Override
     public Character parse(State<Character> s)
-            throws Throwable {
+            throws Exception {
         return parser.parse(s);
     }
 }

@@ -22,7 +22,7 @@ public class FindTest extends Base {
     }
 
     @Test
-    public void simple() throws Throwable {
+    public void simple() throws Exception {
         State<Character> state = newState(data);
         Parsec<Character, String> parser = new Find<>(text("find"));
         String re = parser.parse(state);

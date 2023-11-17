@@ -13,13 +13,13 @@ public class Attempt<E, T>
     private final Parsec<E, T> parsec;
 
     @Override
-    public T parse(State<E> s) throws Throwable {
+    public T parse(State<E> s) throws Exception {
         Integer tran = s.begin();
         try{
             T re = this.parsec.parse(s);
             s.commit(tran);
             return re;
-        } catch (Throwable e) {
+        } catch (Exception e) {
             s.rollback(tran);
             throw e;
         }

@@ -30,7 +30,7 @@ public class GrtOrEq  implements Parsec<Character, Expression> {
   }
 
   @Override
-  public GreatOrEquals parse(State<Character> s) throws Throwable {
+  public GreatOrEquals parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new GreatOrEquals(prev, parser.parse(s));

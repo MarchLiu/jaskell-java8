@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
  */
 public class IsTest {
     @Test
-    public void testPassed() throws Throwable {
+    public void testPassed() throws Exception {
         Parsec<Integer, Integer> parser = new Is<>(i -> i % 2 == 0);
         List<Integer> buffer = new ArrayList<>();
         buffer.add(2);

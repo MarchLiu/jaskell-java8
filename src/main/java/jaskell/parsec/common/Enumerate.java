@@ -50,7 +50,7 @@ public class Enumerate<E, T> implements Parsec<E, Set<T>> {
             } else {
                 return new HashSet<>();
             }
-        } catch (Throwable e) {
+        } catch (Exception e) {
             throw s.trap(e.getMessage());
         }
     }

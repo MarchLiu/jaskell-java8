@@ -17,7 +17,7 @@ public class Between<E, T, O, C> implements
 
     @Override
     public T parse(State<E> s)
-            throws Throwable {
+            throws Exception {
         open.parse(s);
         T re = parsec.parse(s);
         close.parse(s);

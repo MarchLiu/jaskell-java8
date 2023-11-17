@@ -224,3 +224,9 @@ pkg:maven/io.github.marchliu/jaskell-java8@2.40
  - add tryIt methods for function types
  - make Try Class final
  - function types could throw when apply call
+
+### 2.6.0
+
+- replace throwable in method's signature to exception
+- add confirm method to re triable function
+- add BiConsumer

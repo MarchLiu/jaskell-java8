@@ -29,7 +29,7 @@ public class D implements Parsec<Character, Expression> {
   }
 
   @Override
-  public Divide parse(State<Character> s) throws Throwable {
+  public Divide parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new Divide(prev, parser.parse(s));

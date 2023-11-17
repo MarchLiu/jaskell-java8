@@ -53,7 +53,7 @@ public class Ch implements Parsec<Character, Character> {
     }
 
     @Override
-    public Character parse(State<Character> s) throws Throwable {
+    public Character parse(State<Character> s) throws Exception {
         return parser.apply(s).get();
     }
 }

@@ -21,13 +21,13 @@ public class Option<E, T>
 
     @Override
     public  Optional<T> parse(State<E> s)
-            throws Throwable {
+            throws Exception {
         Integer tran = s.begin();
         try{
             Optional<T> result = Optional.of(parser.parse(s));
             s.commit(tran);
             return result;
-        } catch (Throwable e) {
+        } catch (Exception e) {
             s.rollback(tran);
             return Optional.empty();
         }

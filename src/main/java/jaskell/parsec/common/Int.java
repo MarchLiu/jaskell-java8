@@ -22,7 +22,7 @@ public class Int implements Parsec<Character, String> {
 
     @Override
     public String parse(State<Character> s)
-            throws Throwable {
+            throws Exception {
         List<Character> buffer = parser.parse(s);
         StringBuilder sb = new StringBuilder();
         buffer.forEach(sb::append);

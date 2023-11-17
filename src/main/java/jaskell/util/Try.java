@@ -19,7 +19,7 @@ public final class Try<T> {
         _ok = true;
     }
 
-    public Try(Throwable err) {
+    public Try(Exception err) {
         slot = err;
         _ok = false;
     }
@@ -37,33 +37,33 @@ public final class Try<T> {
         if (_ok) {
             try {
                 return Try.success(mapper.apply((T) slot));
-            } catch (Throwable err) {
+            } catch (Exception err) {
                 return Try.failure(err);
             }
         } else {
-            return Try.failure((Throwable) slot);
+            return Try.failure((Exception) slot);
         }
     }
 
-    public Try<T> recover(Function<Throwable, T> func) {
+    public Try<T> recover(Function<Exception, T> func) {
         if (_ok) {
             return this;
         } else {
             try {
-                return Try.success(func.apply((Throwable) slot));
-            } catch (Throwable err) {
+                return Try.success(func.apply((Exception) slot));
+            } catch (Exception err) {
                 return Try.failure(err);
             }
         }
     }
 
-    public Try<T> recoverToTry(Function<Throwable, Try<T>> func) {
+    public Try<T> recoverToTry(Function<Exception, Try<T>> func) {
         if (_ok) {
             return this;
         } else {
             try {
-                return func.apply((Throwable) slot);
-            } catch (Throwable err) {
+                return func.apply((Exception) slot);
+            } catch (Exception err) {
                 return Try.failure(err);
             }
         }
@@ -78,7 +78,7 @@ public final class Try<T> {
         }
         try {
             return Try.success(mapper.apply(this.get(), other.get()));
-        } catch (Throwable err) {
+        } catch (Exception err) {
             return Try.failure(err);
         }
     }
@@ -92,17 +92,17 @@ public final class Try<T> {
         }
         try {
             return mapper.apply(this.get(), other.get());
-        } catch (Throwable err) {
+        } catch (Exception err) {
             return Try.failure(err);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public T get() throws Throwable {
+    public T get() throws Exception {
         if (_ok) {
             return (T) slot;
         } else {
-            throw (Throwable) slot;
+            throw (Exception) slot;
         }
     }
 
@@ -116,7 +116,7 @@ public final class Try<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public T orElseGet(Try<? extends T> other) throws Throwable {
+    public T orElseGet(Try<? extends T> other) throws Exception {
         if (_ok) {
             return (T) slot;
         } else {
@@ -125,20 +125,20 @@ public final class Try<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public T getOr(Function<? super Throwable, ? extends T> other) throws Throwable {
+    public T getOr(Function<? super Exception, ? extends T> other) throws Exception {
         if (_ok) {
             return (T) slot;
         } else {
-            return other.apply((Throwable) slot);
+            return other.apply((Exception) slot);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public T getRecovery(Function<? super Throwable, Try<? extends T>> other) throws Throwable {
+    public T getRecovery(Function<? super Exception, Try<? extends T>> other) throws Exception {
         if (_ok) {
             return (T) slot;
         } else {
-            return other.apply((Throwable) slot).get();
+            return other.apply((Exception) slot).get();
         }
     }
 
@@ -155,11 +155,11 @@ public final class Try<T> {
         if (_ok) {
             try {
                 return mapper.apply((T) slot);
-            } catch (Throwable err) {
+            } catch (Exception err) {
                 return Try.failure(err);
             }
         } else {
-            return Try.failure((Throwable) this.slot);
+            return Try.failure((Exception) this.slot);
         }
     }
 
@@ -179,15 +179,15 @@ public final class Try<T> {
         }
     }
 
-    public Throwable error() {
-        return (Throwable) this.slot;
+    public Exception error() {
+        return (Exception) this.slot;
     }
 
     public static <T> Try<T> success(T value) {
         return new Try<>(value);
     }
 
-    public static <T> Try<T> failure(Throwable err) {
+    public static <T> Try<T> failure(Exception err) {
         return new Try<>(err);
     }
 
@@ -195,15 +195,15 @@ public final class Try<T> {
         return new Try<>(new Exception(message));
     }
 
-    public static <T> Try<T> tryIt(Supp<T> supplier) {
+    public static <T> Try<T> tryIt(Supplier<T> supplier) {
         try {
             return Try.success(supplier.get());
-        } catch (Throwable err) {
+        } catch (Exception err) {
             return Try.failure(err);
         }
     }
 
-    public static <T, U> Try<U> call(Function<T, U> func, T arg) throws Throwable{
+    public static <T, U> Try<U> call(Function<T, U> func, T arg) throws Exception{
         try {
             return Try.success(func.apply(arg));
         } catch (Exception err) {
@@ -228,7 +228,7 @@ public final class Try<T> {
             T r1 = t1.get();
             U r2 = t2.get();
             return Try.success(func.apply(r1, r2));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -250,7 +250,7 @@ public final class Try<T> {
             T r1 = t1.get();
             U r2 = t2.get();
             return func.apply(r1, r2);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -275,7 +275,7 @@ public final class Try<T> {
             U r2 = t2.get();
             V r3 = t3.get();
             return Try.success(func.apply(r1, r2, r3));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -300,7 +300,7 @@ public final class Try<T> {
             U r2 = t2.get();
             V r3 = t3.get();
             return func.apply(r1, r2, r3);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -329,7 +329,7 @@ public final class Try<T> {
             V r3 = t3.get();
             W r4 = t4.get();
             return Try.success(func.apply(r1, r2, r3, r4));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -358,7 +358,7 @@ public final class Try<T> {
             V r3 = t3.get();
             W r4 = t4.get();
             return func.apply(r1, r2, r3, r4);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -390,7 +390,7 @@ public final class Try<T> {
             W r4 = t4.get();
             X r5 = t5.get();
             return Try.success(func.apply(r1, r2, r3, r4, r5));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -422,7 +422,7 @@ public final class Try<T> {
             W r4 = t4.get();
             X r5 = t5.get();
             return func.apply(r1, r2, r3, r4, r5);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -458,7 +458,7 @@ public final class Try<T> {
             X r5 = t5.get();
             Y r6 = t6.get();
             return Try.success(func.apply(r1, r2, r3, r4, r5, r6));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -495,7 +495,7 @@ public final class Try<T> {
             X r5 = t5.get();
             Y r6 = t6.get();
             return func.apply(r1, r2, r3, r4, r5, r6);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -535,7 +535,7 @@ public final class Try<T> {
             Y r6 = t6.get();
             Z r7 = t7.get();
             return Try.success(func.apply(r1, r2, r3, r4, r5, r6, r7));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -575,7 +575,7 @@ public final class Try<T> {
             Y r6 = t6.get();
             Z r7 = t7.get();
             return func.apply(r1, r2, r3, r4, r5, r6, r7);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -619,7 +619,7 @@ public final class Try<T> {
             Y r7 = t7.get();
             Z r8 = t8.get();
             return Try.success(func.apply(r1, r2, r3, r4, r5, r6, r7, r8));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }
@@ -663,7 +663,7 @@ public final class Try<T> {
             Y r7 = t7.get();
             Z r8 = t8.get();
             return func.apply(r1, r2, r3, r4, r5, r6, r7, r8);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }

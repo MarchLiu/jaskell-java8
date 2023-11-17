@@ -22,7 +22,7 @@ import static jaskell.parsec.common.Combinator.between;
  */
 public class Q implements Parsec<Character, Expression> {
   @Override
-  public Quote parse(State<Character> s) throws Throwable {
+  public Quote parse(State<Character> s) throws Exception {
     Parser p = new Parser();
     SkipWhitespaces skips = skipWhiteSpaces();
     Parsec<Character, Expression> parser = between(ch('(').then(skips), skips.then(ch(')')), p);

@@ -30,7 +30,7 @@ public class NotEq  implements Parsec<Character, Expression> {
   }
 
   @Override
-  public NotEquals parse(State<Character> s) throws Throwable {
+  public NotEquals parse(State<Character> s) throws Exception {
     Parsec<Character, Expression> parser = new WeakParser();
     op.parse(s);
     return new NotEquals(prev, parser.parse(s));

@@ -21,7 +21,7 @@ public class ExpressionTest {
   private final Env emptyEnv = new Env();
 
   @Test
-  public void testNumber() throws Throwable {
+  public void testNumber() throws Exception {
     State<Character> state = new TxtState("3.14");
     Parsec<Character, Expression> p = new N();
     Expression expression = p.parse(state);
@@ -29,42 +29,42 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testBasic() throws Throwable {
+  public void testBasic() throws Exception {
     State<Character> state = new TxtState("3.14");
     Expression expression = parser.parse(state);
     assertEquals(3.14, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testAdd() throws Throwable {
+  public void testAdd() throws Exception {
     State<Character> state = new TxtState("3.14+2.53");
     Expression expression = parser.parse(state);
     assertEquals(5.67, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testSub() throws Throwable {
+  public void testSub() throws Exception {
     State<Character> state = new TxtState("179- 8");
     Expression expression = parser.parse(state);
     assertEquals(171, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testProduct() throws Throwable {
+  public void testProduct() throws Exception {
     State<Character> state = new TxtState("8 * -8");
     Expression expression = parser.parse(state);
     assertEquals(-64, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testDivide() throws Throwable {
+  public void testDivide() throws Exception {
     State<Character> state = new TxtState("128/8");
     Expression expression = parser.parse(state);
     assertEquals(16, expression.eval(emptyEnv), 0.00001);
   }
 
   @Test
-  public void testPriorities() throws Throwable {
+  public void testPriorities() throws Exception {
     State<Character> state = new TxtState("7 + 15 * 3");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();
@@ -72,7 +72,7 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testPrioritiesFlow() throws Throwable {
+  public void testPrioritiesFlow() throws Exception {
     State<Character> state = new TxtState("5 * 3 + 7");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();
@@ -80,7 +80,7 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testPloyQuote() throws Throwable {
+  public void testPloyQuote() throws Exception {
     String content = "5 * (3 + 7)";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
@@ -88,7 +88,7 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testPloyComplex() throws Throwable {
+  public void testPloyComplex() throws Exception {
     State<Character> state = new TxtState("5 * (3 + 7) -22.5");
     Expression expression = parser.parse(state);
     expression = expression.makeAst();
@@ -96,7 +96,7 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testPloyMoreComplex() throws Throwable {
+  public void testPloyMoreComplex() throws Exception {
     String content = "5 * (3 + 7) - -22.5";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
@@ -104,7 +104,7 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testPloyScientific() throws Throwable {
+  public void testPloyScientific() throws Exception {
     String content = "5 * (3 + 7e2) - -22.5";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
@@ -117,7 +117,7 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testNormalExpression() throws Throwable {
+  public void testNormalExpression() throws Exception {
     String content = "3.14 + 7 * 8 - (2 + 3)";
     Expression expression = parser.parse(content);
     expression = expression.makeAst();
@@ -125,7 +125,7 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testParameterExpression() throws Throwable {
+  public void testParameterExpression() throws Exception {
     Env env = new Env();
     env.put("p0", 15d);
     String content = "3.14 + 7 * 8 - (2 + p0)";

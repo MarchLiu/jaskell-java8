@@ -13,7 +13,7 @@ public class SpaceTest extends Base {
      * Method: script(State<E> s)
      */
     @Test
-    public void simpleSpace() throws Throwable {
+    public void simpleSpace() throws Exception {
         State<Character> state = newState(" ");
         Parsec<Character, Character> s = new Space();
         Character a = s.parse(state);

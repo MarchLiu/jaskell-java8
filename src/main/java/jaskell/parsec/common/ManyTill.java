@@ -18,7 +18,7 @@ public class ManyTill<E, T, L>
     private final Parsec<E, L> end;
     @Override
     public List<T> parse(State<E> s)
-            throws Throwable {
+            throws Exception {
         List<T> re = new ArrayList<>();
         while (true) {
             try {

@@ -16,7 +16,7 @@ public class SepBy<E, T, Sep>
     private final Parsec<E, T> p;
     @Override
     public List<T> parse(State<E> s)
-            throws Throwable {
+            throws Exception {
         List<T> re = new ArrayList<>();
         try {
             re.add(this.p.parse(s));

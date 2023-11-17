@@ -20,7 +20,7 @@ public interface Function4<T, U, V, W, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(T t, U u, V v, W w) throws Throwable;
+    R apply(T t, U u, V v, W w) throws Exception;
 
     /**
      * Returns a composed function that first applies this function to
@@ -43,7 +43,7 @@ public interface Function4<T, U, V, W, R> {
     default Try<R> tryIt(T t, U u, V v, W w) {
         try {
             return Try.success(apply(t, u, v, w));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             return Try.failure(e);
         }
     }

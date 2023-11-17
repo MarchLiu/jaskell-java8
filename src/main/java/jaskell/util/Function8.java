@@ -24,7 +24,7 @@ public interface Function8<S, T, U, V, W, X, Y, Z, R> {
      * @param u the second function argument
      * @return the function result
      */
-    R apply(S s, T t, U u, V v, W w, X x, Y y, Z z) throws Throwable;
+    R apply(S s, T t, U u, V v, W w, X x, Y y, Z z) throws Exception;
 
     /**
      * Returns a composed function that first applies this function to
@@ -47,7 +47,7 @@ public interface Function8<S, T, U, V, W, X, Y, Z, R> {
     default Try<R> tryIt(S s, T t, U u, V v, W w, X x, Y y, Z z) {
         try {
             return Try.success(apply(s, t, u, v, w, x, y, z));
-        } catch (Throwable err){
+        } catch (Exception err){
             return Try.failure(err);
         }
     }
