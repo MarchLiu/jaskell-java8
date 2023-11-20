@@ -230,3 +230,14 @@ pkg:maven/io.github.marchliu/jaskell-java8@2.40
 - replace throwable in method's signature to exception
 - add confirm method to re triable function
 - add BiConsumer
+
+### 2.6.1
+
+now we can set rest in retry‘s on error handler
+
+### 2.7.0
+
+- add triable interface
+- now retriable type implement triable
+- add all and any methods for try
+- add async all and any methods, use completable future run on fork join tasks or custom executor

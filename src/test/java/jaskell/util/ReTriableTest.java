@@ -2,8 +2,7 @@ package jaskell.util;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * TODO
@@ -45,7 +44,6 @@ public class ReTriableTest {
     @Test
     public void testFailed() throws Exception {
         Supplier<Integer> supplier = new Supplier<Integer>() {
-            int rest = 2;
 
             @Override
             public Integer get() throws Exception {

@@ -1,6 +1,11 @@
 package jaskell.util;
 
 
+import java.util.List;
+import java.util.concurrent.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 /**
  * TODO
  *
@@ -8,13 +13,13 @@ package jaskell.util;
  * @version 1.0.0
  * @since 2020/12/06 13:56
  */
-public class ReTriable<T> implements Supplier<T> {
+public class ReTriable<T> implements Supplier<T>, Triable<T> {
     private final Supplier<T> supplier;
     final private int times;
 
-    private int rest = 0;
+    private Integer rest = 0;
 
-    private BiConsumer<Exception, Integer> onErr;
+    private BiFunction<Exception, Integer, Integer> onErr;
 
     public ReTriable(Supplier<T> supplier) {
         this.supplier = supplier;
@@ -23,8 +28,9 @@ public class ReTriable<T> implements Supplier<T> {
         onErr = (err, rest) -> {
             try {
                 Thread.sleep(1000);
+                return rest;
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                return rest - 1;
             }
         };
     }
@@ -35,24 +41,24 @@ public class ReTriable<T> implements Supplier<T> {
         while (rest > 0) {
             try {
                 return supplier.get();
-            } catch (Exception err){
+            } catch (Exception err) {
                 e = err;
                 try {
-                    onErr.accept(err, rest);
-                } catch (Exception exception){
-                    rest --;
+                    rest = onErr.apply(err, rest);
+                } catch (Exception exception) {
+                    rest--;
                 }
-                rest --;
+                rest--;
             }
         }
-        if(e != null) {
+        if (e != null) {
             throw e;
         } else {
             throw new IllegalStateException(String.format("unknown exception after failed %d times", this.times));
         }
     }
 
-    public Try<T> confirm() {
+    public Try<T> tryIt() {
         return Try.tryIt(this);
     }
 
@@ -62,7 +68,7 @@ public class ReTriable<T> implements Supplier<T> {
         this.rest = times;
     }
 
-    public ReTriable(Supplier<T> supplier, int times, BiConsumer<Exception, Integer> onErr) {
+    public ReTriable(Supplier<T> supplier, int times, BiFunction<Exception, Integer, Integer> onErr) {
         this.supplier = supplier;
         this.times = times;
         this.rest = times;
@@ -83,36 +89,36 @@ public class ReTriable<T> implements Supplier<T> {
         while (rest > 0) {
             try {
                 return supplier.get();
-            } catch (Exception err){
+            } catch (Exception err) {
                 e = err;
                 try {
                     Thread.sleep(1000);
-                } catch (InterruptedException interruptedException){
-                    rest --;
+                } catch (InterruptedException interruptedException) {
+                    rest--;
                 }
-                rest --;
+                rest--;
             }
         }
-        if(e != null) {
+        if (e != null) {
             throw e;
         } else {
             throw new IllegalStateException(String.format("unknown exception after failed %d times", times));
         }
     }
 
-    public static <T> T retries(int times, Supplier<T> supplier, BiConsumer<Exception, Integer> onErr) throws Exception {
+    public static <T> T retries(int times, Supplier<T> supplier, BiFunction<Exception, Integer, Integer> onErr) throws Exception {
         Exception e = null;
         int rest = times;
         while (rest > 0) {
             try {
                 return supplier.get();
-            } catch (Exception err){
+            } catch (Exception err) {
                 e = err;
-                onErr.accept(err, rest);
-                rest --;
+                rest = onErr.apply(err, rest);
+                rest--;
             }
         }
-        if(e != null) {
+        if (e != null) {
             throw new RuntimeException(e);
         } else {
             throw new IllegalStateException(String.format("unknown exception after failed %d times", times));
@@ -127,9 +133,8 @@ public class ReTriable<T> implements Supplier<T> {
         return new ReTriable<>(supplier, times);
     }
 
-    public static <T> ReTriable<T> retry(Supplier<T> supplier, int times, BiConsumer<Exception, Integer> onErr) {
+    public static <T> ReTriable<T> retry(Supplier<T> supplier, int times, BiFunction<Exception, Integer, Integer> onErr) {
         return new ReTriable<>(supplier, times, onErr);
     }
-
 
 }

@@ -1,6 +1,13 @@
 package jaskell.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.function.*;
+import java.util.stream.Collectors;
 
 /**
  * TODO
@@ -203,7 +210,7 @@ public final class Try<T> {
         }
     }
 
-    public static <T, U> Try<U> call(Function<T, U> func, T arg) throws Exception{
+    public static <T, U> Try<U> call(Function<T, U> func, T arg) throws Exception {
         try {
             return Try.success(func.apply(arg));
         } catch (Exception err) {
@@ -668,4 +675,121 @@ public final class Try<T> {
         }
     }
 
+    static <T> Try<List<T>> all(List<Try<T>> elements) {
+        List<T> result = new ArrayList<>();
+        for (Try<T> e : elements) {
+            if (e.isErr()) {
+                return Try.failure(e.error());
+            } else {
+                try {
+                    result.add(e.get());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+        return Try.success(result);
+    }
+
+    static <T> Try<T> any(List<Try<T>> elements) {
+        for (Try<T> e : elements) {
+            if (e.isOk()) {
+                try {
+                    return Try.success(e.get());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+        Optional<Try<T>> item = elements.stream().filter(Try::isErr).findFirst();
+        return item.orElseGet(() -> Try.failure("empty list not include any success item"));
+    }
+
+    static <T> Try<List<T>> tryAll(List<Triable<T>> elements) {
+        return all(elements.stream().map(Triable::tryIt)
+                .collect(Collectors.toList()));
+    }
+
+    static <T> Try<T> tryAny(List<Triable<T>> elements) {
+        Try<T> err = null;
+        for (Triable<T> e : elements) {
+            Try<T> re = e.tryIt();
+            if (re.isOk()) {
+                return re;
+            } else {
+                err = re;
+            }
+        }
+        if(err == null){
+            return Try.failure("empty list not include any success item");
+        } else {
+            return err;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T> Try<List<T>> asyncAll(List<Triable<T>> elements, Executor executor) {
+        List<CompletableFuture<Try<T>>> tasks = elements.stream()
+                .map(t -> CompletableFuture.supplyAsync(t::tryIt, executor))
+                .collect(Collectors.toList());
+        CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
+        tsa = tasks.toArray(tsa);
+        CompletableFuture.allOf(tsa);
+        List<Try<T>> results = tasks.stream().map((java.util.function.Function<CompletableFuture<Try<T>>, Try<T>>) arg -> {
+            try {
+                return arg.get();
+            } catch (Exception e) {
+                return Try.failure(e);
+            }
+        }).collect(Collectors.toList());
+        return Try.all(results);
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T> Try<List<T>> asyncAll(List<Triable<T>> elements) {
+        List<CompletableFuture<Try<T>>> tasks = elements.stream()
+                .map(t -> CompletableFuture.supplyAsync(t::tryIt))
+                .collect(Collectors.toList());
+        CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
+        tsa = tasks.toArray(tsa);
+        CompletableFuture.allOf(tsa);
+        List<Try<T>> results = tasks.stream().map((java.util.function.Function<CompletableFuture<Try<T>>, Try<T>>) arg -> {
+            try {
+                return arg.get();
+            } catch (Exception e) {
+                return Try.failure(e);
+            }
+        }).collect(Collectors.toList());
+        return Try.all(results);
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T> Try<T> asyncAny(List<Triable<T>> elements, Executor executor) {
+        List<CompletableFuture<Try<T>>> tasks = elements.stream()
+                .map(t -> CompletableFuture.supplyAsync(t::tryIt, executor))
+                .collect(Collectors.toList());
+        CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
+
+        try {
+            T re = (T) CompletableFuture.anyOf(tsa).get();
+            return Try.success(re);
+        } catch (Exception e) {
+            return Try.failure(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T> Try<T> asyncAny(List<Triable<T>> elements) {
+        List<CompletableFuture<Try<T>>> tasks = elements.stream()
+                .map(t -> CompletableFuture.supplyAsync(t::tryIt))
+                .collect(Collectors.toList());
+        CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
+        tsa = tasks.toArray(tsa);
+        try {
+            T re = (T) CompletableFuture.anyOf(tsa).get();
+            return Try.success(re);
+        } catch (Exception e) {
+            return Try.failure(e);
+        }
+    }
 }
