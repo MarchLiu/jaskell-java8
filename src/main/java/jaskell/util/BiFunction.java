@@ -44,4 +44,17 @@ public interface BiFunction<T, U, R> {
             return Try.failure(e);
         }
     }
+
+    default Try<R> tryIt(Tuple2<T, U> tuple) {
+        return tryIt(tuple.getItem0(), tuple.getItem1());
+    }
+
+
+    default R apply(Tuple2<T, U> tuple) throws Exception {
+        return this.apply(tuple.getItem0(), tuple.getItem1());
+    }
+
+    default Function<U, R> curry(T t) {
+        return u -> apply(t, u);
+    }
 }

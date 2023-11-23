@@ -1,0 +1,8 @@
+jaskell.croupier
+jaskell.expression
+jaskell.expression.parser
+jaskell.parsec
+jaskell.parsec.common
+jaskell.script
+jaskell.sql
+jaskell.util

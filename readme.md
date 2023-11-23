@@ -241,3 +241,11 @@ now we can set rest in retry‘s on error handler
 - now retriable type implement triable
 - add all and any methods for try
 - add async all and any methods, use completable future run on fork join tasks or custom executor
+
+### 2.8.0
+
+- add curry methods for functionX
+- add tupleN (2~8)
+- add liftA for tupleN
+- add apply for functionX
+- uncurry for tupleN

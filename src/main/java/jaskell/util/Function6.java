@@ -49,4 +49,34 @@ public interface Function6<T, U, V, W, X, Y, R> {
             return Try.failure(e);
         }
     }
+
+    default R apply(Tuple6<T, U, V, W, X, Y> tuple) throws Exception {
+        return apply(tuple.getItem0(), tuple.getItem1(), tuple.getItem2(),
+                tuple.getItem3(), tuple.getItem4(), tuple.getItem5());
+    }
+
+    default Try<R> tryIt(Tuple6<T, U, V, W, X, Y> tuple) {
+        return tryIt(tuple.getItem0(), tuple.getItem1(), tuple.getItem2(),
+                tuple.getItem3(), tuple.getItem4(), tuple.getItem5());
+    }
+
+    default Function5<U, V, W, X, Y, R> curry(T t) {
+        return (u, v, w, x, y) -> apply(t, u, v, w, x, y);
+    }
+
+    default Function4<V, W, X, Y, R> curry(T t, U u) {
+        return (v, w, x, y) -> apply(t, u, v, w, x, y);
+    }
+
+    default TriFunction<W, X, Y, R> curry(T t, U u, V v) {
+        return (w, x, y) -> apply(t, u, v, w, x, y);
+    }
+
+    default BiFunction<X, Y, R> curry(T t, U u, V v, W w) {
+        return (x, y) -> apply(t, u, v, w, x, y);
+    }
+
+    default jaskell.util.Function<Y, R> curry(T t, U u, V v, W w, X x) {
+        return y -> apply(t, u, v, w, x, y);
+    }
 }

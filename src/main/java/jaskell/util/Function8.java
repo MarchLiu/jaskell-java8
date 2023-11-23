@@ -51,4 +51,44 @@ public interface Function8<S, T, U, V, W, X, Y, Z, R> {
             return Try.failure(err);
         }
     }
+
+    default R apply(Tuple8<S, T, U, V, W, X, Y, Z> tuple) throws Exception {
+        return apply(tuple.getItem0(), tuple.getItem1(), tuple.getItem2(),
+                tuple.getItem3(), tuple.getItem4(), tuple.getItem5(),
+                tuple.getItem6(), tuple.getItem7());
+    }
+
+    default Try<R> tryIt(Tuple8<S, T, U, V, W, X, Y, Z> tuple) {
+        return tryIt(tuple.getItem0(), tuple.getItem1(), tuple.getItem2(),
+                tuple.getItem3(), tuple.getItem4(), tuple.getItem5(),
+                tuple.getItem6(), tuple.getItem7());
+    }
+
+    default Function7<T, U, V, W, X, Y, Z, R> curry(S s) {
+        return (t, u, v, w, x, y, z) -> apply(s, t, u, v, w, x, y, z);
+    }
+
+    default Function6<U, V, W, X, Y, Z, R> curry(S s, T t) {
+        return (u, v, w, x, y, z) -> apply(s, t, u, v, w, x, y, z);
+    }
+
+    default Function5<V, W, X, Y, Z, R> curry(S s, T t, U u) {
+        return (v, w, x, y, z) -> apply(s, t, u, v, w, x, y, z);
+    }
+
+    default Function4<W, X, Y, Z, R> curry(S s, T t, U u, V v) {
+        return (w, x, y, z) -> apply(s, t, u, v, w, x, y, z);
+    }
+
+    default TriFunction<X, Y, Z, R> curry(S s, T t, U u, V v, W w) {
+        return (x, y, z) -> apply(s, t, u, v, w, x, y, z);
+    }
+
+    default BiFunction<Y, Z, R> curry(S s, T t, U u, V v, W w, X x) {
+        return (y, z) -> apply(s, t, u, v, w, x, y, z);
+    }
+
+    default jaskell.util.Function<Z, R> curry(S s, T t, U u, V v, W w, X x, Y y) {
+        return z -> apply(s, t, u, v, w, x, y, z);
+    }
 }

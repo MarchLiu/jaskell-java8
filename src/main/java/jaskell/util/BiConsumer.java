@@ -38,4 +38,8 @@ public interface BiConsumer<T, U> {
             after.accept(l, r);
         };
     }
+
+    default Consumer<U> curry(T t) {
+        return (U u) -> accept(t, u);
+    }
 }
