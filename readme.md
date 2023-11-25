@@ -249,3 +249,8 @@ now we can set rest in retry‘s on error handler
 - add liftA for tupleN
 - add apply for functionX
 - uncurry for tupleN
+
+### 2.8.1
+
+- cow methods for tuple
+- add item methods for tuple

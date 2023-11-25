@@ -53,6 +53,33 @@ public class Tuple6<T, U, V, W, X, Y> {
                 getItem3(), getItem4(), getItem5());
     }
 
+    public <Z> Tuple6<Z, U, V, W, X, Y> item0(Z item) {
+        return new Tuple6<>(item, getItem1(), getItem2(), getItem3(), getItem4(), getItem5());
+    }
+
+    public <Z> Tuple6<T, Z, V, W, X, Y> item1(Z item) {
+        return new Tuple6<>(getItem0(), item, getItem2(), getItem3(), getItem4(), getItem5());
+    }
+    public <Z> Tuple6<T, U, Z, W, X, Y> item2(Z item) {
+        return new Tuple6<>(getItem0(), getItem1(), item, getItem3(), getItem4(), getItem5());
+    }
+    public <Z> Tuple6<T, U, V, Z, X, Y> item3(Z item) {
+        return new Tuple6<>(getItem0(), getItem1(), getItem2(), item, getItem4(), getItem5());
+    }
+    public <Z> Tuple6<T, U, V, W, Z, Y> item4(Z item) {
+        return new Tuple6<>(getItem0(), getItem1(), getItem2(), getItem3(), item, getItem5());
+    }
+    public <Z> Tuple6<T, U, V, W, X, Z> item5(Z item) {
+        return new Tuple6<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), item);
+    }
+    public <Z> Tuple7<T, U, V, W, X, Y, Z> add(Z item) {
+        return new Tuple7<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), item);
+    }
+    public <Z> Try<Tuple7<T, U, V, W, X, Y, Z>> tryAdd(Try<Z> tryItem) {
+        return tryItem.map(item -> new Tuple7<>(getItem0(), getItem1(), getItem2(),
+                getItem3(), getItem4(), getItem5(), item));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -24,6 +24,22 @@ public class Tuple2<T, U> {
         return item1;
     }
 
+    public <V> Tuple2<V, U> item0(V item) {
+        return new Tuple2<>(item, getItem1());
+    }
+
+    public <V> Tuple2<T, V> item1(V item) {
+        return new Tuple2<>(getItem0(), item);
+    }
+
+    public <V> Tuple3<T, U, V> add(V item) {
+        return new Tuple3<>(getItem0(), getItem1(), item);
+    }
+
+    public <V> Try<Tuple3<T, U, V>> tryAdd(Try<V> tryItem) {
+        return tryItem.map(item -> new Tuple3<>(getItem0(), getItem1(), item));
+    }
+
     public <R> R uncurry(BiFunction<T, U, R> functor) throws Exception {
         return functor.apply(getItem0(), getItem1());
     }

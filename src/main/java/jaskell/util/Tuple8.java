@@ -68,6 +68,33 @@ public class Tuple8<S, T, U, V, W, X, Y, Z> {
                 getItem6(), getItem7());
     }
 
+    public <A> Tuple8<A, T, U, V, W, X, Y, Z> item0(A item) {
+        return new Tuple8<>(item, getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), getItem6(), getItem7());
+    }
+
+    public <A> Tuple8<S, A, U, V, W, X, Y, Z> item1(A item) {
+        return new Tuple8<>(getItem0(), item, getItem2(), getItem3(), getItem4(), getItem5(), getItem6(), getItem7());
+    }
+
+    public <A> Tuple8<S, T, A, V, W, X, Y, Z> item2(A item) {
+        return new Tuple8<>(getItem0(), getItem1(), item, getItem3(), getItem4(), getItem5(), getItem6(), getItem7());
+    }
+    public <A> Tuple8<S, T, U, A, W, X, Y, Z> item3(A item) {
+        return new Tuple8<>(getItem0(), getItem1(), getItem2(), item, getItem4(), getItem5(), getItem6(), getItem7());
+    }
+    public <A> Tuple8<S, T, U, V, A, X, Y, Z> item4(A item) {
+        return new Tuple8<>(getItem0(), getItem1(), getItem2(), getItem3(), item, getItem5(), getItem6(), getItem7());
+    }
+    public <A> Tuple8<S, T, U, V, W, A, Y, Z> item5(A item) {
+        return new Tuple8<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), item, getItem6(), getItem7());
+    }
+    public <A> Tuple8<S, T, U, V, W, X, A, Z> item6(A item) {
+        return new Tuple8<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), item, getItem7());
+    }
+    public <A> Tuple8<A, T, U, V, W, X, Y, Z> item7(A item) {
+        return new Tuple8<>(item, getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), getItem6(), getItem7());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

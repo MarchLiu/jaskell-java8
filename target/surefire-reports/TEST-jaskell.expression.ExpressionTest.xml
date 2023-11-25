@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="jaskell.expression.ExpressionTest" time="0.029" tests="14" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="jaskell.expression.ExpressionTest" time="0.026" tests="14" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -20,7 +20,7 @@
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/mars/jobs/jaskell-java8/target/surefire/surefirebooter-20231124002858732_3.jar /Users/mars/jobs/jaskell-java8/target/surefire 2023-11-24T00-28-58_642-jvmRun1 surefire-20231124002858732_1tmp surefire_0-20231124002858732_2tmp"/>
+    <property name="sun.java.command" value="/Users/mars/jobs/jaskell-java8/target/surefire/surefirebooter-20231125200821268_3.jar /Users/mars/jobs/jaskell-java8/target/surefire 2023-11-25T20-08-21_173-jvmRun1 surefire-20231125200821268_1tmp surefire_0-20231125200821268_2tmp"/>
     <property name="http.nonProxyHosts" value="192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|127.0.0.1|localhost|*.localhost|local|*.local|timestamp.apple.com|*.timestamp.apple.com|sequoia.apple.com|*.sequoia.apple.com|seed-sequoia.siri.apple.com|*.seed-sequoia.siri.apple.com"/>
     <property name="surefire.test.class.path" value="/Users/mars/jobs/jaskell-java8/target/test-classes:/Users/mars/jobs/jaskell-java8/target/classes:/Users/mars/.m2/repository/org/junit/jupiter/junit-jupiter/5.9.2/junit-jupiter-5.9.2.jar:/Users/mars/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.2/junit-jupiter-api-5.9.2.jar:/Users/mars/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/mars/.m2/repository/org/junit/platform/junit-platform-commons/1.9.2/junit-platform-commons-1.9.2.jar:/Users/mars/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/mars/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.2/junit-jupiter-params-5.9.2.jar:/Users/mars/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.2/junit-jupiter-engine-5.9.2.jar:/Users/mars/.m2/repository/org/junit/platform/junit-platform-engine/1.9.2/junit-platform-engine-1.9.2.jar:/Users/mars/.m2/repository/org/xerial/sqlite-jdbc/3.42.0.0/sqlite-jdbc-3.42.0.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -36,7 +36,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/mars/jobs/jaskell-java8/target/surefire/surefirebooter-20231124002858732_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/mars/jobs/jaskell-java8/target/surefire/surefirebooter-20231125200821268_3.jar"/>
     <property name="sun.boot.class.path" value="/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/resources.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/rt.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/jsse.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/jce.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/charsets.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/jfr.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/lib/cat.jar:/Users/mars/.sdkman/candidates/java/8.0.392-zulu/zulu-8.jdk/Contents/Home/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|127.0.0.1|localhost|*.localhost|local|*.local|timestamp.apple.com|*.timestamp.apple.com|sequoia.apple.com|*.sequoia.apple.com|seed-sequoia.siri.apple.com|*.seed-sequoia.siri.apple.com"/>
@@ -69,17 +69,17 @@
     <property name="socksNonProxyHosts" value="192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|127.0.0.1|localhost|*.localhost|local|*.local|timestamp.apple.com|*.timestamp.apple.com|sequoia.apple.com|*.sequoia.apple.com|seed-sequoia.siri.apple.com|*.seed-sequoia.siri.apple.com"/>
     <property name="http.proxyPort" value="7890"/>
   </properties>
-  <testcase name="testPrioritiesFlow" classname="jaskell.expression.ExpressionTest" time="0.01"/>
-  <testcase name="testNormalExpression" classname="jaskell.expression.ExpressionTest" time="0.002"/>
-  <testcase name="testPloyQuote" classname="jaskell.expression.ExpressionTest" time="0.001"/>
-  <testcase name="testPloyScientific" classname="jaskell.expression.ExpressionTest" time="0.002"/>
+  <testcase name="testPrioritiesFlow" classname="jaskell.expression.ExpressionTest" time="0.008"/>
+  <testcase name="testNormalExpression" classname="jaskell.expression.ExpressionTest" time="0.001"/>
+  <testcase name="testPloyQuote" classname="jaskell.expression.ExpressionTest" time="0"/>
+  <testcase name="testPloyScientific" classname="jaskell.expression.ExpressionTest" time="0.001"/>
   <testcase name="testAdd" classname="jaskell.expression.ExpressionTest" time="0.001"/>
-  <testcase name="testSub" classname="jaskell.expression.ExpressionTest" time="0"/>
+  <testcase name="testSub" classname="jaskell.expression.ExpressionTest" time="0.001"/>
   <testcase name="testBasic" classname="jaskell.expression.ExpressionTest" time="0"/>
   <testcase name="testProduct" classname="jaskell.expression.ExpressionTest" time="0.001"/>
   <testcase name="testPloyMoreComplex" classname="jaskell.expression.ExpressionTest" time="0.001"/>
   <testcase name="testPloyComplex" classname="jaskell.expression.ExpressionTest" time="0.001"/>
-  <testcase name="testPriorities" classname="jaskell.expression.ExpressionTest" time="0"/>
+  <testcase name="testPriorities" classname="jaskell.expression.ExpressionTest" time="0.001"/>
   <testcase name="testParameterExpression" classname="jaskell.expression.ExpressionTest" time="0.002"/>
   <testcase name="testDivide" classname="jaskell.expression.ExpressionTest" time="0.001"/>
   <testcase name="testNumber" classname="jaskell.expression.ExpressionTest" time="0"/>

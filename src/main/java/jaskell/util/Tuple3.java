@@ -31,12 +31,34 @@ public class Tuple3<T, U, V> {
         return item2;
     }
 
+
+
     public <R> R uncurry(TriFunction<T, U, V, R> functor) throws Exception {
         return functor.apply(getItem0(), getItem1(), getItem2());
     }
 
     public <R> Try<R> tryIt(TriFunction<T, U, V, R> functor) throws Exception {
         return functor.tryIt(getItem0(), getItem1(), getItem2());
+    }
+
+    public <W> Tuple3<W, U, V> item0(W item) {
+        return new Tuple3<>(item, getItem1(), getItem2());
+    }
+
+    public <W> Tuple3<T, W, V> item1(W item) {
+        return new Tuple3<>(getItem0(), item, getItem2());
+    }
+
+    public <W> Tuple3<T, U, W> item2(W item) {
+        return new Tuple3<>(getItem0(), getItem1(), item);
+    }
+
+    public <W> Tuple4<T, U, V, W> add(W item) {
+        return new Tuple4<>(getItem0(), getItem1(), getItem2(), item);
+    }
+
+    public <W> Try<Tuple4<T, U, V, W>> tryAdd(Try<W> tryItem) {
+        return tryItem.map(item -> new Tuple4<>(getItem0(), getItem1(), getItem2(), item));
     }
 
     @Override

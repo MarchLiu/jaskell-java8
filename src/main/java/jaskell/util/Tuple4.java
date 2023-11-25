@@ -40,6 +40,30 @@ public class Tuple4<T, U, V, W> {
         return functor.tryIt(getItem0(), getItem1(), getItem2(), getItem3());
     }
 
+    public <X> Tuple4<X, U, V, W> item0(X item) {
+        return new Tuple4<>(item, getItem1(), getItem2(), getItem3());
+    }
+
+    public <X> Tuple4<T, X, V, W> item1(X item) {
+        return new Tuple4<>(getItem0(), item, getItem2(), getItem3());
+    }
+
+    public <X> Tuple4<T, U, X, W> item2(X item) {
+        return new Tuple4<>(getItem0(), getItem1(), item, getItem3());
+    }
+
+    public <X> Tuple4<T, U, V, X> item3(X item) {
+        return new Tuple4<>(getItem0(), getItem1(), getItem2(), item);
+    }
+
+    public <X> Tuple5<T, U, V, W, X> add(X item) {
+        return new Tuple5<>(getItem0(), getItem1(), getItem2(), getItem3(), item);
+    }
+
+    public <X> Try<Tuple5<T, U, V, W, X>> tryAdd(Try<X> tryItem) {
+        return tryItem.map(item -> new Tuple5<>(getItem0(), getItem1(), getItem2(), getItem3(), item));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

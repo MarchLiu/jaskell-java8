@@ -7,6 +7,14 @@ package jaskell.util;
  * @version 1.0.0
  * @since 2023/11/16 18:44
  */
-public interface Supplier<T> {
+public interface Supplier<T> extends Triable<T> {
     T get() throws Exception;
+
+    default Try<T> tryIt() {
+        try {
+            return Try.success(get());
+        } catch (Exception e) {
+            return Try.failure(e);
+        }
+    }
 }

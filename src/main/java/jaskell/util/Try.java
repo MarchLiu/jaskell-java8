@@ -798,4 +798,23 @@ public final class Try<T> {
         }
     }
 
+    static <T> List<T> ifSuccess(List<Try<T>> elements) {
+        List<T> result = new ArrayList<>();
+        for (Try<T> element : elements) {
+            element.foreach(result::add);
+        }
+        return result;
+    }
+
+    static <T> Try<Void> foreach(List<Try<T>> elements, Consumer<T> consumer) {
+        try {
+            for (Try<T> element : elements) {
+                element.foreach(consumer);
+            }
+            return Try.success(null);
+        } catch (Exception err) {
+            return Try.failure(err);
+        }
+    }
+
 }
