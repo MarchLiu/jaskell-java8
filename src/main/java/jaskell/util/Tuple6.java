@@ -2,7 +2,8 @@ package jaskell.util;
 
 import java.util.Objects;
 
-public class Tuple6<T, U, V, W, X, Y> {
+public class Tuple6<T, U, V, W, X, Y>
+        implements Tuple<T, Tuple5<U, V, W, X, Y>, Y, Tuple5<T, U, V, W, X>> {
     final T item0;
     final U item1;
     final V item2;
@@ -97,5 +98,50 @@ public class Tuple6<T, U, V, W, X, Y> {
                                                                             Try<V> t2, Try<W> t3,
                                                                             Try<X> t4, Try<Y> t5) {
         return Try.joinMap6(t0, t1, t2, t3, t4, t5, Tuple6::new);
+    }
+
+    @Override
+    public int size() {
+        return 6;
+    }
+
+    @Override
+    public Object get(int pos) throws IndexOutOfBoundsException {
+        switch (pos) {
+            case 0:
+                return getItem0();
+            case 1:
+                return getItem1();
+            case 2:
+                return getItem2();
+            case 3:
+                return getItem3();
+            case 4:
+                return getItem4();
+            case 5:
+                return getItem5();
+            default:
+                throw new IndexOutOfBoundsException("tuple6 only accept pos in range [0, 5]");
+        }
+    }
+
+    @Override
+    public T head() {
+        return getItem0();
+    }
+
+    @Override
+    public Tuple5<U, V, W, X, Y> tail() {
+        return new Tuple5<>(getItem1(), getItem2(), getItem3(), getItem4(), getItem5());
+    }
+
+    @Override
+    public Y last() {
+        return getItem5();
+    }
+
+    @Override
+    public Tuple5<T, U, V, W, X> butLast() {
+        return new Tuple5<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4());
     }
 }

@@ -204,6 +204,7 @@
 /Users/mars/jobs/jaskell-java8/src/main/java/jaskell/expression/parser/P.java
 /Users/mars/jobs/jaskell-java8/src/main/java/jaskell/parsec/common/ManyTill.java
 /Users/mars/jobs/jaskell-java8/src/main/java/jaskell/expression/Divide.java
+/Users/mars/jobs/jaskell-java8/src/main/java/jaskell/util/Tuple.java
 /Users/mars/jobs/jaskell-java8/src/main/java/jaskell/parsec/Ne.java
 /Users/mars/jobs/jaskell-java8/src/main/java/jaskell/parsec/common/Whitespace.java
 /Users/mars/jobs/jaskell-java8/src/main/java/jaskell/sql/Less.java

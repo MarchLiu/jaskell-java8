@@ -9,7 +9,8 @@ import java.util.Objects;
  * @param <W>
  * @param <X>
  */
-public class Tuple5<T, U, V, W, X> {
+public class Tuple5<T, U, V, W, X>
+        implements Tuple<T, Tuple4<U, V, W, X>, X, Tuple4<T, U, V, W>> {
     final T item0;
     final U item1;
     final V item2;
@@ -96,5 +97,48 @@ public class Tuple5<T, U, V, W, X> {
     public static <T, U, V, W, X> Try<Tuple5<T, U, V, W, X>> liftA(Try<T> t0, Try<U> t1, Try<V> t2,
                                                                       Try<W> t3, Try<X> t4) {
         return Try.joinMap5(t0, t1, t2, t3, t4, Tuple5::new);
+    }
+
+    @Override
+    public int size() {
+        return 5;
+    }
+
+    @Override
+    public Object get(int pos) throws IndexOutOfBoundsException {
+        switch (pos) {
+            case 0:
+                return getItem0();
+            case 1:
+                return getItem1();
+            case 2:
+                return getItem2();
+            case 3:
+                return getItem3();
+            case 4:
+                return getItem4();
+            default:
+                throw new IndexOutOfBoundsException("tuple5 only accept pos in range [0, 4]");
+        }
+    }
+
+    @Override
+    public T head() {
+        return getItem0();
+    }
+
+    @Override
+    public Tuple4<U, V, W, X> tail() {
+        return new Tuple4<>(getItem1(), getItem2(), getItem3(), getItem4());
+    }
+
+    @Override
+    public X last() {
+        return getItem4();
+    }
+
+    @Override
+    public Tuple4<T, U, V, W> butLast() {
+        return new Tuple4<>(getItem0(), getItem1(), getItem2(), getItem3());
     }
 }

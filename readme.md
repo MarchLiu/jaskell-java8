@@ -254,3 +254,16 @@ now we can set rest in retry‘s on error handler
 
 - cow methods for tuple
 - add item methods for tuple
+
+### 2.8.2
+
+- add tuple interface
+    - head method
+    - tail method
+    - last method
+    - butLast method
+    - add static methods for tuple construct
+    - size method
+    - get by pos method
+    - toList method
+    - toMap method

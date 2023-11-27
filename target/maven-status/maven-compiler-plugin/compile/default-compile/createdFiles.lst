@@ -107,6 +107,7 @@ jaskell/parsec/Decimal.class
 jaskell/parsec/common/Letter.class
 jaskell/sql/Like.class
 jaskell/sql/With$CommonTableQuery.class
+jaskell/util/Tuple.class
 jaskell/sql/Cross.class
 jaskell/sql/In.class
 jaskell/expression/parser/P.class

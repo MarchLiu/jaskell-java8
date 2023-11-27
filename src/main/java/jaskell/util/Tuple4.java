@@ -3,7 +3,7 @@ package jaskell.util;
 
 import java.util.Objects;
 
-public class Tuple4<T, U, V, W> {
+public class Tuple4<T, U, V, W> implements Tuple<T, Tuple3<U, V, W>, W, Tuple3<T, U, V>> {
     final T item0;
     final U item1;
     final V item2;
@@ -79,5 +79,46 @@ public class Tuple4<T, U, V, W> {
 
     public static <T, U, V, W> Try<Tuple4<T, U, V, W>> liftA(Try<T> t0, Try<U> t1, Try<V> t2, Try<W> t3) {
         return Try.joinMap4(t0, t1, t2, t3, Tuple4::new);
+    }
+
+    @Override
+    public int size() {
+        return 4;
+    }
+
+    @Override
+    public Object get(int pos) throws IndexOutOfBoundsException {
+        switch (pos) {
+            case 0:
+                return getItem0();
+            case 1:
+                return getItem1();
+            case 2:
+                return getItem2();
+            case 3:
+                return getItem3();
+            default:
+                throw new IndexOutOfBoundsException("tuple4 only accept pos in range [0, 3]");
+        }
+    }
+
+    @Override
+    public T head() {
+        return getItem0();
+    }
+
+    @Override
+    public Tuple3<U, V, W> tail() {
+        return new Tuple3<>(getItem1(), getItem2(), getItem3());
+    }
+
+    @Override
+    public W last() {
+        return getItem3();
+    }
+
+    @Override
+    public Tuple3<T, U, V> butLast() {
+        return new Tuple3<>(getItem0(), getItem1(), getItem2());
     }
 }

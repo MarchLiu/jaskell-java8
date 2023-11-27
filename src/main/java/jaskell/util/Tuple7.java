@@ -3,7 +3,8 @@ package jaskell.util;
 
 import java.util.Objects;
 
-public class Tuple7<T, U, V, W, X, Y, Z> {
+public class Tuple7<T, U, V, W, X, Y, Z>
+        implements Tuple<T, Tuple6<U, V, W, X, Y, Z>, Z, Tuple6<T, U, V, W, X, Y>> {
     final T item0;
     final U item1;
     final V item2;
@@ -67,18 +68,23 @@ public class Tuple7<T, U, V, W, X, Y, Z> {
     public <A> Tuple7<T, A, V, W, X, Y, Z> item1(A item) {
         return new Tuple7<>(getItem0(), item, getItem2(), getItem3(), getItem4(), getItem5(), getItem6());
     }
+
     public <A> Tuple7<T, U, A, W, X, Y, Z> item2(A item) {
         return new Tuple7<>(getItem0(), getItem1(), item, getItem3(), getItem4(), getItem5(), getItem6());
     }
+
     public <A> Tuple7<T, U, V, A, X, Y, Z> item3(A item) {
         return new Tuple7<>(getItem0(), getItem1(), getItem2(), item, getItem4(), getItem5(), getItem6());
     }
+
     public <A> Tuple7<T, U, V, W, A, Y, Z> item4(A item) {
         return new Tuple7<>(getItem0(), getItem1(), getItem2(), getItem3(), item, getItem5(), getItem6());
     }
+
     public <A> Tuple7<T, U, V, W, X, A, Z> item5(A item) {
         return new Tuple7<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), item, getItem6());
     }
+
     public <A> Tuple7<T, U, V, W, X, Y, A> item6(A item) {
         return new Tuple7<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), item);
     }
@@ -108,5 +114,52 @@ public class Tuple7<T, U, V, W, X, Y, Z> {
     public static <T, U, V, W, X, Y, Z> Try<Tuple7<T, U, V, W, X, Y, Z>> liftA(
             Try<T> t0, Try<U> t1, Try<V> t2, Try<W> t3, Try<X> t4, Try<Y> t5, Try<Z> t6) {
         return Try.joinMap7(t0, t1, t2, t3, t4, t5, t6, Tuple7::new);
+    }
+
+    @Override
+    public int size() {
+        return 7;
+    }
+
+    @Override
+    public Object get(int pos) throws IndexOutOfBoundsException {
+        switch (pos) {
+            case 0:
+                return getItem0();
+            case 1:
+                return getItem1();
+            case 2:
+                return getItem2();
+            case 3:
+                return getItem3();
+            case 4:
+                return getItem4();
+            case 5:
+                return getItem5();
+            case 6:
+                return getItem6();
+            default:
+                throw new IndexOutOfBoundsException("tuple7 only accept pos in range [0, 6]");
+        }
+    }
+
+    @Override
+    public T head() {
+        return getItem0();
+    }
+
+    @Override
+    public Tuple6<U, V, W, X, Y, Z> tail() {
+        return new Tuple6<>(getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), getItem6());
+    }
+
+    @Override
+    public Z last() {
+        return getItem6();
+    }
+
+    @Override
+    public Tuple6<T, U, V, W, X, Y> butLast() {
+        return new Tuple6<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), getItem5());
     }
 }

@@ -3,7 +3,8 @@ package jaskell.util;
 
 import java.util.Objects;
 
-public class Tuple8<S, T, U, V, W, X, Y, Z> {
+public class Tuple8<S, T, U, V, W, X, Y, Z>
+        implements Tuple<S, Tuple7<T, U, V, W, X, Y, Z>, Z, Tuple7<S, T, U, V, W, X, Y>> {
     final S item0;
     final T item1;
     final U item2;
@@ -111,5 +112,54 @@ public class Tuple8<S, T, U, V, W, X, Y, Z> {
     public static <S, T, U, V, W, X, Y, Z> Try<Tuple8<S, T, U, V, W, X, Y, Z>> liftA(
             Try<S> t0, Try<T> t1, Try<U> t2, Try<V> t3, Try<W> t4, Try<X> t5, Try<Y> t6, Try<Z> t7) {
         return Try.joinMap8(t0, t1, t2, t3, t4, t5, t6, t7, Tuple8::new);
+    }
+
+    @Override
+    public int size() {
+        return 8;
+    }
+
+    @Override
+    public Object get(int pos) throws IndexOutOfBoundsException {
+        switch (pos) {
+            case 0:
+                return getItem0();
+            case 1:
+                return getItem1();
+            case 2:
+                return getItem2();
+            case 3:
+                return getItem3();
+            case 4:
+                return getItem4();
+            case 5:
+                return getItem5();
+            case 6:
+                return getItem6();
+            case 7:
+                return getItem7();
+            default:
+                throw new IndexOutOfBoundsException("tuple8 only accept pos in range [0, 7]");
+        }
+    }
+
+    @Override
+    public S head() {
+        return getItem0();
+    }
+
+    @Override
+    public Tuple7<T, U, V, W, X, Y, Z> tail() {
+        return new Tuple7<>(getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), getItem6(), getItem7());
+    }
+
+    @Override
+    public Z last() {
+        return getItem7();
+    }
+
+    @Override
+    public Tuple7<S, T, U, V, W, X, Y> butLast() {
+        return new Tuple7<>(getItem0(), getItem1(), getItem2(), getItem3(), getItem4(), getItem5(), getItem6());
     }
 }

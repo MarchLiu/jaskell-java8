@@ -7,7 +7,7 @@ import java.util.Objects;
  * @param <T>
  * @param <U>
  */
-public class Tuple2<T, U> {
+public class Tuple2<T, U> implements Tuple<T, U, U, T> {
     final T item0;
     final U item1;
 
@@ -65,4 +65,40 @@ public class Tuple2<T, U> {
         return Try.joinMap(t0, t1, Tuple2::new);
     }
 
+    @Override
+    public int size() {
+        return 2;
+    }
+
+    @Override
+    public Object get(int pos) throws IndexOutOfBoundsException {
+        switch (pos) {
+            case 0:
+                return getItem0();
+            case 1:
+                return getItem1();
+            default:
+                throw new IndexOutOfBoundsException("tuple2 only accept 0 or 1 pos");
+        }
+    }
+
+    @Override
+    public T head() {
+        return getItem0();
+    }
+
+    @Override
+    public U tail() {
+        return getItem1();
+    }
+
+    @Override
+    public U last() {
+        return getItem1();
+    }
+
+    @Override
+    public T butLast() {
+        return getItem0();
+    }
 }

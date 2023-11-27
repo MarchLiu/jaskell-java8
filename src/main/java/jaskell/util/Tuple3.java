@@ -8,7 +8,7 @@ import java.util.Objects;
  * @param <U>
  * @param <V>
  */
-public class Tuple3<T, U, V> {
+public class Tuple3<T, U, V> implements Tuple<T, Tuple2<U, V>, U, Tuple2<T, U>>  {
     final T item0;
     final U item1;
     final V item2;
@@ -76,5 +76,44 @@ public class Tuple3<T, U, V> {
 
     public static <T, U, V> Try<Tuple3<T, U, V>> liftA(Try<T> t0, Try<U> t1, Try<V> t2) {
         return Try.joinMap3(t0, t1, t2, Tuple3::new);
+    }
+
+    @Override
+    public int size() {
+        return 3;
+    }
+
+    @Override
+    public Object get(int pos) throws IndexOutOfBoundsException {
+        switch (pos) {
+            case 0:
+                return getItem0();
+            case 1:
+                return getItem1();
+            case 2:
+                return getItem2();
+            default:
+                throw new IndexOutOfBoundsException("tuple3 only accept pos in range [0, 2]");
+        }
+    }
+
+    @Override
+    public T head() {
+        return getItem0();
+    }
+
+    @Override
+    public Tuple2<U, V> tail() {
+        return new Tuple2<>(getItem1(), getItem2());
+    }
+
+    @Override
+    public U last() {
+        return getItem1();
+    }
+
+    @Override
+    public Tuple2<T, U> butLast() {
+        return new Tuple2<>(getItem0(), getItem1());
     }
 }
