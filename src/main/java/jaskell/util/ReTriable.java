@@ -53,7 +53,8 @@ public class ReTriable<T> implements Supplier<T>, Triable<T> {
         }
     }
 
-    public Try<T> tryIt() {
+    @Override
+    public Try<T> collect() {
         return Try.tryIt(this);
     }
 

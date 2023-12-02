@@ -711,14 +711,14 @@ public final class Try<T> {
     }
 
     static <T> Try<List<T>> tryAll(List<Triable<T>> elements) {
-        return all(elements.stream().map(Triable::tryIt)
+        return all(elements.stream().map(Triable::collect)
                 .collect(Collectors.toList()));
     }
 
     static <T> Try<T> tryAny(List<Triable<T>> elements) {
         Try<T> err = null;
         for (Triable<T> e : elements) {
-            Try<T> re = e.tryIt();
+            Try<T> re = e.collect();
             if (re.isOk()) {
                 return re;
             } else {
@@ -735,7 +735,7 @@ public final class Try<T> {
     @SuppressWarnings("unchecked")
     static <T> Try<List<T>> asyncAll(List<Triable<T>> elements, Executor executor) {
         List<CompletableFuture<Try<T>>> tasks = elements.stream()
-                .map(t -> CompletableFuture.supplyAsync(t::tryIt, executor))
+                .map(t -> CompletableFuture.supplyAsync(t::collect, executor))
                 .collect(Collectors.toList());
         CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
         tsa = tasks.toArray(tsa);
@@ -753,7 +753,7 @@ public final class Try<T> {
     @SuppressWarnings("unchecked")
     static <T> Try<List<T>> asyncAll(List<Triable<T>> elements) {
         List<CompletableFuture<Try<T>>> tasks = elements.stream()
-                .map(t -> CompletableFuture.supplyAsync(t::tryIt))
+                .map(t -> CompletableFuture.supplyAsync(t::collect))
                 .collect(Collectors.toList());
         CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
         tsa = tasks.toArray(tsa);
@@ -771,7 +771,7 @@ public final class Try<T> {
     @SuppressWarnings("unchecked")
     static <T> Try<T> asyncAny(List<Triable<T>> elements, Executor executor) {
         List<CompletableFuture<Try<T>>> tasks = elements.stream()
-                .map(t -> CompletableFuture.supplyAsync(t::tryIt, executor))
+                .map(t -> CompletableFuture.supplyAsync(t::collect, executor))
                 .collect(Collectors.toList());
         CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
 
@@ -786,7 +786,7 @@ public final class Try<T> {
     @SuppressWarnings("unchecked")
     static <T> Try<T> asyncAny(List<Triable<T>> elements) {
         List<CompletableFuture<Try<T>>> tasks = elements.stream()
-                .map(t -> CompletableFuture.supplyAsync(t::tryIt))
+                .map(t -> CompletableFuture.supplyAsync(t::collect))
                 .collect(Collectors.toList());
         CompletableFuture<Try<T>>[] tsa = new CompletableFuture[tasks.size()];
         tsa = tasks.toArray(tsa);

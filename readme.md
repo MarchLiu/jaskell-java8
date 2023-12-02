@@ -267,3 +267,13 @@ now we can set rest in retry‘s on error handler
     - get by pos method
     - toList method
     - toMap method
+
+### 2.9.0
+
+- add methods for triable interface make it as lazy try
+  - joinMap
+  - joinFlatMap
+  - map
+  - flatMap accept argument typed Function\<T, Try\<U\>\>
+  - async methods
+- triable collect method return try object
