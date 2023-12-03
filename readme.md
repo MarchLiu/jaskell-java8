@@ -277,3 +277,8 @@ now we can set rest in retry‘s on error handler
   - flatMap accept argument typed Function\<T, Try\<U\>\>
   - async methods
 - triable collect method return try object
+
+### 2.9.1
+
+- rename tryIt of Functions to collect 
+- add stream method for try

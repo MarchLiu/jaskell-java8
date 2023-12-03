@@ -37,7 +37,7 @@ public interface BiFunction<T, U, R> {
         return (T t, U u) -> after.apply(apply(t, u));
     }
 
-    default Try<R> tryIt(T t, U u) {
+    default Try<R> collect(T t, U u) {
         try {
             return Try.success(apply(t, u));
         } catch (Exception e) {
@@ -45,8 +45,8 @@ public interface BiFunction<T, U, R> {
         }
     }
 
-    default Try<R> tryIt(Tuple2<T, U> tuple) {
-        return tryIt(tuple.getItem0(), tuple.getItem1());
+    default Try<R> collect(Tuple2<T, U> tuple) {
+        return collect(tuple.getItem0(), tuple.getItem1());
     }
 
 

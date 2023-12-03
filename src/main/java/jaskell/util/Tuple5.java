@@ -50,7 +50,7 @@ public class Tuple5<T, U, V, W, X>
     }
 
     public <R> Try<R> tryIt(Function5<T, U, V, W, X, R> functor) {
-        return functor.tryIt(getItem0(), getItem1(), getItem2(), getItem3(), getItem4());
+        return functor.collect(getItem0(), getItem1(), getItem2(), getItem3(), getItem4());
     }
 
     public <Y> Tuple5<Y, U, V, W, X> item0(Y item) {

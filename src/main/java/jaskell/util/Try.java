@@ -7,6 +7,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * TODO
@@ -154,6 +155,15 @@ public final class Try<T> {
 
     public boolean isErr() {
         return !_ok;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Stream<T> stream() {
+        if(isOk()){
+            return Stream.of((T) slot);
+        } else {
+            return Stream.empty();
+        }
     }
 
     @SuppressWarnings("unchecked")

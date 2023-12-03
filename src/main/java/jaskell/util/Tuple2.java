@@ -45,7 +45,7 @@ public class Tuple2<T, U> implements Tuple<T, U, U, T> {
     }
 
     public <R> Try<R> tryIt(BiFunction<T, U, R> functor) throws Exception {
-        return functor.tryIt(getItem0(), getItem1());
+        return functor.collect(getItem0(), getItem1());
     }
 
     @Override

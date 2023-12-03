@@ -64,7 +64,7 @@ public class Tuple8<S, T, U, V, W, X, Y, Z>
     }
 
     public <R> Try<R> tryIt(Function8<S, T, U, V, W, X, Y, Z, R> functor) throws Exception {
-        return functor.tryIt(getItem0(), getItem1(), getItem2(),
+        return functor.collect(getItem0(), getItem1(), getItem2(),
                 getItem3(), getItem4(), getItem5(),
                 getItem6(), getItem7());
     }

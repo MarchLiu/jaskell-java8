@@ -38,7 +38,7 @@ public class Tuple3<T, U, V> implements Tuple<T, Tuple2<U, V>, U, Tuple2<T, U>> 
     }
 
     public <R> Try<R> tryIt(TriFunction<T, U, V, R> functor) throws Exception {
-        return functor.tryIt(getItem0(), getItem1(), getItem2());
+        return functor.collect(getItem0(), getItem1(), getItem2());
     }
 
     public <W> Tuple3<W, U, V> item0(W item) {
