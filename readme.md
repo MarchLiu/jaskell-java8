@@ -282,3 +282,8 @@ now we can set rest in retry‘s on error handler
 
 - rename tryIt of Functions to collect 
 - add stream method for try
+
+### 2.9.2
+
+- add try tests
+- upgrade project settings

@@ -31,6 +31,14 @@ public final class Try<T> {
         _ok = false;
     }
 
+    static <T, U> Try<? extends U> apply(Function<? super T, ? extends U> func, T arg) {
+        try {
+            return Try.success(func.apply(arg));
+        } catch (Exception err) {
+            return Try.failure(err);
+        }
+    }
+
     public Try<T> or(Try<T> other) {
         if (_ok) {
             return this;
